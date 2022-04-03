@@ -1,0 +1,51 @@
+@import 'shared/styles/mixins.scss';
+
+.container {
+  width: 100%;
+}
+
+.header {
+  @include row;
+  @extend .container;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.link {
+  @include row;
+  font-size: 14px;
+  color: var(--grey-1);
+  font-weight: 500;
+  flex-shrink: 0;
+  align-items: center;
+  transition: color var(--transition);
+
+  & > svg {
+    width: 14px;
+    height: 14px;
+    margin-left: 4px;
+
+    path {
+      fill: currentColor;
+      transition: fill var(--transition);
+    }
+  }
+
+  &:hover {
+    color: var(--black-2);
+    text-decoration: underline;
+  }
+}
+
+.list {
+  @extend .container;
+  margin-top: 16px;
+}
+
+.item {
+  @extend .container;
+
+  &:not(:first-child) {
+    margin-top: 8px;
+  }
+}
