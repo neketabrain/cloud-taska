@@ -1,0 +1,22 @@
+@import 'shared/styles/mixins.scss';
+
+.logo {
+  @include row;
+  align-items: center;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+
+  path {
+    fill: var(--black-2);
+  }
+}
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 4px;
+  color: var(--black-2);
+}
