@@ -3,6 +3,7 @@ import { ToggleTask } from 'features/toggle-task';
 
 import { TaskList } from './list';
 import styles from './styles.module.scss';
+import { TaskTable } from './table';
 
 const HomePage: React.VFC = () => {
   const currentTask = taskModel.useCurrentTask();
@@ -10,9 +11,11 @@ const HomePage: React.VFC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.row}>
-        <div className={styles.analytics} />
+        <div className={styles.activity} />
 
-        <div className={styles.scrollbar} />
+        <div className={styles.list}>
+          <TaskList />
+        </div>
       </div>
 
       <div className={styles.row}>
@@ -22,8 +25,8 @@ const HomePage: React.VFC = () => {
           )}
         </div>
 
-        <div className={styles.list}>
-          <TaskList />
+        <div className={styles.table}>
+          <TaskTable />
         </div>
       </div>
     </div>

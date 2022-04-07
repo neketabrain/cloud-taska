@@ -2,50 +2,92 @@
 
 .container {
   width: 100%;
+  height: 100%;
+  background-color: var(--black-2);
+  padding: 16px 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0px 0px 16px rgba(0, 0, 0, 0.2);
 }
 
-.header {
-  @include row;
-  @extend .container;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.link {
-  @include row;
-  font-size: 14px;
-  color: var(--grey-1);
+.title {
+  font-size: 12px;
   font-weight: 500;
-  flex-shrink: 0;
-  align-items: center;
-  transition: color var(--transition);
-
-  & > svg {
-    width: 14px;
-    height: 14px;
-    margin-left: 4px;
-
-    path {
-      fill: currentColor;
-      transition: fill var(--transition);
-    }
-  }
-
-  &:hover {
-    color: var(--black-2);
-    text-decoration: underline;
-  }
+  color: var(--white-1);
+  text-transform: uppercase;
+  padding-left: 16px;
+  position: relative;
 }
 
 .list {
-  @extend .container;
-  margin-top: 16px;
+  @include row;
+  position: relative;
+  width: 100%;
+  height: 220px;
+  margin-top: 10px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .item {
-  @extend .container;
+  display: inline-block;
 
   &:not(:first-child) {
-    margin-top: 8px;
+    margin-left: 24px;
+  }
+
+  &:last-child {
+    margin-right: 64px;
+  }
+}
+
+.circleSmall {
+  position: absolute;
+  left: -40px;
+  top: 160px;
+  width: 190px;
+  height: 190px;
+  background: linear-gradient(180deg, #b04f31 0%, rgba(255, 153, 0, 0) 100%);
+  border-radius: 50%;
+}
+
+.circleMedium {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  left: 20%;
+  top: -140px;
+  background: linear-gradient(180deg, #ab3e1d 0%, rgba(201, 71, 71, 0) 96.87%);
+  opacity: 0.8;
+  transform: rotate(-95deg);
+  border-radius: 50%;
+}
+
+.circleLarge {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  right: -60px;
+  top: 160px;
+  background: linear-gradient(180deg, #ff9900 0%, rgba(255, 153, 0, 0) 100%);
+  opacity: 0.6;
+  transform: rotate(-120deg);
+  border-radius: 50%;
+}
+
+.scrollbar {
+  width: 100%;
+  height: 220px;
+  padding: 0 64px;
+
+  :global(.simplebar-scrollbar) {
+    &::before {
+      height: 4px !important;
+      background-color: var(--white-1) !important;
+    }
+  }
+
+  :global(.simplebar-track) {
+    margin: 0 64px;
   }
 }
