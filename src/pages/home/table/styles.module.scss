@@ -1,0 +1,66 @@
+@import 'shared/styles/mixins.scss';
+
+.container {
+  width: 100%;
+  position: relative;
+}
+
+.header {
+  @include row;
+  @extend .container;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.switch {
+  @include row;
+  align-items: center;
+}
+
+.allTasksLink {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--black-2);
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Source Code Pro', sans-serif;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.separator {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--black-2);
+  text-transform: uppercase;
+  white-space: pre;
+}
+
+.list {
+  @extend .container;
+  margin-top: 16px;
+}
+
+.item {
+  @extend .container;
+
+  &:not(:first-child) {
+    margin-top: 8px;
+  }
+}
+
+.addTaskButton {
+  height: 32px;
+  width: auto;
+  font-size: 12px;
+  padding-left: 11px;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+  }
+}

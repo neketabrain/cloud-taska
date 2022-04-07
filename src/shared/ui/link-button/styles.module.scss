@@ -1,0 +1,49 @@
+@import 'shared/styles/mixins.scss';
+
+.link {
+  @include row;
+  width: auto;
+  height: auto;
+  padding: 0;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  transition: background-color var(--transition) color var(--transition);
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  & > svg {
+    path {
+      fill: currentColor;
+    }
+  }
+
+  &_primary {
+    width: 100%;
+    height: 40px;
+    padding: 0px 16px;
+    background-color: var(--black-2);
+    color: var(--white-1);
+
+    &:hover:not(:disabled) {
+      background-color: var(--black-3);
+    }
+  }
+
+  &_transparent {
+    background-color: transparent;
+    color: var(--black-2);
+
+    &:hover:not(:disabled) {
+      color: var(--black-3);
+    }
+  }
+}
