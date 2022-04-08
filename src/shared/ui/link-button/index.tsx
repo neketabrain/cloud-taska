@@ -7,7 +7,7 @@ interface LinkButtonProps extends LinkProps {
   variant?: 'primary' | 'transparent';
 }
 
-const LinkButton: React.FC<LinkButtonProps> = (props) => {
+export const LinkButton: React.FC<LinkButtonProps> = (props) => {
   const { className, children, variant = 'primary', ...rest } = props;
 
   return (
@@ -16,5 +16,3 @@ const LinkButton: React.FC<LinkButtonProps> = (props) => {
     </Link>
   );
 };
-
-export { LinkButton };

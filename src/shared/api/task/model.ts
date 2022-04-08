@@ -1,4 +1,4 @@
-interface Task {
+export interface Task {
   id: number;
   title: string;
   description: string;
@@ -6,5 +6,3 @@ interface Task {
   due_date: string;
   completed?: boolean;
 }
-
-export type { Task };

@@ -8,7 +8,7 @@ interface HeaderProps {
   logoLink: string;
 }
 
-const Header: React.VFC<HeaderProps> = (props) => {
+export const Header: React.VFC<HeaderProps> = (props) => {
   const { logoLink } = props;
 
   return (
@@ -19,5 +19,3 @@ const Header: React.VFC<HeaderProps> = (props) => {
     </header>
   );
 };
-
-export { Header };

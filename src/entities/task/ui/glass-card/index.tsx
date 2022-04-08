@@ -11,7 +11,7 @@ interface TaskGlassCardProps {
   className?: string;
 }
 
-const TaskGlassCard: React.VFC<TaskGlassCardProps> = (props) => {
+export const TaskGlassCard: React.VFC<TaskGlassCardProps> = (props) => {
   const { task, className } = props;
 
   const startDate = new Date(task.start_date);
@@ -33,5 +33,3 @@ const TaskGlassCard: React.VFC<TaskGlassCardProps> = (props) => {
     </article>
   );
 };
-
-export { TaskGlassCard };

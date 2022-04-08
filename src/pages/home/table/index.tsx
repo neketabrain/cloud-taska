@@ -1,14 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
-import { taskModel, TaskRow } from 'entities/task';
-import {
-  getTasksForToday,
-  getTasksForTomorrow,
-  getTasksForWeek,
-  getTasksForYesterday,
-  sortTasksByDate,
-} from 'entities/task/lib';
+import { taskModel, TaskRow, taskLib } from 'entities/task';
 import { PlusIcon } from 'shared/assets/icons';
 import { ROUTES } from 'shared/config';
 import { Button, TextSwitch } from 'shared/ui';
@@ -24,25 +17,25 @@ function useTaskFilter() {
 
   const filteredTasks = useMemo(() => {
     if (period === PERIODS.today) {
-      return getTasksForToday(tasks);
+      return taskLib.getTasksForToday(tasks);
     }
 
     if (period === PERIODS.tomorrow) {
-      return getTasksForTomorrow(tasks);
+      return taskLib.getTasksForTomorrow(tasks);
     }
 
     if (period === PERIODS.yesterday) {
-      return getTasksForYesterday(tasks);
+      return taskLib.getTasksForYesterday(tasks);
     }
 
     if (period === PERIODS.week) {
-      return getTasksForWeek(tasks);
+      return taskLib.getTasksForSevenDays(tasks);
     }
 
     return tasks;
   }, [tasks, period]);
 
-  const sortedTasks = useMemo(() => sortTasksByDate(filteredTasks), [filteredTasks]);
+  const sortedTasks = useMemo(() => taskLib.sortTasksByDate(filteredTasks), [filteredTasks]);
 
   const changeFilter = useCallback(
     (newFilter: string) => {
@@ -54,7 +47,7 @@ function useTaskFilter() {
   return { period, changeFilter, tasks: sortedTasks };
 }
 
-const TaskTable: React.VFC = () => {
+export const TaskTable: React.VFC = () => {
   const currentTask = taskModel.useCurrentTask();
 
   const { period, changeFilter, tasks } = useTaskFilter();
@@ -86,5 +79,3 @@ const TaskTable: React.VFC = () => {
     </section>
   );
 };
-
-export { TaskTable };

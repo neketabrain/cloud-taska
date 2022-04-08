@@ -4,7 +4,7 @@ import { ROUTES } from 'shared/config';
 
 import { HomePage } from './home';
 
-const Pages: React.VFC = () => {
+export const Pages: React.VFC = () => {
   return (
     <Routes>
       <Route path={ROUTES.root} element={<HomePage />} />
@@ -12,5 +12,3 @@ const Pages: React.VFC = () => {
     </Routes>
   );
 };
-
-export { Pages };

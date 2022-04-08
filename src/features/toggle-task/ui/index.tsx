@@ -9,7 +9,7 @@ interface ToggleTaskProps {
   task: Task;
 }
 
-const ToggleTask: React.VFC<ToggleTaskProps> = (props) => {
+export const ToggleTask: React.VFC<ToggleTaskProps> = (props) => {
   const { task } = props;
 
   function toggleTask() {
@@ -18,5 +18,3 @@ const ToggleTask: React.VFC<ToggleTaskProps> = (props) => {
 
   return <Button onClick={toggleTask}>{task.completed ? <CheckIcon className={styles.icon} /> : 'Завершить'}</Button>;
 };
-
-export { ToggleTask };

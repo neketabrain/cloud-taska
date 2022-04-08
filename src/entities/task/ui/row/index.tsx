@@ -14,7 +14,7 @@ interface TaskRowProps {
   link?: string;
 }
 
-const TaskRow: React.VFC<TaskRowProps> = (props) => {
+export const TaskRow: React.VFC<TaskRowProps> = (props) => {
   const { task, className, link, isActive } = props;
 
   const startDate = new Date(task.start_date);
@@ -51,5 +51,3 @@ const TaskRow: React.VFC<TaskRowProps> = (props) => {
     </div>
   );
 };
-
-export { TaskRow };

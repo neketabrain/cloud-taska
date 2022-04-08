@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 
 import styles from './styles.module.scss';
 
-interface TextSwitchItem {
+export interface TextSwitchItem {
   label: React.ReactNode;
   value: string;
 }
@@ -15,7 +15,7 @@ interface TextSwitchProps {
   items: TextSwitchItem[];
 }
 
-const TextSwitch: React.VFC<TextSwitchProps> = (props) => {
+export const TextSwitch: React.VFC<TextSwitchProps> = (props) => {
   const { name, items, value, onChange } = props;
 
   function handleChange(selectedValue: TextSwitchItem['value']) {
@@ -49,6 +49,3 @@ const TextSwitch: React.VFC<TextSwitchProps> = (props) => {
     </div>
   );
 };
-
-export { TextSwitch };
-export type { TextSwitchItem };

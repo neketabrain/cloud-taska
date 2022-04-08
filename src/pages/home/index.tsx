@@ -5,7 +5,7 @@ import { TaskList } from './list';
 import styles from './styles.module.scss';
 import { TaskTable } from './table';
 
-const HomePage: React.VFC = () => {
+export const HomePage: React.VFC = () => {
   const currentTask = taskModel.useCurrentTask();
 
   return (
@@ -32,5 +32,3 @@ const HomePage: React.VFC = () => {
     </div>
   );
 };
-
-export { HomePage };

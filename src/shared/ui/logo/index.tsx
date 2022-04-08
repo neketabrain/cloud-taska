@@ -9,7 +9,7 @@ interface LogoProps {
   as?: keyof React.ReactHTML;
 }
 
-const Logo: React.VFC<LogoProps> = (props) => {
+export const Logo: React.VFC<LogoProps> = (props) => {
   const { className, as: Wrapper = 'h1' } = props;
 
   return (
@@ -19,5 +19,3 @@ const Logo: React.VFC<LogoProps> = (props) => {
     </div>
   );
 };
-
-export { Logo };

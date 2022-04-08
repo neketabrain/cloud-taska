@@ -1,4 +1,4 @@
-function getToday(): Date {
+export function getToday(): Date {
   const today = new Date();
   today.setHours(0);
   today.setMinutes(0);
@@ -8,12 +8,10 @@ function getToday(): Date {
   return today;
 }
 
-function formatDate(date: Date): string {
+export function formatDate(date: Date): string {
   return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }).slice(0, -3);
 }
 
-function formatTime(date: Date): string {
+export function formatTime(date: Date): string {
   return date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
 }
-
-export { getToday, formatDate, formatTime };

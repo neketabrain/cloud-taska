@@ -3,7 +3,7 @@ import { Header } from 'widgets/header';
 
 import styles from './layout.module.scss';
 
-const Layout: React.FC = (props) => {
+export const Layout: React.FC = (props) => {
   const { children } = props;
 
   return (
@@ -16,5 +16,3 @@ const Layout: React.FC = (props) => {
     </div>
   );
 };
-
-export { Layout };

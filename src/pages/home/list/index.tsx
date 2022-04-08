@@ -1,14 +1,16 @@
 import { useMemo } from 'react';
 import SimpleBar from 'simplebar-react';
 
-import { TaskGlassCard, taskModel } from 'entities/task';
-import { getTasksForToday, sortTasksByDate, getActiveTasks } from 'entities/task/lib';
+import { TaskGlassCard, taskModel, taskLib } from 'entities/task';
 
 import styles from './styles.module.scss';
 
-const TaskList: React.VFC = () => {
+export const TaskList: React.VFC = () => {
   const tasks = taskModel.useTasks();
-  const taskList = useMemo(() => sortTasksByDate(getTasksForToday(getActiveTasks(tasks))), [tasks]);
+  const taskList = useMemo(
+    () => taskLib.sortTasksByDate(taskLib.getTasksForToday(taskLib.getActiveTasks(tasks))),
+    [tasks]
+  );
 
   return (
     <section className={styles.container}>
@@ -30,5 +32,3 @@ const TaskList: React.VFC = () => {
     </section>
   );
 };
-
-export { TaskList };

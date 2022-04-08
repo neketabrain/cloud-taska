@@ -12,6 +12,4 @@ const Main: React.VFC = () => {
   );
 };
 
-const App = withProviders(Main);
-
-export { App };
+export const App = withProviders(Main);

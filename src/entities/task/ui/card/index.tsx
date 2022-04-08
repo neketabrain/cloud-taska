@@ -11,7 +11,7 @@ interface TaskCardProps {
   action?: React.ReactNode;
 }
 
-const TaskCard: React.VFC<TaskCardProps> = (props) => {
+export const TaskCard: React.VFC<TaskCardProps> = (props) => {
   const { label, task, action } = props;
 
   const startDate = new Date(task.start_date);
@@ -42,5 +42,3 @@ const TaskCard: React.VFC<TaskCardProps> = (props) => {
     </article>
   );
 };
-
-export { TaskCard };
