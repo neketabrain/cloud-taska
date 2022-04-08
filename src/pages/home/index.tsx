@@ -1,6 +1,7 @@
 import { TaskCard, taskModel } from 'entities/task';
 import { ToggleTask } from 'features/toggle-task';
 
+import { Activity } from './activity';
 import { TaskList } from './list';
 import styles from './styles.module.scss';
 import { TaskTable } from './table';
@@ -11,7 +12,9 @@ export const HomePage: React.VFC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.row}>
-        <div className={styles.activity} />
+        <div className={styles.activity}>
+          <Activity />
+        </div>
 
         <div className={styles.list}>
           <TaskList />
