@@ -1,14 +1,8 @@
-import isFriday from 'date-fns/isFriday';
-import isMonday from 'date-fns/isMonday';
-import isSaturday from 'date-fns/isSaturday';
-import isSunday from 'date-fns/isSunday';
-import isThursday from 'date-fns/isThursday';
-import isTuesday from 'date-fns/isTuesday';
-import isWednesday from 'date-fns/isWednesday';
+import { isMonday, isTuesday, isWednesday, isThursday, isFriday, isSaturday, isSunday } from 'date-fns';
 
 import { Task } from 'shared/api/task';
 import { getToday } from 'shared/lib';
-import { GraphColumn } from 'shared/ui/graph';
+import { BarChartItem } from 'shared/ui';
 
 export function getTaskStatistics(tasks: Task[]) {
   return tasks.reduce(
@@ -25,42 +19,131 @@ export function getTaskStatistics(tasks: Task[]) {
   );
 }
 
-export function getGraphColumns(tasks: Task[]): GraphColumn[] {
+function getTooltipText(allTasks: number, completedTasks: number): string {
+  return `Завершено: ${completedTasks}\nОсталось: ${allTasks - completedTasks}\nВсего: ${allTasks}`;
+}
+
+export function getChartData(tasks: Task[]): BarChartItem[] {
   const tasksCount = tasks.length;
   const today = getToday().getDay();
 
-  const count = tasks.reduce(
+  const tasksByDay = tasks.reduce(
     (acc, task) => {
       const startDate = new Date(task.start_date);
 
       if (isMonday(startDate)) {
-        acc.monday++;
+        acc.mondayAll++;
+
+        if (task.completed) {
+          acc.mondayCompleted++;
+        }
       } else if (isTuesday(startDate)) {
-        acc.tuesday++;
+        acc.tuesdayAll++;
+
+        if (task.completed) {
+          acc.tuesdayCompleted++;
+        }
       } else if (isWednesday(startDate)) {
-        acc.wednesday++;
+        acc.wednesdayAll++;
+
+        if (task.completed) {
+          acc.wednesdayCompleted++;
+        }
       } else if (isThursday(startDate)) {
-        acc.thursday++;
+        acc.thursdayAll++;
+
+        if (task.completed) {
+          acc.thursdayCompleted++;
+        }
       } else if (isFriday(startDate)) {
-        acc.friday++;
+        acc.fridayAll++;
+
+        if (task.completed) {
+          acc.fridayCompleted++;
+        }
       } else if (isSaturday(startDate)) {
-        acc.saturday++;
+        acc.saturdayAll++;
+
+        if (task.completed) {
+          acc.saturdayCompleted++;
+        }
       } else if (isSunday(startDate)) {
-        acc.sunday++;
+        acc.sundayAll++;
+
+        if (task.completed) {
+          acc.sundayCompleted++;
+        }
       }
 
       return acc;
     },
-    { monday: 0, tuesday: 0, wednesday: 0, thursday: 0, friday: 0, saturday: 0, sunday: 0 }
+    {
+      mondayAll: 0,
+      mondayCompleted: 0,
+      tuesdayAll: 0,
+      tuesdayCompleted: 0,
+      wednesdayAll: 0,
+      wednesdayCompleted: 0,
+      thursdayAll: 0,
+      thursdayCompleted: 0,
+      fridayAll: 0,
+      fridayCompleted: 0,
+      saturdayAll: 0,
+      saturdayCompleted: 0,
+      sundayAll: 0,
+      sundayCompleted: 0,
+    }
   );
 
   return [
-    { label: 'Пн', value: (count.monday / tasksCount) * 100, active: today === 1 },
-    { label: 'Вт', value: (count.tuesday / tasksCount) * 100, active: today === 2 },
-    { label: 'Ср', value: (count.wednesday / tasksCount) * 100, active: today === 3 },
-    { label: 'Чт', value: (count.thursday / tasksCount) * 100, active: today === 4 },
-    { label: 'Пт', value: (count.friday / tasksCount) * 100, active: today === 5 },
-    { label: 'Сб', value: (count.saturday / tasksCount) * 100, active: today === 6 },
-    { label: 'Вс', value: (count.sunday / tasksCount) * 100, active: today === 0 },
+    {
+      label: 'Пн',
+      foregroundValue: (tasksByDay.mondayAll / tasksCount) * 100,
+      value: (tasksByDay.mondayCompleted / tasksCount) * 100,
+      active: today === 1,
+      tooltip: getTooltipText(tasksByDay.mondayAll, tasksByDay.mondayCompleted),
+    },
+    {
+      label: 'Вт',
+      foregroundValue: (tasksByDay.tuesdayAll / tasksCount) * 100,
+      value: (tasksByDay.tuesdayCompleted / tasksCount) * 100,
+      active: today === 2,
+      tooltip: getTooltipText(tasksByDay.tuesdayAll, tasksByDay.tuesdayCompleted),
+    },
+    {
+      label: 'Ср',
+      foregroundValue: (tasksByDay.wednesdayAll / tasksCount) * 100,
+      value: (tasksByDay.wednesdayCompleted / tasksCount) * 100,
+      active: today === 3,
+      tooltip: getTooltipText(tasksByDay.wednesdayAll, tasksByDay.wednesdayCompleted),
+    },
+    {
+      label: 'Чт',
+      foregroundValue: (tasksByDay.thursdayAll / tasksCount) * 100,
+      value: (tasksByDay.thursdayCompleted / tasksCount) * 100,
+      active: today === 4,
+      tooltip: getTooltipText(tasksByDay.thursdayAll, tasksByDay.thursdayCompleted),
+    },
+    {
+      label: 'Пт',
+      foregroundValue: (tasksByDay.fridayAll / tasksCount) * 100,
+      value: (tasksByDay.fridayCompleted / tasksCount) * 100,
+      active: today === 5,
+      tooltip: getTooltipText(tasksByDay.fridayAll, tasksByDay.fridayCompleted),
+    },
+    {
+      label: 'Сб',
+      foregroundValue: (tasksByDay.saturdayAll / tasksCount) * 100,
+      value: (tasksByDay.saturdayCompleted / tasksCount) * 100,
+      active: today === 6,
+      tooltip: getTooltipText(tasksByDay.saturdayAll, tasksByDay.saturdayCompleted),
+    },
+    {
+      label: 'Вс',
+      foregroundValue: (tasksByDay.sundayAll / tasksCount) * 100,
+      value: (tasksByDay.sundayCompleted / tasksCount) * 100,
+      active: today === 0,
+      tooltip: getTooltipText(tasksByDay.sundayAll, tasksByDay.sundayCompleted),
+    },
   ];
 }

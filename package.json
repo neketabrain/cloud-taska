@@ -1,5 +1,6 @@
 {
   "name": "cloud-taska",
+  "author": "Nikita Karapuzov <karapuzov.nikita@gmail.com>",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,6 +19,7 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
+    "react-tooltip": "^4.2.21",
     "sass": "^1.49.10",
     "simplebar-react": "^2.3.6",
     "typescript": "^4.4.2",
@@ -44,15 +46,7 @@
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx src --color",
     "lint:types": "tsc --noEmit",
     "prettify": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'",
-    "isReady": "yarn lint:types && yarn prettify && yarn lint:fix && yarn build",
-    "test:ci": "CI=true react-scripts test --env=jsdom --passWithNoTests",
     "prepare": "husky install"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [

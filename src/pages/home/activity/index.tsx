@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 
 import { taskModel, taskLib } from 'entities/task';
-import { Graph } from 'shared/ui';
+import { BarChart } from 'shared/ui';
 
-import { getGraphColumns, getTaskStatistics } from './lib';
+import { getChartData, getTaskStatistics } from './lib';
 import styles from './styles.module.scss';
 
 export const Activity: React.VFC = () => {
@@ -12,7 +12,7 @@ export const Activity: React.VFC = () => {
   const taskList = useMemo(() => taskLib.getTasksForWeek(tasks), [tasks]);
 
   const { active, completed } = useMemo(() => getTaskStatistics(taskList), [taskList]);
-  const graphColumns = useMemo(() => getGraphColumns(taskList), [taskList]);
+  const chartData = useMemo(() => getChartData(taskList), [taskList]);
 
   return (
     <section className={styles.container}>
@@ -20,7 +20,7 @@ export const Activity: React.VFC = () => {
 
       <div className={styles.content}>
         <div className={styles.graph}>
-          <Graph columns={graphColumns} />
+          <BarChart data={chartData} />
         </div>
 
         <div className={styles.separator} />

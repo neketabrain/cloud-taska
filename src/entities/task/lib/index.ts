@@ -1,10 +1,4 @@
-import isAfter from 'date-fns/isAfter';
-import isBefore from 'date-fns/isBefore';
-import isSameWeek from 'date-fns/isSameWeek';
-import isToday from 'date-fns/isToday';
-import isTomorrow from 'date-fns/isTomorrow';
-import isYesterday from 'date-fns/isYesterday';
-import setDate from 'date-fns/setDate';
+import { isAfter, isBefore, isSameWeek, isToday, isTomorrow, isYesterday, setDate } from 'date-fns';
 
 import { Task } from 'shared/api/task';
 import { getToday } from 'shared/lib';
