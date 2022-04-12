@@ -1,3 +1,4 @@
 :root {
-  --transition: 200ms;
+  --transition-duration: 200ms;
+  --transition: var(--transition-duration) ease;
 }

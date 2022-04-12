@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { taskModel, TaskRow, taskLib } from 'entities/task';
@@ -13,7 +13,7 @@ function useTaskFilter() {
   const tasks = taskModel.useTasks();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const period = searchParams.get('period') ?? PERIODS.tomorrow;
+  const period = searchParams.get('period') || PERIODS.tomorrow;
 
   const filteredTasks = useMemo(() => {
     if (period === PERIODS.today) {
@@ -44,6 +44,12 @@ function useTaskFilter() {
     [setSearchParams]
   );
 
+  useEffect(() => {
+    if (!Object.values(PERIODS).includes(period)) {
+      setSearchParams({ period: PERIODS.tomorrow });
+    }
+  }, [period, setSearchParams]);
+
   return { period, changeFilter, tasks: sortedTasks };
 }
 
@@ -72,7 +78,7 @@ export const TaskTable: React.VFC = () => {
       <ul className={styles.list}>
         {tasks.map((task) => (
           <li key={task.id} className={styles.item}>
-            <TaskRow task={task} link={`${ROUTES.tasks}/${task.id}`} isActive={task.id === currentTask?.id} />
+            <TaskRow task={task} link={`${ROUTES.tasks}/${task.id}`} active={task.id === currentTask?.id} />
           </li>
         ))}
       </ul>

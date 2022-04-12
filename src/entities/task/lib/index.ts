@@ -47,7 +47,7 @@ export function getTasksForWeek(tasks: Task[], date = getToday()): Task[] {
   return tasks.filter((task) => {
     const startDate = new Date(task.start_date);
 
-    return isSameWeek(date, startDate);
+    return isSameWeek(date, startDate, { weekStartsOn: 1 });
   });
 }
 

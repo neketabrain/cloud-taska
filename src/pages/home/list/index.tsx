@@ -6,11 +6,10 @@ import { TaskGlassCard, taskModel, taskLib } from 'entities/task';
 import styles from './styles.module.scss';
 
 export const TaskList: React.VFC = () => {
+  const currentTask = taskModel.useCurrentTask();
   const tasks = taskModel.useTasks();
-  const taskList = useMemo(
-    () => taskLib.sortTasksByDate(taskLib.getTasksForToday(taskLib.getActiveTasks(tasks))),
-    [tasks]
-  );
+  const tasksForToday = useMemo(() => taskLib.getTasksForToday(tasks), [tasks]);
+  const taskList = useMemo(() => taskLib.sortTasksByDate(taskLib.getActiveTasks(tasksForToday)), [tasksForToday]);
 
   return (
     <section className={styles.container}>
@@ -20,15 +19,21 @@ export const TaskList: React.VFC = () => {
 
       <h2 className={styles.title}>ЗАДАЧИ НА СЕГОДНЯ</h2>
 
-      <ul className={styles.list}>
+      {!taskList.length && (
+        <p className={styles.text}>{tasksForToday.length ? 'Все задачи выполнены' : 'Задачи на сегодня отсутствуют'}</p>
+      )}
+
+      {taskList.length && (
         <SimpleBar className={styles.scrollbar}>
-          {taskList.map((task) => (
-            <li key={task.id} className={styles.item}>
-              <TaskGlassCard task={task} />
-            </li>
-          ))}
+          <ul className={styles.list}>
+            {taskList.map((task) => (
+              <li key={task.id} className={styles.item}>
+                <TaskGlassCard task={task} active={task.id === currentTask?.id} />
+              </li>
+            ))}
+          </ul>
         </SimpleBar>
-      </ul>
+      )}
     </section>
   );
 };

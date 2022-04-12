@@ -10,12 +10,12 @@ import styles from './styles.module.scss';
 interface TaskRowProps {
   task: Task;
   className?: string;
-  isActive?: boolean;
+  active?: boolean;
   link?: string;
 }
 
 export const TaskRow: React.VFC<TaskRowProps> = (props) => {
-  const { task, className, link, isActive } = props;
+  const { task, className, link, active } = props;
 
   const startDate = new Date(task.start_date);
   const dueDate = new Date(task.due_date);
@@ -29,8 +29,8 @@ export const TaskRow: React.VFC<TaskRowProps> = (props) => {
 
       <div className={styles.right}>
         <div>
-          <div className={clsx(styles.datetime, isActive && styles.datetime_active)}>
-            {isActive ? <FireIcon /> : <ClockIcon />}
+          <div className={clsx(styles.datetime, active && styles.datetime_active)}>
+            {active ? <FireIcon /> : <ClockIcon />}
             <p>
               {formatTime(startDate)} - {formatTime(dueDate)}
             </p>
@@ -43,7 +43,7 @@ export const TaskRow: React.VFC<TaskRowProps> = (props) => {
         </div>
 
         {link && (
-          <Link to={link} className={styles.link}>
+          <Link to={link} className={styles.link} aria-label="Перейти к задаче">
             <ArrowIcon />
           </Link>
         )}
