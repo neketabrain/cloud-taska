@@ -52,3 +52,5 @@ export const $tasks = createStore<Task[]>(defaultState)
   .reset(resetTasks);
 
 export const $currentTask = $tasks.map((state) => getCurrentTask(state));
+
+export const $currentTaskId = $currentTask.map((state) => state?.id);

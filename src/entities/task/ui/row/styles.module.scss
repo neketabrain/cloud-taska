@@ -94,8 +94,11 @@
   }
 }
 
-.more {
+.dropdown {
   margin-left: 16px;
+}
+
+.dropdownButton {
   color: var(--grey-1);
   transition: color var(--transition);
   padding: 8px 0px 8px 8px;

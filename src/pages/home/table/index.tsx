@@ -55,7 +55,7 @@ function useTaskFilter() {
 }
 
 export const TaskTable: React.VFC = () => {
-  const currentTask = taskModel.useCurrentTask();
+  const currentTaskId = taskModel.useCurrentTaskId();
 
   const { period, changeFilter, tasks } = useTaskFilter();
 
@@ -79,7 +79,7 @@ export const TaskTable: React.VFC = () => {
       <ul className={styles.list}>
         {tasks.map((task) => (
           <li key={task.id} className={styles.item}>
-            <TaskRow task={task} active={task.id === currentTask?.id} toggle={<ToggleTaskMini task={task} />} />
+            <TaskRow task={task} active={task.id === currentTaskId} toggle={<ToggleTaskMini task={task} />} />
           </li>
         ))}
       </ul>

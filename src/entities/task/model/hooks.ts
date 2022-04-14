@@ -1,6 +1,6 @@
 import { useStore } from 'effector-react';
 
-import { $tasks, $currentTask } from './store';
+import { $tasks, $currentTask, $currentTaskId } from './store';
 
 export function useTasks() {
   return useStore($tasks);
@@ -8,4 +8,8 @@ export function useTasks() {
 
 export function useCurrentTask() {
   return useStore($currentTask);
+}
+
+export function useCurrentTaskId() {
+  return useStore($currentTaskId);
 }

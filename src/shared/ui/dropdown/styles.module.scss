@@ -1,0 +1,29 @@
+.container {
+  position: relative;
+  width: auto;
+  height: auto;
+}
+
+.button {
+  padding: 4px;
+  height: auto;
+
+  svg {
+    transform: rotate(90deg);
+  }
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 10;
+  width: auto;
+  height: auto;
+  background-color: rgba(black, 0.7);
+  border: 1px solid rgba(black, 0.2);
+  box-shadow: 0 0 8px rgba(black, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 0px 0px 8px 8px;
+  color: var(--white-1);
+}

@@ -1,21 +1,23 @@
 import clsx from 'clsx';
+import { Children } from 'react';
 
 import { Task } from 'shared/api/task';
 import { CalendarIcon, ClockIcon, DotsIcon, FireIcon } from 'shared/assets/icons';
 import { formatDate, formatTime } from 'shared/lib';
-import { Button } from 'shared/ui';
+import { Button, Dropdown } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
 interface TaskRowProps {
   task: Task;
   toggle?: React.ReactNode;
+  actions?: React.ReactNode[];
   className?: string;
   active?: boolean;
 }
 
 export const TaskRow: React.VFC<TaskRowProps> = (props) => {
-  const { task, className, active, toggle } = props;
+  const { task, className, active, toggle, actions } = props;
 
   const startDate = new Date(task.start_date);
   const dueDate = new Date(task.due_date);
@@ -46,9 +48,23 @@ export const TaskRow: React.VFC<TaskRowProps> = (props) => {
           </div>
         </div>
 
-        <Button variant="transparent" className={styles.more} aria-label="Открыть меню">
-          <DotsIcon />
-        </Button>
+        {actions?.length && (
+          <Dropdown
+            className={styles.dropdown}
+            element={({ toggle: toggleDropdown }) => (
+              <Button
+                variant="transparent"
+                onClick={toggleDropdown}
+                className={styles.dropdownButton}
+                aria-label="Открыть меню"
+              >
+                <DotsIcon />
+              </Button>
+            )}
+          >
+            {Children.map(actions, (action) => action)}
+          </Dropdown>
+        )}
       </div>
     </div>
   );
