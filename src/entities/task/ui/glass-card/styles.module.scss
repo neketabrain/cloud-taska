@@ -14,11 +14,7 @@
   backdrop-filter: blur(8px);
 
   &_active {
-    background-color: rgba(white, 0.25);
-
-    .time {
-      color: var(--orange-1);
-    }
+    background-color: rgba(white, 0.2);
   }
 }
 

@@ -2,6 +2,8 @@ export { ReactComponent as ArrowIcon } from './arrow.svg';
 export { ReactComponent as CalendarIcon } from './calendar.svg';
 export { ReactComponent as CheckIcon } from './check.svg';
 export { ReactComponent as ClockIcon } from './clock.svg';
+export { ReactComponent as DotsIcon } from './dots.svg';
 export { ReactComponent as FireIcon } from './fire.svg';
 export { ReactComponent as LogoIcon } from './logo.svg';
 export { ReactComponent as PlusIcon } from './plus.svg';
+export { ReactComponent as RenewIcon } from './renew.svg';

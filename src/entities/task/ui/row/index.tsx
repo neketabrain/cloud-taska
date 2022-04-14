@@ -1,30 +1,34 @@
 import clsx from 'clsx';
-import { Link } from 'react-router-dom';
 
 import { Task } from 'shared/api/task';
-import { ArrowIcon, CalendarIcon, ClockIcon, FireIcon } from 'shared/assets/icons';
+import { CalendarIcon, ClockIcon, DotsIcon, FireIcon } from 'shared/assets/icons';
 import { formatDate, formatTime } from 'shared/lib';
+import { Button } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
 interface TaskRowProps {
   task: Task;
+  toggle?: React.ReactNode;
   className?: string;
   active?: boolean;
-  link?: string;
 }
 
 export const TaskRow: React.VFC<TaskRowProps> = (props) => {
-  const { task, className, link, active } = props;
+  const { task, className, active, toggle } = props;
 
   const startDate = new Date(task.start_date);
   const dueDate = new Date(task.due_date);
 
   return (
-    <div className={clsx(styles.container, className)}>
+    <div className={clsx(styles.taskRow, task.completed && styles.taskRow_active, className)}>
       <div className={styles.left}>
-        <p className={styles.title}>{task.title}</p>
-        <p className={styles.description}>{task.description}</p>
+        {toggle && <div className={styles.toggle}>{toggle}</div>}
+
+        <div>
+          <p className={styles.title}>{task.title}</p>
+          <p className={styles.description}>{task.description}</p>
+        </div>
       </div>
 
       <div className={styles.right}>
@@ -42,11 +46,9 @@ export const TaskRow: React.VFC<TaskRowProps> = (props) => {
           </div>
         </div>
 
-        {link && (
-          <Link to={link} className={styles.link} aria-label="Перейти к задаче">
-            <ArrowIcon />
-          </Link>
-        )}
+        <Button variant="transparent" className={styles.more} aria-label="Открыть меню">
+          <DotsIcon />
+        </Button>
       </div>
     </div>
   );
