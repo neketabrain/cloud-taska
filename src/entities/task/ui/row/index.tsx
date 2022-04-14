@@ -51,6 +51,7 @@ export const TaskRow: React.VFC<TaskRowProps> = (props) => {
         {actions?.length && (
           <Dropdown
             className={styles.dropdown}
+            contentClassName={styles.dropdownContent}
             element={({ toggle: toggleDropdown }) => (
               <Button
                 variant="transparent"

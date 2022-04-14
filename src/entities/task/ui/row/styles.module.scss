@@ -19,7 +19,7 @@
     .title,
     .description,
     .datetime,
-    .more {
+    .dropdownButton {
       color: var(--grey-3);
     }
   }
@@ -96,6 +96,10 @@
 
 .dropdown {
   margin-left: 16px;
+}
+
+.dropdownContent {
+  padding: 8px 0;
 }
 
 .dropdownButton {
