@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useState } from 'react';
 
 import { ArrowIcon } from 'shared/assets/icons';
-import { useClickOutside } from 'shared/hooks';
+import { useClickOutside } from 'shared/lib';
 import { Button } from 'shared/ui';
 
 import styles from './styles.module.scss';
@@ -48,11 +48,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
         </Button>
       )}
 
-      {isOpen && (
-        <div className={clsx(styles.dropdown, contentClassName)} role="dialog">
-          {children}
-        </div>
-      )}
+      {isOpen && <div className={clsx(styles.dropdown, contentClassName)}>{children}</div>}
     </div>
   );
 };
