@@ -1,35 +1,25 @@
-import { useEffect } from 'react';
-import ReactTooltip from 'react-tooltip'; // FIXME Обновить версию библиотеки (не скрываются тултипы)
+import clsx from 'clsx';
+import ReactTooltip from 'rc-tooltip';
+import { TooltipProps as ReactTooltipProps } from 'rc-tooltip/lib/Tooltip';
+import 'rc-tooltip/assets/bootstrap.css';
 
 import styles from './styles.module.scss';
 
-interface TooltipProps extends React.HTMLAttributes<HTMLElement> {
-  tip?: string;
-  as?: React.ElementType;
+interface TooltipProps extends ReactTooltipProps {
+  className?: string;
+  placement?: 'left' | 'right' | 'top' | 'bottom' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
 }
 
-const TOOLTIP_ID = 'tooltip';
+export const Tooltip: React.FC<TooltipProps> = (props) => {
+  const { children, className, overlay, ...rest } = props;
 
-export const TooltipContainer: React.FC = (props) => {
-  const { children } = props;
+  if (!overlay) {
+    return <>{children}</>;
+  }
 
   return (
-    <ReactTooltip id={TOOLTIP_ID} className={styles.tooltip} effect="solid">
+    <ReactTooltip overlayClassName={clsx(styles.tooltip, className)} overlay={overlay} {...rest}>
       {children}
     </ReactTooltip>
-  );
-};
-
-export const Tooltip: React.FC<TooltipProps> = (props) => {
-  const { children, tip, as: Tag = 'div', ...rest } = props;
-
-  useEffect(() => {
-    ReactTooltip.rebuild();
-  });
-
-  return (
-    <Tag data-tip={tip} data-for={TOOLTIP_ID} {...rest}>
-      {children}
-    </Tag>
   );
 };

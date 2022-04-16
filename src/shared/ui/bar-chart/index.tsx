@@ -26,12 +26,14 @@ export const BarChart: React.VFC<BarChartProps> = (props) => {
       {data.map((item) => {
         return (
           <div key={item.label} className={clsx(styles.column, item.active && styles.column_active)}>
-            <Tooltip tip={item.tooltip} className={styles.barContainer}>
-              {hasValue(item.foregroundValue) && (
-                <div className={styles.foregroundBar} style={{ height: `${item.foregroundValue}%` }} />
-              )}
+            <Tooltip overlay={item.tooltip} placement="top">
+              <div className={styles.barContainer}>
+                {hasValue(item.foregroundValue) && (
+                  <div className={styles.foregroundBar} style={{ height: `${item.foregroundValue}%` }} />
+                )}
 
-              <div className={styles.bar} style={{ height: `${item.value}%` }} />
+                <div className={styles.bar} style={{ height: `${item.value}%` }} />
+              </div>
             </Tooltip>
 
             <p className={styles.label}>{item.label}</p>
