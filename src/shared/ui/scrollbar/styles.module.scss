@@ -1,0 +1,10 @@
+.scrollbar {
+  position: relative;
+
+  :global(.simplebar-scrollbar) {
+    &::before {
+      height: 4px !important;
+      background-color: var(--white-1) !important;
+    }
+  }
+}

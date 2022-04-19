@@ -15,72 +15,32 @@
   font-weight: 400;
 }
 
-:global(.rc-tooltip-placement-top) {
-  :global(.rc-tooltip-arrow) {
-    border-top-color: var(--black-2);
-  }
-}
-
-:global(.rc-tooltip-placement-topLeft) {
-  :global(.rc-tooltip-arrow) {
-    border-top-color: var(--black-2);
-  }
-}
-
+:global(.rc-tooltip-placement-top),
+:global(.rc-tooltip-placement-topLeft),
 :global(.rc-tooltip-placement-topRight) {
   :global(.rc-tooltip-arrow) {
     border-top-color: var(--black-2);
   }
 }
 
-:global(.rc-tooltip-placement-bottom) {
-  :global(.rc-tooltip-arrow) {
-    border-bottom-color: var(--black-2);
-  }
-}
-
-:global(.rc-tooltip-placement-bottomLeft) {
-  :global(.rc-tooltip-arrow) {
-    border-bottom-color: var(--black-2);
-  }
-}
-
+:global(.rc-tooltip-placement-bottom),
+:global(.rc-tooltip-placement-bottomLeft),
 :global(.rc-tooltip-placement-bottomRight) {
   :global(.rc-tooltip-arrow) {
     border-bottom-color: var(--black-2);
   }
 }
 
-:global(.rc-tooltip-placement-left) {
-  :global(.rc-tooltip-arrow) {
-    border-left-color: var(--black-2);
-  }
-}
-
-:global(.rc-tooltip-placement-leftBottom) {
-  :global(.rc-tooltip-arrow) {
-    border-left-color: var(--black-2);
-  }
-}
-
+:global(.rc-tooltip-placement-left),
+:global(.rc-tooltip-placement-leftBottom),
 :global(.rc-tooltip-placement-leftTop) {
   :global(.rc-tooltip-arrow) {
     border-left-color: var(--black-2);
   }
 }
 
-:global(.rc-tooltip-placement-right) {
-  :global(.rc-tooltip-arrow) {
-    border-right-color: var(--black-2);
-  }
-}
-
-:global(.rc-tooltip-placement-rightBottom) {
-  :global(.rc-tooltip-arrow) {
-    border-right-color: var(--black-2);
-  }
-}
-
+:global(.rc-tooltip-placement-right),
+:global(.rc-tooltip-placement-rightBottom),
 :global(.rc-tooltip-placement-rightTop) {
   :global(.rc-tooltip-arrow) {
     border-right-color: var(--black-2);

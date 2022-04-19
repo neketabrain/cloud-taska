@@ -3,6 +3,7 @@ export * from './button';
 export * from './dropdown';
 export * from './dropdown-menu';
 export * from './logo';
+export * from './scrollbar';
 export * from './tag';
 export * from './text-switch';
 export * from './tooltip';

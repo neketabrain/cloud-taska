@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import SimpleBar from 'simplebar-react';
 
 import { TaskGlassCard, taskModel, taskLib } from 'entities/task';
+import { Scrollbar } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
@@ -24,7 +24,7 @@ export const TaskList: React.VFC = () => {
       )}
 
       {taskList.length && (
-        <SimpleBar className={styles.scrollbar}>
+        <Scrollbar className={styles.scrollbar}>
           <ul className={styles.list}>
             {taskList.map((task) => (
               <li key={task.id} className={styles.item}>
@@ -32,7 +32,7 @@ export const TaskList: React.VFC = () => {
               </li>
             ))}
           </ul>
-        </SimpleBar>
+        </Scrollbar>
       )}
     </section>
   );
