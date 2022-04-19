@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { taskModel, TaskRow, taskLib } from 'entities/task';
-import { ToggleTaskMini } from 'features/toggle-task';
+import { Task } from 'features/task';
 import { PlusIcon } from 'shared/assets/icons';
 import { ROUTES } from 'shared/config';
 import { Button, TextSwitch } from 'shared/ui';
@@ -79,7 +79,12 @@ export const TaskTable: React.VFC = () => {
       <ul className={styles.list}>
         {tasks.map((task) => (
           <li key={task.id} className={styles.item}>
-            <TaskRow task={task} active={task.id === currentTaskId} toggle={<ToggleTaskMini task={task} />} />
+            <TaskRow
+              task={task}
+              active={task.id === currentTaskId}
+              toggle={<Task.ToggleTaskMini task={task} />}
+              actions={[<Task.EditTaskModal task={task} />, <Task.DeleteTask taskId={task.id} />]}
+            />
           </li>
         ))}
       </ul>

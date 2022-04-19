@@ -1,0 +1,50 @@
+.dropdownContent {
+  padding: {
+    left: 0;
+    right: 0;
+  }
+}
+
+.dropdownButton {
+  color: var(--grey-1);
+  transition: color var(--transition);
+  padding: 8px 0px 8px 8px;
+
+  & > svg {
+    width: 24px;
+    height: 24px;
+
+    path {
+      fill: currentColor;
+    }
+  }
+
+  &:hover {
+    color: var(--black-2);
+  }
+}
+
+.dropdownMenuItem {
+  color: var(--grey-1);
+  padding: 8px 24px 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  width: 100%;
+  justify-content: start;
+
+  & > svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: var(--grey-4);
+  }
+
+  &_danger {
+    &:hover:not(:disabled) {
+      color: var(--red-1);
+    }
+  }
+}

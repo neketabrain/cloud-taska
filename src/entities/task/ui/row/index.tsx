@@ -1,10 +1,9 @@
 import clsx from 'clsx';
-import { Children } from 'react';
 
 import { Task } from 'shared/api/task';
-import { CalendarIcon, ClockIcon, DotsIcon, FireIcon } from 'shared/assets/icons';
+import { CalendarIcon, ClockIcon, FireIcon } from 'shared/assets/icons';
 import { formatDate, formatTime } from 'shared/lib';
-import { Button, Dropdown } from 'shared/ui';
+import { DropdownMenu } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
@@ -48,24 +47,7 @@ export const TaskRow: React.VFC<TaskRowProps> = (props) => {
           </div>
         </div>
 
-        {actions?.length && (
-          <Dropdown
-            className={styles.dropdown}
-            contentClassName={styles.dropdownContent}
-            element={({ toggle: toggleDropdown }) => (
-              <Button
-                variant="transparent"
-                onClick={toggleDropdown}
-                className={styles.dropdownButton}
-                aria-label="Открыть меню"
-              >
-                <DotsIcon />
-              </Button>
-            )}
-          >
-            {Children.map(actions, (action) => action)}
-          </Dropdown>
-        )}
+        {actions?.length && <DropdownMenu className={styles.dropdownMenu} items={actions} />}
       </div>
     </div>
   );

@@ -94,29 +94,6 @@
   }
 }
 
-.dropdown {
+.dropdownMenu {
   margin-left: 16px;
-}
-
-.dropdownContent {
-  padding: 8px 0;
-}
-
-.dropdownButton {
-  color: var(--grey-1);
-  transition: color var(--transition);
-  padding: 8px 0px 8px 8px;
-
-  & > svg {
-    width: 24px;
-    height: 24px;
-
-    path {
-      fill: currentColor;
-    }
-  }
-
-  &:hover {
-    color: var(--black-2);
-  }
 }

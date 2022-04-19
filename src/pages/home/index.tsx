@@ -1,5 +1,5 @@
 import { TaskCard, taskModel } from 'entities/task';
-import { ToggleTask } from 'features/toggle-task';
+import { Task } from 'features/task';
 
 import { Activity } from './activity';
 import { TaskList } from './list';
@@ -24,7 +24,7 @@ export const HomePage: React.VFC = () => {
       <div className={styles.row}>
         <div className={styles.task}>
           {!!currentTask && (
-            <TaskCard task={currentTask} label="текущая задача" action={<ToggleTask task={currentTask} />} />
+            <TaskCard task={currentTask} label="текущая задача" action={<Task.ToggleTask task={currentTask} />} />
           )}
         </div>
 

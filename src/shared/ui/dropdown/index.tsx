@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import { createContext, useState } from 'react';
 
 import { ArrowIcon } from 'shared/assets/icons';
 import { useClickOutside } from 'shared/lib';
@@ -7,48 +7,55 @@ import { Button } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
-interface DropdownElementArgs {
+interface DropdownActions {
   open: VoidFunction;
   close: VoidFunction;
   toggle: VoidFunction;
 }
 
 interface DropdownProps {
-  element?: (args: DropdownElementArgs) => React.ReactNode;
+  element?: (actions: DropdownActions) => React.ReactNode;
   className?: string;
   contentClassName?: string;
 }
 
-export const Dropdown: React.FC<DropdownProps> = (props) => {
+export const DropdownContext = createContext<DropdownActions>({ open: () => {}, close: () => {}, toggle: () => {} });
+
+export const Dropdown: React.FC<DropdownProps> & { context: typeof DropdownContext } = (props) => {
   const { element, children, className, contentClassName } = props;
 
   const [isOpen, setOpen] = useState(false);
 
-  function openDropdown() {
+  function open() {
     setOpen(true);
   }
 
-  function closeDropdown() {
+  function close() {
     setOpen(false);
   }
 
-  function toggleDropdown() {
+  function toggle() {
     setOpen((prev) => !prev);
   }
 
-  const ref = useClickOutside<HTMLDivElement>(closeDropdown);
+  const ref = useClickOutside<HTMLDivElement>(close);
+  const actions: DropdownActions = { open, close, toggle };
 
   return (
-    <div className={clsx(styles.container, className)} ref={ref}>
-      {element && element({ open: openDropdown, close: closeDropdown, toggle: toggleDropdown })}
+    <DropdownContext.Provider value={actions}>
+      <div className={clsx(styles.container, className)} ref={ref}>
+        {element && element(actions)}
 
-      {!element && (
-        <Button onClick={toggleDropdown} className={styles.button}>
-          <ArrowIcon />
-        </Button>
-      )}
+        {!element && (
+          <Button onClick={toggle} className={styles.button}>
+            <ArrowIcon />
+          </Button>
+        )}
 
-      {isOpen && <div className={clsx(styles.dropdown, contentClassName)}>{children}</div>}
-    </div>
+        {isOpen && <div className={clsx(styles.dropdown, contentClassName)}>{children}</div>}
+      </div>
+    </DropdownContext.Provider>
   );
 };
+
+Dropdown.context = DropdownContext;

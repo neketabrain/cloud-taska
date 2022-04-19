@@ -8,7 +8,7 @@
   padding: 4px;
   height: auto;
 
-  svg {
+  & > svg {
     transform: rotate(90deg);
   }
 }
@@ -26,4 +26,5 @@
   border: 1px solid var(--grey-4);
   color: var(--black-2);
   min-width: 160px;
+  padding: 8px 12px;
 }

@@ -1,9 +1,9 @@
 import clsx from 'clsx';
+import { useCallback } from 'react';
 
 import { taskModel } from 'entities/task';
 import { Task } from 'shared/api/task';
 import { CheckIcon, RenewIcon } from 'shared/assets/icons';
-import { Button } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
@@ -11,19 +11,24 @@ interface ToggleTaskProps {
   task: Task;
 }
 
+function useToggle() {
+  const toggleTask = useCallback(
+    (taskId: number) => () => {
+      taskModel.events.toggleTask(taskId);
+    },
+    []
+  );
+
+  return toggleTask;
+}
+
 export const ToggleTask: React.VFC<ToggleTaskProps> = (props) => {
   const { task } = props;
-
-  function toggleTask() {
-    taskModel.events.toggleTask(task.id);
-  }
+  const toggleTask = useToggle();
 
   return (
-    <Button
-      onClick={toggleTask}
-      className={styles.toggleTask}
-      aria-label={task.completed ? 'Возобновить задачу' : 'Завершить задачу'}
-    >
+    <label className={styles.toggleTask} aria-label="Переключить состояние задачи">
+      <input type="checkbox" checked={task.completed} onChange={toggleTask(task.id)} className={styles.checkbox} />
       {task.completed ? (
         <>
           <RenewIcon /> <span>Возобновить</span>
@@ -33,24 +38,21 @@ export const ToggleTask: React.VFC<ToggleTaskProps> = (props) => {
           <CheckIcon /> <span>Завершить</span>
         </>
       )}
-    </Button>
+    </label>
   );
 };
 
 export const ToggleTaskMini: React.VFC<ToggleTaskProps> = (props) => {
   const { task } = props;
-
-  function toggleTask() {
-    taskModel.events.toggleTask(task.id);
-  }
+  const toggleTask = useToggle();
 
   return (
-    <Button
-      onClick={toggleTask}
+    <label
       className={clsx(styles.toggleTaskMini, task.completed && styles.toggleTaskMini_active)}
-      aria-label={task.completed ? 'Возобновить задачу' : 'Завершить задачу'}
+      aria-label="Переключить состояние задачи"
     >
+      <input type="checkbox" checked={task.completed} onChange={toggleTask(task.id)} className={styles.checkbox} />
       {task.completed ? <RenewIcon /> : <CheckIcon />}
-    </Button>
+    </label>
   );
 };

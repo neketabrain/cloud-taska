@@ -4,7 +4,7 @@ import { Task } from 'shared/api/task';
 
 import { getCurrentTask } from '../lib';
 
-import { resetTasks, setTasks, toggleTask, addTask } from './events';
+import { resetTasks, setTasks, toggleTask, addTask, deleteTask } from './events';
 
 // TODO: удалить
 const today = new Date();
@@ -26,6 +26,7 @@ function generateTasks(count: number, day = today.getDate(), startTime = 10): Ta
       description: `Описание задачи ${idx + 1}`,
       start_date: date.toISOString(),
       due_date: dueDate.toISOString(),
+      completed: false,
     };
   });
 }
@@ -40,6 +41,7 @@ const defaultState: Task[] = [
 export const $tasks = createStore<Task[]>(defaultState)
   .on(setTasks, (_, tasks) => tasks)
   .on(addTask, (state, task) => state.concat(task))
+  .on(deleteTask, (state, taskId) => state.filter((task) => task.id !== taskId))
   .on(toggleTask, (state, taskId) =>
     state.map((task) => {
       if (task.id === taskId) {

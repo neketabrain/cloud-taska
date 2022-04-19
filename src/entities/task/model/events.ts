@@ -6,3 +6,4 @@ export const setTasks = createEvent<Task[]>();
 export const addTask = createEvent<Task>();
 export const resetTasks = createEvent();
 export const toggleTask = createEvent<number>();
+export const deleteTask = createEvent<number>();

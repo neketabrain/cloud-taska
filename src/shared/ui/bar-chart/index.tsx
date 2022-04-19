@@ -7,8 +7,8 @@ import styles from './styles.module.scss';
 
 export interface BarChartItem {
   label: string;
-  value: number; // 0 - 100
-  foregroundValue?: number; // 0 - 100
+  value: number; // From 0 to 100
+  foregroundValue?: number; // From 0 to 100
   tooltip?: string;
   active?: boolean;
 }
