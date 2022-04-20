@@ -52,7 +52,7 @@ export const Dropdown: React.FC<DropdownProps> & { context: typeof DropdownConte
           </Button>
         )}
 
-        {isOpen && <div className={clsx(styles.dropdown, contentClassName)}>{children}</div>}
+        <div className={clsx(styles.dropdown, isOpen && styles.dropdown_open, contentClassName)}>{children}</div>
       </div>
     </DropdownContext.Provider>
   );

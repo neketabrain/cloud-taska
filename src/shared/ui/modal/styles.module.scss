@@ -1,0 +1,23 @@
+@import 'shared/styles/mixins.scss';
+
+.wrapper {
+  @include row;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  background: rgba(30, 30, 30, 0.5);
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal {
+  position: absolute;
+  width: 600px;
+  height: auto;
+  overflow-y: auto;
+  background-color: var(--white-1);
+  border-radius: 4px;
+}

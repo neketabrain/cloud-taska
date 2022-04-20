@@ -35,6 +35,7 @@ interface DropdownMenuItemProps extends React.ButtonHTMLAttributes<HTMLButtonEle
 
 const DropdownMenuItem: React.FC<DropdownMenuItemProps> = (props) => {
   const { children, danger, onClick, ...rest } = props;
+
   const { close } = useContext(Dropdown.context);
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {

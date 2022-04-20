@@ -1,10 +1,12 @@
 import clsx from 'clsx';
+import { forwardRef } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
 
 import styles from './styles.module.scss';
 
 enum ButtonVariants {
   primary = 'primary',
+  secondary = 'secondary',
   transparent = 'transparent',
 }
 
@@ -16,22 +18,22 @@ interface LinkButtonProps extends LinkProps {
   variant?: `${ButtonVariants}`;
 }
 
-export const Button: React.FC<ButtonProps> = (props) => {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const { className, children, variant = 'primary', ...rest } = props;
 
   return (
-    <button className={clsx(styles.button, styles[`button_${variant}`], className)} {...rest}>
+    <button className={clsx(styles.button, styles[`button_${variant}`], className)} ref={ref} {...rest}>
       {children}
     </button>
   );
-};
+});
 
-export const LinkButton: React.FC<LinkButtonProps> = (props) => {
+export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>((props, ref) => {
   const { className, children, variant = 'primary', ...rest } = props;
 
   return (
-    <Link className={clsx(styles.button, styles[`button_${variant}`], className)} {...rest}>
+    <Link className={clsx(styles.button, styles[`button_${variant}`], className)} ref={ref} {...rest}>
       {children}
     </Link>
   );
-};
+});
