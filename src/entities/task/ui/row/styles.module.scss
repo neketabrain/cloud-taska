@@ -31,6 +31,11 @@
   width: 100%;
   overflow: hidden;
   height: 100%;
+  padding-left: 24px;
+
+  &_withToggle {
+    padding-left: 0;
+  }
 }
 
 .right {

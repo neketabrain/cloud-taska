@@ -23,7 +23,7 @@ export const TaskRow: React.VFC<TaskRowProps> = (props) => {
 
   return (
     <div className={clsx(styles.taskRow, task.completed && styles.taskRow_active, className)}>
-      <div className={styles.left}>
+      <div className={clsx(styles.left, !!toggle && styles.left_withToggle)}>
         {toggle && <div className={styles.toggle}>{toggle}</div>}
 
         <div>
