@@ -16,7 +16,6 @@
 .dropdown {
   display: none;
   position: absolute;
-  right: 0;
   top: 100%;
   z-index: 10;
   width: auto;
@@ -31,5 +30,13 @@
 
   &_open {
     display: block;
+  }
+
+  &_left {
+    left: 0;
+  }
+
+  &_right {
+    right: 0;
   }
 }

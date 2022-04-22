@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 
 interface TagProps {
   className?: string;
-  as?: React.ElementType;
+  as?: keyof JSX.IntrinsicElements;
 }
 
 export const Tag: React.FC<TagProps> = (props) => {

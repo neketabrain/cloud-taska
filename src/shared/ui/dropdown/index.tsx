@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { createContext, useState } from 'react';
+import { createContext, CSSProperties, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ArrowIcon } from 'shared/assets/icons';
@@ -14,16 +14,18 @@ interface DropdownActions {
   toggle: VoidFunction;
 }
 
-interface DropdownProps {
+export interface DropdownProps {
+  placement?: 'left' | 'right';
   element?: (actions: DropdownActions) => React.ReactNode;
   className?: string;
   contentClassName?: string;
+  contentStyle?: CSSProperties;
 }
 
 export const DropdownContext = createContext<DropdownActions>({ open: () => {}, close: () => {}, toggle: () => {} });
 
 export const Dropdown: React.FC<DropdownProps> & { context: typeof DropdownContext } = (props) => {
-  const { element, children, className, contentClassName } = props;
+  const { placement = 'right', element, children, className, contentClassName, contentStyle } = props;
 
   const { t } = useTranslation('actions');
   const [isOpen, setOpen] = useState(false);
@@ -54,7 +56,17 @@ export const Dropdown: React.FC<DropdownProps> & { context: typeof DropdownConte
           </Button>
         )}
 
-        <div className={clsx(styles.dropdown, isOpen && styles.dropdown_open, contentClassName)}>{children}</div>
+        <div
+          className={clsx(
+            styles.dropdown,
+            styles[`dropdown_${placement}`],
+            isOpen && styles.dropdown_open,
+            contentClassName
+          )}
+          style={contentStyle}
+        >
+          {children}
+        </div>
       </div>
     </DropdownContext.Provider>
   );

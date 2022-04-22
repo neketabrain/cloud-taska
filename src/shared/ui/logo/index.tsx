@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 
 interface LogoProps {
   className?: string;
-  as?: React.ElementType;
+  as?: keyof JSX.IntrinsicElements;
 }
 
 export const Logo: React.VFC<LogoProps> = (props) => {

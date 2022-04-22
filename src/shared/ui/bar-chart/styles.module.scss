@@ -3,7 +3,7 @@
 .container {
   @include row;
   position: relative;
-  justify-content: space-between;
+  column-gap: 16px;
 }
 
 .column {

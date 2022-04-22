@@ -3,29 +3,28 @@ import React, { useContext, Children } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { DotsIcon } from 'shared/assets/icons';
-import { Dropdown, Button } from 'shared/ui';
+import { Dropdown, DropdownProps, Button } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
-interface DropdownMenuProps {
+interface DropdownMenuProps extends DropdownProps {
   items: React.ReactNode[];
-  className?: string;
 }
 
 export const DropdownMenu: React.VFC<DropdownMenuProps> & { Item: typeof DropdownMenuItem } = (props) => {
-  const { items, className } = props;
+  const { items, ...rest } = props;
 
   const { t } = useTranslation('actions');
 
   return (
     <Dropdown
-      className={className}
       contentClassName={styles.dropdownContent}
       element={({ toggle }) => (
         <Button variant="transparent" onClick={toggle} className={styles.dropdownButton} aria-label={t('openMenu')}>
           <DotsIcon />
         </Button>
       )}
+      {...rest}
     >
       {Children.map(items, (item) => item)}
     </Dropdown>

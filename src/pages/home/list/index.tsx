@@ -27,7 +27,7 @@ export const TaskList: React.VFC = () => {
       )}
 
       {taskList.length && (
-        <Scrollbar className={styles.scrollbar}>
+        <Scrollbar className={styles.scrollbar} variant="light">
           <ul className={styles.list}>
             {taskList.map((task) => (
               <li key={task.id} className={styles.item}>

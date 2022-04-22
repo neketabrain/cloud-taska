@@ -22,7 +22,7 @@ export const Activity: React.VFC = () => {
 
       <div className={styles.content}>
         <div className={styles.graph}>
-          <BarChart data={chartData} />
+          <BarChart data={chartData} className={styles.chart} />
         </div>
 
         <div className={styles.separator} />

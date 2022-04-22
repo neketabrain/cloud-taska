@@ -9,15 +9,16 @@ import styles from './styles.module.scss';
 interface ConfirmModalProps {
   accept: VoidFunction;
   close: VoidFunction;
-  acceptText?: string;
-  closeText?: string;
   title: React.ReactNode;
   description: React.ReactNode;
+  acceptText?: string;
+  closeText?: string;
   className?: string;
+  rootId?: string;
 }
 
 export const ConfirmModal: React.VFC<ConfirmModalProps> = (props) => {
-  const { title, description, accept, close, acceptText, closeText, className } = props;
+  const { title, description, accept, close, acceptText, closeText, className, rootId } = props;
 
   const { t } = useTranslation('actions');
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -29,7 +30,7 @@ export const ConfirmModal: React.VFC<ConfirmModalProps> = (props) => {
   }, []);
 
   return (
-    <Modal close={close} className={className}>
+    <Modal close={close} className={className} rootId={rootId}>
       <div className={styles.content}>
         <div className={styles.header}>
           <h3 className={styles.title}>{title}</h3>

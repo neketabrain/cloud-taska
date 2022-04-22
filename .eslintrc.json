@@ -7,7 +7,8 @@
     "plugin:boundaries/recommended",
     "plugin:prettier/recommended",
     "plugin:effector/recommended",
-    "plugin:effector/scope"
+    "plugin:effector/scope",
+    "plugin:storybook/recommended"
   ],
   "plugins": ["prettier", "effector"],
   "settings": {
@@ -168,5 +169,13 @@
         "printWidth": 120
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.stories.*"],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
+      }
+    }
+  ]
 }
