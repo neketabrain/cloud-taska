@@ -57,14 +57,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false --passWithNoTests",
     "eject": "react-scripts eject",
     "lint": "yarn lint:code && yarn lint:types",
     "lint:code": "eslint --ext .js,.jsx,.ts,.tsx src --color",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx src --color",
     "lint:types": "tsc --noEmit",
     "prettify": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'",
-    "prepare": "husky install",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
