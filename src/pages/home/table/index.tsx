@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { taskModel, TaskRow, taskLib } from 'entities/task';
@@ -7,7 +8,7 @@ import { PlusIcon } from 'shared/assets/icons';
 import { ROUTES } from 'shared/config';
 import { Button, TextSwitch } from 'shared/ui';
 
-import { filters, PERIODS } from './config';
+import { getFilters, PERIODS } from './config';
 import styles from './styles.module.scss';
 
 function useTaskFilter() {
@@ -55,24 +56,26 @@ function useTaskFilter() {
 }
 
 export const TaskTable: React.VFC = () => {
-  const currentTaskId = taskModel.useCurrentTaskId();
+  const { t: tDatetime } = useTranslation('datetime');
+  const { t: tTask } = useTranslation('task');
 
+  const currentTaskId = taskModel.useCurrentTaskId();
   const { period, changeFilter, tasks } = useTaskFilter();
 
   return (
     <section className={styles.container}>
       <div className={styles.header}>
         <div className={styles.switch}>
-          <TextSwitch name="period" items={filters} value={period} onChange={changeFilter} />
+          <TextSwitch name="period" items={getFilters(tDatetime)} value={period} onChange={changeFilter} />
 
           <p className={styles.separator}>{' / '}</p>
           <Link to={ROUTES.tasks} className={styles.allTasksLink}>
-            Все
+            {tDatetime('all')}
           </Link>
         </div>
 
         <Button className={styles.addTaskButton}>
-          <PlusIcon /> Добавить задачу
+          <PlusIcon /> {tTask('addTask')}
         </Button>
       </div>
 

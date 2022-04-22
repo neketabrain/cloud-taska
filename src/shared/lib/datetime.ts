@@ -1,3 +1,5 @@
+import { getLocale } from './i18n';
+
 export function getToday(): Date {
   const today = new Date();
   today.setHours(0);
@@ -9,9 +11,13 @@ export function getToday(): Date {
 }
 
 export function formatDate(date: Date): string {
-  return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }).slice(0, -3);
+  const locale = getLocale();
+
+  return date.toLocaleDateString([locale, 'ru-RU'], { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
 export function formatTime(date: Date): string {
-  return date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+  const locale = getLocale();
+
+  return date.toLocaleTimeString([locale, 'ru-RU'], { hour: '2-digit', minute: '2-digit', hour12: false });
 }

@@ -1,3 +1,5 @@
+import { TFunction } from 'react-i18next';
+
 import { TextSwitchItem } from 'shared/ui/text-switch';
 
 export const PERIODS = {
@@ -7,9 +9,11 @@ export const PERIODS = {
   week: 'week',
 };
 
-export const filters: TextSwitchItem[] = [
-  { value: PERIODS.yesterday, label: 'вчера' },
-  { value: PERIODS.today, label: 'сегодня' },
-  { value: PERIODS.tomorrow, label: 'завтра' },
-  { value: PERIODS.week, label: 'неделя' },
-];
+export function getFilters(t: TFunction): TextSwitchItem[] {
+  return [
+    { value: PERIODS.yesterday, label: t('yesterday') },
+    { value: PERIODS.today, label: t('today') },
+    { value: PERIODS.tomorrow, label: t('tomorrow') },
+    { value: PERIODS.week, label: t('week') },
+  ];
+}

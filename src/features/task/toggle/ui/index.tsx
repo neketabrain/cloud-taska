@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { taskModel } from 'entities/task';
 import { Task } from 'shared/api/task';
@@ -24,18 +25,21 @@ function useToggle() {
 
 export const ToggleTask: React.VFC<ToggleTaskProps> = (props) => {
   const { task } = props;
+
+  const { t: tAction } = useTranslation('actions');
+  const { t: tTask } = useTranslation('task');
   const toggleTask = useToggle();
 
   return (
-    <label className={styles.toggleTask} aria-label="Переключить состояние задачи">
+    <label className={styles.toggleTask} aria-label={tTask('toggleTask')}>
       <input type="checkbox" checked={task.completed} onChange={toggleTask(task.id)} className={styles.checkbox} />
       {task.completed ? (
         <>
-          <RenewIcon /> <span>Возобновить</span>
+          <RenewIcon /> <span>{tAction('renew')}</span>
         </>
       ) : (
         <>
-          <CheckIcon /> <span>Завершить</span>
+          <CheckIcon /> <span>{tAction('complete')}</span>
         </>
       )}
     </label>
@@ -44,12 +48,14 @@ export const ToggleTask: React.VFC<ToggleTaskProps> = (props) => {
 
 export const ToggleTaskMini: React.VFC<ToggleTaskProps> = (props) => {
   const { task } = props;
+
+  const { t } = useTranslation('task');
   const toggleTask = useToggle();
 
   return (
     <label
       className={clsx(styles.toggleTaskMini, task.completed && styles.toggleTaskMini_active)}
-      aria-label="Переключить состояние задачи"
+      aria-label={t('toggleTask')}
     >
       <input type="checkbox" checked={task.completed} onChange={toggleTask(task.id)} className={styles.checkbox} />
       {task.completed ? <RenewIcon /> : <CheckIcon />}

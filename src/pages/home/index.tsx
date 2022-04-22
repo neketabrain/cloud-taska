@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { TaskCard, taskModel } from 'entities/task';
 import { Task } from 'features/task';
 
@@ -7,6 +9,7 @@ import styles from './styles.module.scss';
 import { TaskTable } from './table';
 
 export const HomePage: React.VFC = () => {
+  const { t } = useTranslation('task');
   const currentTask = taskModel.useCurrentTask();
 
   return (
@@ -24,7 +27,11 @@ export const HomePage: React.VFC = () => {
       <div className={styles.row}>
         <div className={styles.task}>
           {!!currentTask && (
-            <TaskCard task={currentTask} label="текущая задача" action={<Task.ToggleTask task={currentTask} />} />
+            <TaskCard
+              task={currentTask}
+              label={t('currentTask').toLowerCase()}
+              action={<Task.ToggleTask task={currentTask} />}
+            />
           )}
         </div>
 

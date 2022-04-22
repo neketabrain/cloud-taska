@@ -1,4 +1,5 @@
 import { isMonday, isTuesday, isWednesday, isThursday, isFriday, isSaturday, isSunday } from 'date-fns';
+import { TFunction } from 'react-i18next';
 
 import { Task } from 'shared/api/task';
 import { getToday } from 'shared/lib';
@@ -19,11 +20,11 @@ export function getTaskStatistics(tasks: Task[]) {
   );
 }
 
-function getTooltipText(allTasks: number, completedTasks: number): string {
-  return `Завершено: ${completedTasks}\nОсталось: ${allTasks - completedTasks}\nВсего: ${allTasks}`;
+function getTooltipText(allTasks: number, completedTasks: number, t: TFunction): string {
+  return `${t('completed')}: ${completedTasks}\n${t('left')}: ${allTasks - completedTasks}\n${t('total')}: ${allTasks}`;
 }
 
-export function getChartData(tasks: Task[]): BarChartItem[] {
+export function getChartData(tasks: Task[], tDatetime: TFunction, tActivity: TFunction): BarChartItem[] {
   const today = getToday().getDay();
 
   const tasksByDay = tasks.reduce(
@@ -106,53 +107,53 @@ export function getChartData(tasks: Task[]): BarChartItem[] {
 
   return [
     {
-      label: 'Пн',
+      label: tDatetime('shortWeekDays.monday'),
       foregroundValue: (tasksByDay.mondayAll / maxTaskCount) * 100,
       value: (tasksByDay.mondayCompleted / maxTaskCount) * 100,
       active: today === 1,
-      tooltip: getTooltipText(tasksByDay.mondayAll, tasksByDay.mondayCompleted),
+      tooltip: getTooltipText(tasksByDay.mondayAll, tasksByDay.mondayCompleted, tActivity),
     },
     {
-      label: 'Вт',
+      label: tDatetime('shortWeekDays.tuesday'),
       foregroundValue: (tasksByDay.tuesdayAll / maxTaskCount) * 100,
       value: (tasksByDay.tuesdayCompleted / maxTaskCount) * 100,
       active: today === 2,
-      tooltip: getTooltipText(tasksByDay.tuesdayAll, tasksByDay.tuesdayCompleted),
+      tooltip: getTooltipText(tasksByDay.tuesdayAll, tasksByDay.tuesdayCompleted, tActivity),
     },
     {
-      label: 'Ср',
+      label: tDatetime('shortWeekDays.wednesday'),
       foregroundValue: (tasksByDay.wednesdayAll / maxTaskCount) * 100,
       value: (tasksByDay.wednesdayCompleted / maxTaskCount) * 100,
       active: today === 3,
-      tooltip: getTooltipText(tasksByDay.wednesdayAll, tasksByDay.wednesdayCompleted),
+      tooltip: getTooltipText(tasksByDay.wednesdayAll, tasksByDay.wednesdayCompleted, tActivity),
     },
     {
-      label: 'Чт',
+      label: tDatetime('shortWeekDays.thursday'),
       foregroundValue: (tasksByDay.thursdayAll / maxTaskCount) * 100,
       value: (tasksByDay.thursdayCompleted / maxTaskCount) * 100,
       active: today === 4,
-      tooltip: getTooltipText(tasksByDay.thursdayAll, tasksByDay.thursdayCompleted),
+      tooltip: getTooltipText(tasksByDay.thursdayAll, tasksByDay.thursdayCompleted, tActivity),
     },
     {
-      label: 'Пт',
+      label: tDatetime('shortWeekDays.friday'),
       foregroundValue: (tasksByDay.fridayAll / maxTaskCount) * 100,
       value: (tasksByDay.fridayCompleted / maxTaskCount) * 100,
       active: today === 5,
-      tooltip: getTooltipText(tasksByDay.fridayAll, tasksByDay.fridayCompleted),
+      tooltip: getTooltipText(tasksByDay.fridayAll, tasksByDay.fridayCompleted, tActivity),
     },
     {
-      label: 'Сб',
+      label: tDatetime('shortWeekDays.saturday'),
       foregroundValue: (tasksByDay.saturdayAll / maxTaskCount) * 100,
       value: (tasksByDay.saturdayCompleted / maxTaskCount) * 100,
       active: today === 6,
-      tooltip: getTooltipText(tasksByDay.saturdayAll, tasksByDay.saturdayCompleted),
+      tooltip: getTooltipText(tasksByDay.saturdayAll, tasksByDay.saturdayCompleted, tActivity),
     },
     {
-      label: 'Вс',
+      label: tDatetime('shortWeekDays.sunday'),
       foregroundValue: (tasksByDay.sundayAll / maxTaskCount) * 100,
       value: (tasksByDay.sundayCompleted / maxTaskCount) * 100,
       active: today === 0,
-      tooltip: getTooltipText(tasksByDay.sundayAll, tasksByDay.sundayCompleted),
+      tooltip: getTooltipText(tasksByDay.sundayAll, tasksByDay.sundayCompleted, tActivity),
     },
   ];
 }

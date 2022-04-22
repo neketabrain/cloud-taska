@@ -1,0 +1,16 @@
+{
+  "today": "Сегодня",
+  "tomorrow": "Завтра",
+  "yesterday": "Вчера",
+  "week": "Неделя",
+  "all": "Все",
+  "shortWeekDays": {
+    "monday": "Пн",
+    "tuesday": "Вт",
+    "wednesday": "Ср",
+    "thursday": "Чт",
+    "friday": "Пт",
+    "saturday": "Сб",
+    "sunday": "Вс"
+  }
+}

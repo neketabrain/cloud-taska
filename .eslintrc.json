@@ -39,6 +39,7 @@
     "no-console": "warn",
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
+    "import/no-named-as-default-member": "off",
     "import/order": [
       "error",
       {

@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { createContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { ArrowIcon } from 'shared/assets/icons';
 import { useClickOutside } from 'shared/lib';
@@ -24,6 +25,7 @@ export const DropdownContext = createContext<DropdownActions>({ open: () => {}, 
 export const Dropdown: React.FC<DropdownProps> & { context: typeof DropdownContext } = (props) => {
   const { element, children, className, contentClassName } = props;
 
+  const { t } = useTranslation('actions');
   const [isOpen, setOpen] = useState(false);
 
   function open() {
@@ -47,7 +49,7 @@ export const Dropdown: React.FC<DropdownProps> & { context: typeof DropdownConte
         {element && element(actions)}
 
         {!element && (
-          <Button onClick={toggle} className={styles.button}>
+          <Button onClick={toggle} className={styles.button} aria-label={t('open')}>
             <ArrowIcon />
           </Button>
         )}

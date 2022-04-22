@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { taskModel } from 'entities/task';
 import { DeleteIcon } from 'shared/assets/icons';
@@ -11,6 +12,8 @@ interface DeleteTaskProps {
 export const DeleteTask: React.VFC<DeleteTaskProps> = (props) => {
   const { taskId } = props;
 
+  const { t: tAction } = useTranslation('actions');
+  const { t: tTask } = useTranslation('task');
   const [isModalOpen, setModalOpen] = useState(false);
 
   function openModal() {
@@ -30,15 +33,16 @@ export const DeleteTask: React.VFC<DeleteTaskProps> = (props) => {
     <>
       <DropdownMenu.Item onClick={openModal} danger>
         <DeleteIcon />
-        Удалить
+        {tAction('delete')}
       </DropdownMenu.Item>
 
       {isModalOpen && (
         <ConfirmModal
           close={closeModal}
           accept={deleteTask}
-          title="Удаление задачи"
-          description="Вы уверены, что хотите удалить задачу? Это действие не может быть отменено"
+          acceptText={tAction('delete')}
+          title={tTask('deleteTask')}
+          description={tTask('deleteTaskConfirmation')}
         />
       )}
     </>

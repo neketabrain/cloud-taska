@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { CloseIcon } from 'shared/assets/icons';
 import { Modal, Button } from 'shared/ui';
@@ -8,14 +9,17 @@ import styles from './styles.module.scss';
 interface ConfirmModalProps {
   accept: VoidFunction;
   close: VoidFunction;
+  acceptText?: string;
+  closeText?: string;
   title: React.ReactNode;
   description: React.ReactNode;
   className?: string;
 }
 
 export const ConfirmModal: React.VFC<ConfirmModalProps> = (props) => {
-  const { title, description, accept, close, className } = props;
+  const { title, description, accept, close, acceptText, closeText, className } = props;
 
+  const { t } = useTranslation('actions');
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -33,7 +37,7 @@ export const ConfirmModal: React.VFC<ConfirmModalProps> = (props) => {
           <Button
             onClick={close}
             variant="transparent"
-            aria-label="Закрыть"
+            aria-label={t('close')}
             className={styles.closeButton}
             ref={closeButtonRef}
           >
@@ -46,10 +50,10 @@ export const ConfirmModal: React.VFC<ConfirmModalProps> = (props) => {
 
       <div className={styles.actions}>
         <Button variant="secondary" onClick={close}>
-          Отменить
+          {closeText ?? t('close')}
         </Button>
 
-        <Button onClick={accept}>Удалить</Button>
+        <Button onClick={accept}>{acceptText ?? t('accept')}</Button>
       </div>
     </Modal>
   );

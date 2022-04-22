@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { TaskGlassCard, taskModel, taskLib } from 'entities/task';
 import { Scrollbar } from 'shared/ui';
@@ -6,6 +7,8 @@ import { Scrollbar } from 'shared/ui';
 import styles from './styles.module.scss';
 
 export const TaskList: React.VFC = () => {
+  const { t } = useTranslation('task');
+
   const currentTaskId = taskModel.useCurrentTaskId();
   const tasks = taskModel.useTasks();
   const tasksForToday = useMemo(() => taskLib.getTasksForToday(tasks), [tasks]);
@@ -17,10 +20,10 @@ export const TaskList: React.VFC = () => {
       <div className={styles.circleMedium} />
       <div className={styles.circleLarge} />
 
-      <h2 className={styles.title}>ЗАДАЧИ НА СЕГОДНЯ</h2>
+      <h2 className={styles.title}>{t('tasksForToday').toUpperCase()}</h2>
 
       {!taskList.length && (
-        <p className={styles.text}>{tasksForToday.length ? 'Все задачи выполнены' : 'Задачи на сегодня отсутствуют'}</p>
+        <p className={styles.text}>{tasksForToday.length ? t('allTasksCompleted') : t('noTasksForToday')}</p>
       )}
 
       {taskList.length && (
