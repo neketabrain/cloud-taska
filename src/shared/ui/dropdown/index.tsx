@@ -51,7 +51,7 @@ export const Dropdown: React.FC<DropdownProps> & { context: typeof DropdownConte
         {element && element(actions)}
 
         {!element && (
-          <Button onClick={toggle} className={styles.button} aria-label={t('open')}>
+          <Button variant="transparent" onClick={toggle} className={styles.button} aria-label={t('open')}>
             <ArrowIcon />
           </Button>
         )}

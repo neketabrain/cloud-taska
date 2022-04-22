@@ -11,6 +11,7 @@
   font-size: 16px;
   font-weight: 600;
   border: none;
+  border-radius: var(--border-radius);
   transition: background-color var(--transition), color var(--transition), box-shadow var(--transition);
   font-family: 'Montserrat', sans-serif;
   text-decoration: none;
@@ -51,10 +52,10 @@
 
   &_transparent {
     background-color: transparent;
-    color: var(--black-2);
+    color: var(--grey-1);
 
     &:hover:not(:disabled) {
-      color: var(--black-3);
+      color: var(--black-2);
     }
   }
 }

@@ -28,6 +28,8 @@
 }
 
 .task {
+  position: sticky;
+  top: 24px;
   width: 300px;
   height: 300px;
   flex-shrink: 0;

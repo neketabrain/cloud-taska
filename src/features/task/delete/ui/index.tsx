@@ -38,7 +38,7 @@ export const DeleteTask: React.VFC<DeleteTaskProps> = (props) => {
 
       {isModalOpen && (
         <ConfirmModal
-          close={closeModal}
+          cancel={closeModal}
           accept={deleteTask}
           acceptText={tAction('delete')}
           title={tTask('deleteTask')}

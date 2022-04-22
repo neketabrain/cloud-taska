@@ -1,4 +1,6 @@
 :root {
   --transition-duration: 200ms;
   --transition: var(--transition-duration) ease;
+  --border-radius: 4px;
+  --box-shadow: 0 0 4px rgb(0, 0, 0, 0.1);
 }

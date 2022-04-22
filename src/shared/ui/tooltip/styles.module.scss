@@ -8,11 +8,12 @@
   background-color: var(--black-2);
   color: var(--white-1);
   border: none;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   font-size: 12px;
   line-height: 1.5;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
+  box-shadow: var(--box-shadow);
 }
 
 :global(.rc-tooltip-placement-top),

@@ -3,6 +3,7 @@
 .row {
   @include row;
   align-items: center;
+  border-radius: var(--border-radius);
 }
 
 .taskRow {

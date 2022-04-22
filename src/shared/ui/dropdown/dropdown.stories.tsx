@@ -28,7 +28,10 @@ export const Component: ComponentStory<typeof Dropdown> = (args) => (
 export const WithCustomElement = Component.bind({});
 WithCustomElement.args = {
   element: (actions) => (
-    <button onClick={actions.toggle} style={{ backgroundColor: 'orange', padding: '8px 16px', border: 'none' }}>
+    <button
+      onClick={actions.toggle}
+      style={{ backgroundColor: 'orange', padding: '8px 16px', border: 'none', cursor: 'pointer' }}
+    >
       Open
     </button>
   ),

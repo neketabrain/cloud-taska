@@ -21,8 +21,8 @@
   width: auto;
   height: auto;
   background-color: var(--white-1);
-  box-shadow: 0 0 8px rgba(black, 0.1);
-  border-radius: 4px;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
   border: 1px solid var(--grey-4);
   color: var(--black-2);
   min-width: 160px;

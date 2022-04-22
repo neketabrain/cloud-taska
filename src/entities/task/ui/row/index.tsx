@@ -47,7 +47,9 @@ export const TaskRow: React.VFC<TaskRowProps> = (props) => {
           </div>
         </div>
 
-        {actions?.length && <DropdownMenu className={styles.dropdownMenu} items={actions} />}
+        {actions?.length && (
+          <DropdownMenu className={styles.dropdownMenu} buttonClassName={styles.dropdownButton} items={actions} />
+        )}
       </div>
     </div>
   );

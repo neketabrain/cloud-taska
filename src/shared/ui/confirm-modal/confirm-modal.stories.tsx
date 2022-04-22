@@ -14,10 +14,10 @@ export default {
         defaultValue: { summary: 'Accept' },
       },
     },
-    closeText: {
-      defaultValue: 'Close',
+    cancelText: {
+      defaultValue: 'Cancel',
       table: {
-        defaultValue: { summary: 'Close' },
+        defaultValue: { summary: 'Cancel' },
       },
     },
     rootId: {
@@ -28,7 +28,7 @@ export default {
     },
   },
   args: {
-    title: 'Confirm modal',
+    title: 'Confirmation modal',
     description: 'Description',
   },
 } as ComponentMeta<typeof ConfirmModal>;
@@ -48,7 +48,7 @@ export const Component: ComponentStory<typeof ConfirmModal> = (args) => {
     <div id="modal-root">
       <Button onClick={openModal}>Open</Button>
 
-      {isOpen && <ConfirmModal {...args} close={closeModal} accept={closeModal} />}
+      {isOpen && <ConfirmModal {...args} cancel={closeModal} accept={closeModal} />}
     </div>
   );
 };

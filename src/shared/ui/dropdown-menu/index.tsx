@@ -9,10 +9,11 @@ import styles from './styles.module.scss';
 
 interface DropdownMenuProps extends DropdownProps {
   items: React.ReactNode[];
+  buttonClassName?: string;
 }
 
 export const DropdownMenu: React.VFC<DropdownMenuProps> & { Item: typeof DropdownMenuItem } = (props) => {
-  const { items, ...rest } = props;
+  const { items, buttonClassName, ...rest } = props;
 
   const { t } = useTranslation('actions');
 
@@ -20,7 +21,12 @@ export const DropdownMenu: React.VFC<DropdownMenuProps> & { Item: typeof Dropdow
     <Dropdown
       contentClassName={styles.dropdownContent}
       element={({ toggle }) => (
-        <Button variant="transparent" onClick={toggle} className={styles.dropdownButton} aria-label={t('openMenu')}>
+        <Button
+          variant="transparent"
+          onClick={toggle}
+          className={clsx(styles.dropdownButton, buttonClassName)}
+          aria-label={t('openMenu')}
+        >
           <DotsIcon />
         </Button>
       )}

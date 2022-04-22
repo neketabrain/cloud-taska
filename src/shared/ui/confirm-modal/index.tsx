@@ -1,57 +1,29 @@
-import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { CloseIcon } from 'shared/assets/icons';
-import { Modal, Button } from 'shared/ui';
+import { Button, Modal, ModalProps } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
-interface ConfirmModalProps {
+interface ConfirmModalProps extends Omit<ModalProps, 'close'> {
   accept: VoidFunction;
-  close: VoidFunction;
-  title: React.ReactNode;
-  description: React.ReactNode;
+  cancel: VoidFunction;
+  description?: React.ReactNode;
   acceptText?: string;
-  closeText?: string;
-  className?: string;
-  rootId?: string;
+  cancelText?: string;
 }
 
 export const ConfirmModal: React.VFC<ConfirmModalProps> = (props) => {
-  const { title, description, accept, close, acceptText, closeText, className, rootId } = props;
+  const { description, accept, cancel, acceptText, cancelText, ...rest } = props;
 
   const { t } = useTranslation('actions');
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (closeButtonRef.current) {
-      closeButtonRef.current.focus();
-    }
-  }, []);
 
   return (
-    <Modal close={close} className={className} rootId={rootId}>
-      <div className={styles.content}>
-        <div className={styles.header}>
-          <h3 className={styles.title}>{title}</h3>
-
-          <Button
-            onClick={close}
-            variant="transparent"
-            aria-label={t('close')}
-            className={styles.closeButton}
-            ref={closeButtonRef}
-          >
-            <CloseIcon />
-          </Button>
-        </div>
-
-        <p className={styles.description}>{description}</p>
-      </div>
+    <Modal close={cancel} withCloseButton={true} {...rest}>
+      {description && <p className={styles.description}>{description}</p>}
 
       <div className={styles.actions}>
-        <Button variant="secondary" onClick={close}>
-          {closeText ?? t('close')}
+        <Button variant="secondary" onClick={cancel}>
+          {cancelText ?? t('cancel')}
         </Button>
 
         <Button onClick={accept}>{acceptText ?? t('accept')}</Button>

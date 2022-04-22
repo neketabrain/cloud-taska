@@ -5,19 +5,39 @@
   position: fixed;
   justify-content: center;
   align-items: center;
-  background: rgba(30, 30, 30, 0.5);
+  background: rgba(30, 30, 30, 0.8);
   z-index: 100;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  backdrop-filter: blur(4px);
 }
 
 .modal {
   position: absolute;
-  width: 600px;
+  width: 480px;
   height: auto;
   overflow-y: auto;
   background-color: var(--white-1);
-  border-radius: 4px;
+  border-radius: var(--border-radius);
+  box-shadow: 0px 0px 4px rgba(black, 0.2);
+}
+
+.header {
+  @include row;
+  justify-content: space-between;
+  padding: 24px 24px 0;
+  column-gap: 16px;
+}
+
+.closeButton {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--black-2);
 }

@@ -6,7 +6,6 @@
 }
 
 .dropdownButton {
-  color: var(--grey-1);
   transition: color var(--transition);
   padding: 8px 0px 8px 8px;
 
@@ -18,19 +17,15 @@
       fill: currentColor;
     }
   }
-
-  &:hover {
-    color: var(--black-2);
-  }
 }
 
 .dropdownMenuItem {
-  color: var(--grey-1);
   padding: 8px 24px 8px 16px;
   font-size: 12px;
   font-weight: 500;
   width: 100%;
   justify-content: start;
+  border-radius: 0;
 
   & > svg {
     width: 18px;

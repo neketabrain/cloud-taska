@@ -1,13 +1,19 @@
 import clsx from 'clsx';
-import { CSSProperties } from 'react';
+import { CSSProperties, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { useTranslation } from 'react-i18next';
 
+import { CloseIcon } from 'shared/assets/icons';
 import { useClickOutside } from 'shared/lib';
+
+import { Button } from '../button';
 
 import styles from './styles.module.scss';
 
-interface ModalProps {
+export interface ModalProps {
   close: VoidFunction;
+  title?: React.ReactNode;
+  withCloseButton?: boolean;
   rootId?: string;
   className?: string;
   wrapperClassName?: string;
@@ -15,10 +21,18 @@ interface ModalProps {
 }
 
 export const Modal: React.FC<ModalProps> = (props) => {
-  const { children, close, rootId = 'modal-root', className, style, wrapperClassName } = props;
+  const { title, children, close, withCloseButton, rootId = 'modal-root', className, style, wrapperClassName } = props;
 
+  const { t } = useTranslation('actions');
   const root = document.getElementById(rootId);
   const ref = useClickOutside<HTMLDivElement>(close);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (closeButtonRef.current) {
+      closeButtonRef.current.focus();
+    }
+  }, []);
 
   if (!root) {
     return null;
@@ -27,6 +41,23 @@ export const Modal: React.FC<ModalProps> = (props) => {
   return createPortal(
     <div className={clsx(styles.wrapper, wrapperClassName)}>
       <div className={clsx(styles.modal, className)} style={style} ref={ref} role="dialog">
+        {(title || withCloseButton) && (
+          <div className={styles.header}>
+            {title && <h3 className={styles.title}>{title}</h3>}
+
+            {withCloseButton && (
+              <Button
+                onClick={close}
+                variant="transparent"
+                aria-label={t('close')}
+                className={styles.closeButton}
+                ref={closeButtonRef}
+              >
+                <CloseIcon />
+              </Button>
+            )}
+          </div>
+        )}
         {children}
       </div>
     </div>,
