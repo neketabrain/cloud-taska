@@ -5,25 +5,19 @@ import { getToday } from 'shared/lib';
 
 export function getTasksForToday(tasks: Task[]): Task[] {
   return tasks.filter((task) => {
-    const startDate = new Date(task.start_date);
-
-    return isToday(startDate);
+    return isToday(task.start_date);
   });
 }
 
 export function getTasksForTomorrow(tasks: Task[]): Task[] {
   return tasks.filter((task) => {
-    const startDate = new Date(task.start_date);
-
-    return isTomorrow(startDate);
+    return isTomorrow(task.start_date);
   });
 }
 
 export function getTasksForYesterday(tasks: Task[]): Task[] {
   return tasks.filter((task) => {
-    const startDate = new Date(task.start_date);
-
-    return isYesterday(startDate);
+    return isYesterday(task.start_date);
   });
 }
 
@@ -31,22 +25,18 @@ export function getTasksForSevenDays(tasks: Task[], date = getToday()): Task[] {
   const week = setDate(date, date.getDate() + 6);
 
   return tasks.filter((task) => {
-    const startDate = new Date(task.start_date);
-
-    return isAfter(startDate, date) && isBefore(startDate, week);
+    return isAfter(task.start_date, date) && isBefore(task.start_date, week);
   });
 }
 
 export function getTasksForWeek(tasks: Task[], date = getToday()): Task[] {
   return tasks.filter((task) => {
-    const startDate = new Date(task.start_date);
-
-    return isSameWeek(date, startDate, { weekStartsOn: 1 });
+    return isSameWeek(date, task.start_date, { weekStartsOn: 1 });
   });
 }
 
 export function sortTasksByDate(tasks: Task[]): Task[] {
-  return tasks.sort((a, b) => new Date(a.start_date).getTime() - new Date(b.start_date).getTime());
+  return tasks.sort((a, b) => a.start_date.getTime() - b.start_date.getTime());
 }
 
 export function getActiveTasks(tasks: Task[]): Task[] {
@@ -61,10 +51,7 @@ export function getCurrentTasks(tasks: Task[]): Task[] {
   const now = Date.now();
 
   return tasks.filter((task) => {
-    const startDate = new Date(task.start_date);
-    const dueDate = new Date(task.due_date);
-
-    return isAfter(dueDate, now) && isBefore(startDate, now);
+    return isAfter(task.due_date, now) && isBefore(task.start_date, now);
   });
 }
 

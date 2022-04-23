@@ -29,9 +29,15 @@ export const Modal: React.FC<ModalProps> = (props) => {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
     if (closeButtonRef.current) {
       closeButtonRef.current.focus();
     }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
   }, []);
 
   if (!root) {

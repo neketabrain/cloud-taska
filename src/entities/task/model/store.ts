@@ -24,8 +24,8 @@ function generateTasks(count: number, day = today.getDate(), startTime = 10): Ta
       id: date.getTime(),
       title: `Задача ${idx + 1}`,
       description: `Описание задачи ${idx + 1}`,
-      start_date: date.toISOString(),
-      due_date: dueDate.toISOString(),
+      start_date: date,
+      due_date: dueDate,
       completed: false,
     };
   });

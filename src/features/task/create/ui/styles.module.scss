@@ -1,0 +1,51 @@
+@import 'shared/styles/mixins.scss';
+
+.button {
+  height: 32px;
+  font-size: 12px;
+
+  & > span {
+    margin-right: 8px;
+  }
+
+  & > svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+  }
+}
+
+.form {
+  position: relative;
+  width: 100%;
+  margin-top: 32px;
+}
+
+.inputs {
+  position: relative;
+  width: 100%;
+  padding: 0 24px;
+}
+
+.row {
+  @include row;
+  position: relative;
+  column-gap: 16px;
+
+  &:not(:first-child) {
+    margin-top: 12px;
+  }
+}
+
+.actions {
+  @include row;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 40px;
+
+  & > button {
+    width: 100%;
+    height: 44px;
+    border-radius: 0;
+  }
+}

@@ -14,9 +14,6 @@ interface TaskCardProps {
 export const TaskCard: React.VFC<TaskCardProps> = (props) => {
   const { label, task, action } = props;
 
-  const startDate = new Date(task.start_date);
-  const dueDate = new Date(task.due_date);
-
   return (
     <article className={styles.container}>
       <div className={styles.content}>
@@ -28,13 +25,13 @@ export const TaskCard: React.VFC<TaskCardProps> = (props) => {
         <div className={styles.time}>
           <FireIcon />
           <p>
-            {formatTime(startDate)} - {formatTime(dueDate)}
+            {formatTime(task.start_date)} - {formatTime(task.due_date)}
           </p>
         </div>
 
         <div className={styles.date}>
           <CalendarIcon />
-          <p>{formatDate(startDate)}</p>
+          <p>{formatDate(task.start_date)}</p>
         </div>
       </div>
 

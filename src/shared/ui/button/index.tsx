@@ -19,10 +19,10 @@ interface LinkButtonProps extends LinkProps {
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { className, children, variant = 'primary', ...rest } = props;
+  const { className, children, variant = 'primary', type = 'button', ...rest } = props;
 
   return (
-    <button className={clsx(styles.button, styles[`button_${variant}`], className)} ref={ref} {...rest}>
+    <button className={clsx(styles.button, styles[`button_${variant}`], className)} type={type} ref={ref} {...rest}>
       {children}
     </button>
   );

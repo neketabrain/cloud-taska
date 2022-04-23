@@ -12,7 +12,7 @@ interface DeleteTaskProps {
 export const DeleteTask: React.VFC<DeleteTaskProps> = (props) => {
   const { taskId } = props;
 
-  const { t: tAction } = useTranslation('actions');
+  const { t: tActions } = useTranslation('actions');
   const { t: tTask } = useTranslation('task');
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -31,16 +31,16 @@ export const DeleteTask: React.VFC<DeleteTaskProps> = (props) => {
 
   return (
     <>
-      <DropdownMenu.Item onClick={openModal} danger>
+      <DropdownMenu.Item onClick={openModal} danger={true}>
         <DeleteIcon />
-        {tAction('delete')}
+        {tActions('delete')}
       </DropdownMenu.Item>
 
       {isModalOpen && (
         <ConfirmModal
           cancel={closeModal}
           accept={deleteTask}
-          acceptText={tAction('delete')}
+          acceptText={tActions('delete')}
           title={tTask('deleteTask')}
           description={tTask('deleteTaskConfirmation')}
         />

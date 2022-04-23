@@ -29,45 +29,43 @@ export function getChartData(tasks: Task[], tDatetime: TFunction, tActivity: TFu
 
   const tasksByDay = tasks.reduce(
     (acc, task) => {
-      const startDate = new Date(task.start_date);
-
-      if (isMonday(startDate)) {
+      if (isMonday(task.start_date)) {
         acc.mondayAll++;
 
         if (task.completed) {
           acc.mondayCompleted++;
         }
-      } else if (isTuesday(startDate)) {
+      } else if (isTuesday(task.start_date)) {
         acc.tuesdayAll++;
 
         if (task.completed) {
           acc.tuesdayCompleted++;
         }
-      } else if (isWednesday(startDate)) {
+      } else if (isWednesday(task.start_date)) {
         acc.wednesdayAll++;
 
         if (task.completed) {
           acc.wednesdayCompleted++;
         }
-      } else if (isThursday(startDate)) {
+      } else if (isThursday(task.start_date)) {
         acc.thursdayAll++;
 
         if (task.completed) {
           acc.thursdayCompleted++;
         }
-      } else if (isFriday(startDate)) {
+      } else if (isFriday(task.start_date)) {
         acc.fridayAll++;
 
         if (task.completed) {
           acc.fridayCompleted++;
         }
-      } else if (isSaturday(startDate)) {
+      } else if (isSaturday(task.start_date)) {
         acc.saturdayAll++;
 
         if (task.completed) {
           acc.saturdayCompleted++;
         }
-      } else if (isSunday(startDate)) {
+      } else if (isSunday(task.start_date)) {
         acc.sundayAll++;
 
         if (task.completed) {

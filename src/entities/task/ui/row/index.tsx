@@ -18,9 +18,6 @@ interface TaskRowProps {
 export const TaskRow: React.VFC<TaskRowProps> = (props) => {
   const { task, className, active, toggle, actions } = props;
 
-  const startDate = new Date(task.start_date);
-  const dueDate = new Date(task.due_date);
-
   return (
     <div className={clsx(styles.taskRow, task.completed && styles.taskRow_active, className)}>
       <div className={clsx(styles.left, !!toggle && styles.left_withToggle)}>
@@ -37,13 +34,13 @@ export const TaskRow: React.VFC<TaskRowProps> = (props) => {
           <div className={clsx(styles.datetime, active && styles.datetime_active)}>
             {active ? <FireIcon /> : <ClockIcon />}
             <p>
-              {formatTime(startDate)} - {formatTime(dueDate)}
+              {formatTime(task.start_date)} - {formatTime(task.due_date)}
             </p>
           </div>
 
           <div className={styles.datetime}>
             <CalendarIcon />
-            <p>{formatDate(startDate)}</p>
+            <p>{formatDate(task.start_date)}</p>
           </div>
         </div>
 

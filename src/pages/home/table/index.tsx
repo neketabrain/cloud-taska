@@ -4,9 +4,8 @@ import { Link, useSearchParams } from 'react-router-dom';
 
 import { taskModel, TaskRow, taskLib } from 'entities/task';
 import { Task } from 'features/task';
-import { PlusIcon } from 'shared/assets/icons';
 import { ROUTES } from 'shared/config';
-import { Button, TextSwitch } from 'shared/ui';
+import { TextSwitch } from 'shared/ui';
 
 import { getFilters, PERIODS } from './config';
 import styles from './styles.module.scss';
@@ -56,8 +55,7 @@ function useTaskFilter() {
 }
 
 export const TaskTable: React.VFC = () => {
-  const { t: tDatetime } = useTranslation('datetime');
-  const { t: tTask } = useTranslation('task');
+  const { t } = useTranslation('datetime');
 
   const currentTaskId = taskModel.useCurrentTaskId();
   const { period, changeFilter, tasks } = useTaskFilter();
@@ -66,17 +64,15 @@ export const TaskTable: React.VFC = () => {
     <section className={styles.container}>
       <div className={styles.header}>
         <div className={styles.switch}>
-          <TextSwitch name="period" items={getFilters(tDatetime)} value={period} onChange={changeFilter} />
+          <TextSwitch name="period" items={getFilters(t)} value={period} onChange={changeFilter} />
 
           <p className={styles.separator}>{' / '}</p>
           <Link to={ROUTES.tasks} className={styles.allTasksLink}>
-            {tDatetime('all')}
+            {t('all')}
           </Link>
         </div>
 
-        <Button className={styles.addTaskButton}>
-          <PlusIcon /> {tTask('addTask')}
-        </Button>
+        <Task.CreateTask />
       </div>
 
       <ul className={styles.list}>
@@ -86,7 +82,7 @@ export const TaskTable: React.VFC = () => {
               task={task}
               active={task.id === currentTaskId}
               toggle={<Task.ToggleTaskMini task={task} />}
-              actions={[<Task.EditTaskModal task={task} />, <Task.DeleteTask taskId={task.id} />]}
+              actions={[<Task.EditTask task={task} />, <Task.DeleteTask taskId={task.id} />]}
             />
           </li>
         ))}
