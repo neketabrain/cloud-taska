@@ -87,7 +87,6 @@ const CreateTaskModal: React.VFC<CreateTaskModalProps> = (props) => {
 
 export const CreateTask: React.VFC = () => {
   const { t } = useTranslation('task');
-
   const [isModalOpen, setModalOpen] = useState(false);
 
   function openModal() {

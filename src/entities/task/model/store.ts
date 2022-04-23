@@ -4,7 +4,7 @@ import { Task } from 'shared/api/task';
 
 import { getCurrentTask } from '../lib';
 
-import { resetTasks, setTasks, toggleTask, addTask, deleteTask } from './events';
+import { resetTasks, setTasks, toggleTask, addTask, editTask, deleteTask } from './events';
 
 // TODO: удалить
 const today = new Date();
@@ -42,6 +42,15 @@ export const $tasks = createStore<Task[]>(defaultState)
   .on(setTasks, (_, tasks) => tasks)
   .on(addTask, (state, task) => state.concat(task))
   .on(deleteTask, (state, taskId) => state.filter((task) => task.id !== taskId))
+  .on(editTask, (state, editedTask) =>
+    state.map((task) => {
+      if (task.id === editedTask.id) {
+        return { ...task, ...editedTask };
+      }
+
+      return task;
+    })
+  )
   .on(toggleTask, (state, taskId) =>
     state.map((task) => {
       if (task.id === taskId) {
