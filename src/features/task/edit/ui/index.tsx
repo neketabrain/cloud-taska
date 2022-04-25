@@ -1,12 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { taskModel } from 'entities/task';
 import { NewTask, Task } from 'shared/api/task';
 import { EditIcon } from 'shared/assets/icons';
 import { Button, DropdownMenu, Input, Modal, Textarea } from 'shared/ui';
+import { DatePicker } from 'shared/ui/date-picker';
 
 import { validationSchema } from '../config';
 
@@ -25,6 +26,7 @@ const EditTaskModal: React.VFC<CreateTaskModalProps> = (props) => {
   const { t: tTask } = useTranslation('task');
 
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -44,22 +46,36 @@ const EditTaskModal: React.VFC<CreateTaskModalProps> = (props) => {
           </div>
 
           <div className={styles.row}>
-            {/* TODO: Сделать Datepicker */}
-            <Input
-              label={tTask('startDate')}
-              placeholder={tTask('enterDate')}
-              hasError={!!errors.start_date}
-              type="datetime-local"
-              {...register('start_date')}
+            <Controller
+              name="start_date"
+              control={control}
+              render={({ field }) => (
+                <DatePicker
+                  label={tTask('startDate')}
+                  placeholder={tTask('enterDate')}
+                  hasError={!!errors.start_date}
+                  selected={field.value}
+                  onChange={(value) => field.onChange(value)}
+                  showTimeSelect={true}
+                  dateFormat="Pp"
+                />
+              )}
             />
 
-            {/* TODO: Сделать Datepicker */}
-            <Input
-              label={tTask('dueDate')}
-              placeholder={tTask('enterDate')}
-              hasError={!!errors.due_date}
-              type="datetime-local"
-              {...register('due_date')}
+            <Controller
+              name="due_date"
+              control={control}
+              render={({ field }) => (
+                <DatePicker
+                  label={tTask('dueDate')}
+                  placeholder={tTask('enterDate')}
+                  hasError={!!errors.due_date}
+                  selected={field.value}
+                  onChange={(value) => field.onChange(value)}
+                  showTimeSelect={true}
+                  dateFormat="Pp"
+                />
+              )}
             />
           </div>
 
@@ -67,7 +83,7 @@ const EditTaskModal: React.VFC<CreateTaskModalProps> = (props) => {
             <Textarea
               label={tTask('description')}
               placeholder={tTask('enterDescription')}
-              rows={5}
+              rows={8}
               hasError={!!errors.description}
               {...register('description')}
             />

@@ -25,8 +25,10 @@ export const Modal: React.FC<ModalProps> = (props) => {
 
   const { t } = useTranslation('actions');
   const root = document.getElementById(rootId);
-  const ref = useClickOutside<HTMLDivElement>(close);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  const modalRef = useRef<HTMLDivElement>(null);
+  useClickOutside(modalRef, close);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -46,7 +48,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
 
   return createPortal(
     <div className={clsx(styles.wrapper, wrapperClassName)}>
-      <div className={clsx(styles.modal, className)} style={style} ref={ref} role="dialog">
+      <div className={clsx(styles.modal, className)} style={style} ref={modalRef} role="dialog">
         {(title || withCloseButton) && (
           <div className={styles.header}>
             {title && <h3 className={styles.title}>{title}</h3>}

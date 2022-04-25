@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { createContext, CSSProperties, useState } from 'react';
+import { createContext, CSSProperties, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ArrowIcon } from 'shared/assets/icons';
@@ -28,6 +28,7 @@ export const Dropdown: React.FC<DropdownProps> & { context: typeof DropdownConte
   const { placement = 'right', element, children, className, contentClassName, contentStyle } = props;
 
   const { t } = useTranslation('actions');
+  const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setOpen] = useState(false);
 
   function open() {
@@ -42,8 +43,9 @@ export const Dropdown: React.FC<DropdownProps> & { context: typeof DropdownConte
     setOpen((prev) => !prev);
   }
 
-  const ref = useClickOutside<HTMLDivElement>(close);
   const actions: DropdownActions = { open, close, toggle };
+
+  useClickOutside(ref, close);
 
   return (
     <DropdownContext.Provider value={actions}>

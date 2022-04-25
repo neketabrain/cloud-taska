@@ -1,12 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { setHours } from 'date-fns';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { taskModel } from 'entities/task';
 import { NewTask } from 'shared/api/task';
 import { PlusIcon } from 'shared/assets/icons';
 import { Button, Input, Modal, Textarea } from 'shared/ui';
+import { DatePicker } from 'shared/ui/date-picker';
 
 import { validationSchema } from '../config';
 
@@ -23,11 +25,17 @@ const CreateTaskModal: React.VFC<CreateTaskModalProps> = (props) => {
   const { t: tActions } = useTranslation('actions');
   const { t: tTask } = useTranslation('task');
 
+  const now = new Date();
+
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<NewTask>({ resolver: yupResolver(validationSchema) });
+  } = useForm<NewTask>({
+    defaultValues: { start_date: now, due_date: setHours(now, now.getHours() + 1) },
+    resolver: yupResolver(validationSchema),
+  });
 
   return (
     <Modal title={tTask('addTask')} close={close} withCloseButton={true}>
@@ -43,22 +51,36 @@ const CreateTaskModal: React.VFC<CreateTaskModalProps> = (props) => {
           </div>
 
           <div className={styles.row}>
-            {/* TODO: Сделать Datepicker */}
-            <Input
-              label={tTask('startDate')}
-              placeholder={tTask('enterDate')}
-              hasError={!!errors.start_date}
-              type="datetime-local"
-              {...register('start_date')}
+            <Controller
+              name="start_date"
+              control={control}
+              render={({ field }) => (
+                <DatePicker
+                  label={tTask('startDate')}
+                  placeholder={tTask('enterDate')}
+                  hasError={!!errors.start_date}
+                  selected={field.value}
+                  onChange={(value) => field.onChange(value)}
+                  showTimeSelect={true}
+                  dateFormat="Pp"
+                />
+              )}
             />
 
-            {/* TODO: Сделать Datepicker */}
-            <Input
-              label={tTask('dueDate')}
-              placeholder={tTask('enterDate')}
-              hasError={!!errors.due_date}
-              type="datetime-local"
-              {...register('due_date')}
+            <Controller
+              name="due_date"
+              control={control}
+              render={({ field }) => (
+                <DatePicker
+                  label={tTask('dueDate')}
+                  placeholder={tTask('enterDate')}
+                  hasError={!!errors.due_date}
+                  selected={field.value}
+                  onChange={(value) => field.onChange(value)}
+                  showTimeSelect={true}
+                  dateFormat="Pp"
+                />
+              )}
             />
           </div>
 
@@ -66,7 +88,7 @@ const CreateTaskModal: React.VFC<CreateTaskModalProps> = (props) => {
             <Textarea
               label={tTask('description')}
               placeholder={tTask('enterDescription')}
-              rows={5}
+              rows={8}
               hasError={!!errors.description}
               {...register('description')}
             />
