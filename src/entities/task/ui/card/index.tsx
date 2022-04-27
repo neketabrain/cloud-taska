@@ -5,13 +5,31 @@ import { Tag } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
+interface EmptyTaskCardProps {
+  label: string;
+  description: string;
+}
+
+const EmptyTaskCard: React.VFC<EmptyTaskCardProps> = (props) => {
+  const { label, description } = props;
+
+  return (
+    <article className={styles.container}>
+      <div className={styles.content}>
+        <Tag as="h2">{label}</Tag>
+        <p className={styles.empty}>{description}</p>
+      </div>
+    </article>
+  );
+};
+
 interface TaskCardProps {
   task: Task;
   label: string;
   action?: React.ReactNode;
 }
 
-export const TaskCard: React.VFC<TaskCardProps> = (props) => {
+export const TaskCard: React.VFC<TaskCardProps> & { Empty: typeof EmptyTaskCard } = (props) => {
   const { label, task, action } = props;
 
   return (
@@ -39,3 +57,5 @@ export const TaskCard: React.VFC<TaskCardProps> = (props) => {
     </article>
   );
 };
+
+TaskCard.Empty = EmptyTaskCard;

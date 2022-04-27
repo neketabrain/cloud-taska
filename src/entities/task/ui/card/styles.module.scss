@@ -77,3 +77,15 @@
   width: 100%;
   flex-shrink: 0;
 }
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--grey-2);
+  margin-top: 80px;
+  text-align: center;
+}

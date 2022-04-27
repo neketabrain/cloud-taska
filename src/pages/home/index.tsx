@@ -33,6 +33,8 @@ export const HomePage: React.VFC = () => {
               action={<Task.ToggleTask task={currentTask} />}
             />
           )}
+
+          {!currentTask && <TaskCard.Empty label={t('currentTask').toLowerCase()} description={t('noActiveTask')} />}
         </div>
 
         <div className={styles.table}>

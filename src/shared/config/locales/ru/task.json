@@ -2,6 +2,7 @@
   "tasksForToday": "Задачи на сегодня",
   "noTasksForToday": "Задачи на сегодня отсутствуют",
   "allTasksCompleted": "Все задачи выполнены",
+  "noActiveTask": "Активная задача отсутствует",
   "currentTask": "Текущая задача",
   "addTask": "Добавить задачу",
   "editTask": "Редактировать задачу",
