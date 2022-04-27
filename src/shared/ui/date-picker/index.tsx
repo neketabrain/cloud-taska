@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import ru from 'date-fns/locale/ru';
 import ReactDatePicker, { ReactDatePickerProps, registerLocale } from 'react-datepicker';
-
 import 'react-datepicker/dist/react-datepicker.css';
-import { getLocale } from 'shared/lib';
+import { useTranslation } from 'react-i18next';
 
-import { Input } from '../input';
+import { getLocale } from 'shared/lib';
+import { Input } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
@@ -23,6 +23,7 @@ export const DatePicker: React.VFC<DatePickerProps> = (props) => {
   const { label, placeholder, hasError, className, inputClassName, ...rest } = props;
 
   const locale = getLocale();
+  const { t } = useTranslation('common');
 
   return (
     <div className={clsx(styles.datePicker, className)}>
@@ -30,6 +31,7 @@ export const DatePicker: React.VFC<DatePickerProps> = (props) => {
         placeholderText={placeholder}
         customInput={<Input label={label} hasError={hasError} inputClassName={inputClassName} />}
         locale={locale}
+        timeCaption={t('time')}
         {...rest}
       />
     </div>

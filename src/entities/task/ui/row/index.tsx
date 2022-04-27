@@ -23,7 +23,7 @@ export const TaskRow: React.VFC<TaskRowProps> = (props) => {
       <div className={clsx(styles.left, !!toggle && styles.left_withToggle)}>
         {toggle && <div className={styles.toggle}>{toggle}</div>}
 
-        <div>
+        <div className={styles.info}>
           <p className={styles.title}>{task.title}</p>
           <p className={styles.description}>{task.description}</p>
         </div>

@@ -19,6 +19,7 @@
 }
 
 .title {
+  @include paragraphLines(34px);
   font-size: 14px;
   color: var(--white-1);
   font-weight: bold;
@@ -26,6 +27,7 @@
 }
 
 .description {
+  @include paragraphLines(44px);
   font-size: 12px;
   color: var(--white-1);
   font-weight: 300;

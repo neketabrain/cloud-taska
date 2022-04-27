@@ -5,8 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { CloseIcon } from 'shared/assets/icons';
 import { useClickOutside } from 'shared/lib';
-
-import { Button } from '../button';
+import { Button } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
