@@ -1,4 +1,4 @@
-import { Task } from 'shared/api/task';
+import { Task } from 'shared/api';
 import { CalendarIcon, FireIcon } from 'shared/assets/icons';
 import { formatDate, formatTime } from 'shared/lib';
 import { Tag } from 'shared/ui';

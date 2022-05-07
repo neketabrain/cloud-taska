@@ -1,6 +1,6 @@
 import { isAfter, isBefore, isSameWeek, isToday, isTomorrow, isYesterday, setDate } from 'date-fns';
 
-import { Task } from 'shared/api/task';
+import { Task } from 'shared/api';
 import { getToday } from 'shared/lib';
 
 export function getTasksForToday(tasks: Task[]): Task[] {

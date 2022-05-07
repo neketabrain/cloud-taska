@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { taskModel } from 'entities/task';
-import { Task } from 'shared/api/task';
+import { Task } from 'shared/api';
 import { CheckIcon, RenewIcon } from 'shared/assets/icons';
 
 import styles from './styles.module.scss';
@@ -14,7 +14,7 @@ interface ToggleTaskProps {
 
 function useToggle() {
   const toggleTask = useCallback(
-    (taskId: number) => () => {
+    (taskId: string) => () => {
       taskModel.events.toggleTask(taskId);
     },
     []

@@ -1,7 +1,7 @@
 import { isMonday, isTuesday, isWednesday, isThursday, isFriday, isSaturday, isSunday } from 'date-fns';
 import { TFunction } from 'react-i18next';
 
-import { Task } from 'shared/api/task';
+import { Task } from 'shared/api';
 import { getToday } from 'shared/lib';
 import { BarChartItem } from 'shared/ui';
 

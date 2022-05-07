@@ -1,6 +1,6 @@
 import { createStore } from 'effector';
 
-import { Task } from 'shared/api/task';
+import { Task } from 'shared/api';
 
 import { getCurrentTask } from '../lib';
 
@@ -21,7 +21,7 @@ function generateTasks(count: number, day = today.getDate(), startTime = 10): Ta
     dueDate.setHours(date.getHours() + 1);
 
     return {
-      id: date.getTime(),
+      id: String(Math.random() * 10 + idx),
       title: `Задача ${idx + 1}`,
       description: `Описание задачи ${idx + 1}`,
       start_date: date,

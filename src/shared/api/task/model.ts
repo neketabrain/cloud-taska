@@ -1,5 +1,5 @@
 export interface TaskResponse {
-  id: number;
+  id: string;
   title: string;
   description: string;
   start_date: string;

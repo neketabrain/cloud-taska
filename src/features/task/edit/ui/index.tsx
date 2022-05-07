@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { taskModel } from 'entities/task';
-import { NewTask, Task } from 'shared/api/task';
+import { NewTask, Task } from 'shared/api';
 import { EditIcon } from 'shared/assets/icons';
 import { Button, DropdownMenu, Input, Modal, Textarea } from 'shared/ui';
 import { DatePicker } from 'shared/ui/date-picker';

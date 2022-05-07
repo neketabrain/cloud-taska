@@ -6,6 +6,7 @@ import 'shared/lib/i18n';
 
 import { Layout } from './layout';
 import { withProviders } from './providers';
+
 import './styles.scss';
 
 const Main: React.VFC = () => {

@@ -6,7 +6,7 @@ import { DeleteIcon } from 'shared/assets/icons';
 import { DropdownMenu, ConfirmModal } from 'shared/ui';
 
 interface DeleteTaskProps {
-  taskId: number;
+  taskId: string;
 }
 
 export const DeleteTask: React.VFC<DeleteTaskProps> = (props) => {

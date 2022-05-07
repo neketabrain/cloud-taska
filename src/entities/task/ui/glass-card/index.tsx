@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { Task } from 'shared/api/task';
+import { Task } from 'shared/api';
 import { FireIcon } from 'shared/assets/icons';
 import { formatTime } from 'shared/lib';
 

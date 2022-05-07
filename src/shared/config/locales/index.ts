@@ -1,6 +1,6 @@
 import { ru } from './ru';
 
-export const locales = {
+export const LOCALES = {
   ru,
   'ru-RU': ru,
 };

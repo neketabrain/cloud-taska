@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { Task } from 'shared/api/task';
+import { Task } from 'shared/api';
 import { CalendarIcon, ClockIcon, FireIcon } from 'shared/assets/icons';
 import { formatDate, formatTime } from 'shared/lib';
 import { DropdownMenu } from 'shared/ui';

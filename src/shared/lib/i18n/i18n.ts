@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import languageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
-import { locales } from 'shared/config/locales';
+import { LOCALES } from 'shared/config/locales';
 
 const detectorOptions = {
   caches: ['localStorage', 'cookie'],
@@ -25,7 +25,7 @@ i18n
     react: {
       useSuspense: true,
     },
-    resources: locales,
+    resources: LOCALES,
   });
 
 export { i18n };

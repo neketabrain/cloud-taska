@@ -1,6 +1,6 @@
 import { object, string, date, boolean, SchemaOf } from 'yup';
 
-import { NewTask } from 'shared/api/task';
+import { NewTask } from 'shared/api';
 
 export const validationSchema: SchemaOf<NewTask> = object({
   title: string().required(),
