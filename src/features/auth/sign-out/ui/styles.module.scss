@@ -1,0 +1,8 @@
+.button {
+  padding: 8px 0 8px 8px;
+
+  & > svg {
+    width: 20px;
+    height: 20px;
+  }
+}

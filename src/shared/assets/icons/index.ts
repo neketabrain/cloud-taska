@@ -8,5 +8,6 @@ export { ReactComponent as DotsIcon } from './dots.svg';
 export { ReactComponent as EditIcon } from './edit.svg';
 export { ReactComponent as FireIcon } from './fire.svg';
 export { ReactComponent as LogoIcon } from './logo.svg';
+export { ReactComponent as LogoutIcon } from './logout.svg';
 export { ReactComponent as PlusIcon } from './plus.svg';
 export { ReactComponent as RenewIcon } from './renew.svg';
