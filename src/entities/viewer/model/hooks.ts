@@ -1,16 +1,16 @@
 import { useStore } from 'effector-react';
 import { useEffect, useState } from 'react';
 
-import { viewerApi } from 'shared/api';
+import { Viewer, viewerApi } from 'shared/api';
 
 import { setViewer } from './events';
 import { $viewer } from './store';
 
-export function useViewer() {
+export function useViewer(): Viewer | null {
   return useStore($viewer);
 }
 
-export function useViewerAuthStatus() {
+export function useViewerAuthStatus(): boolean {
   const [isInitialized, setInitialized] = useState(false);
 
   useEffect(() => {

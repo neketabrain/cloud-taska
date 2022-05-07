@@ -61,7 +61,7 @@ export function getCurrentTask(tasks: Task[]): Task | undefined {
   const activeTasks = getActiveTasks(sortedTasks);
 
   if (activeTasks.length) {
-    return activeTasks[0];
+    return activeTasks.at(0);
   }
 
   return sortedTasks.at(-1);
