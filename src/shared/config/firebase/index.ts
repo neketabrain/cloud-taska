@@ -9,3 +9,5 @@ export const FIREBASE_CONFIG = {
   appId: getEnvVariable('REACT_APP_FIREBASE_APP_ID'),
   measurementId: getEnvVariable('REACT_APP_FIREBASE_MEASUREMENT_ID'),
 };
+
+export const TASKS_COLLECTION = 'tasks';
