@@ -8,6 +8,7 @@ export default {
     label: 'Current task',
     task: {
       id: '1',
+      owner_id: '1',
       title: 'Task',
       description: 'Description',
       start_date: new Date(),

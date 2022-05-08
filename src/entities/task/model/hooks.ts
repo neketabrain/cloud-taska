@@ -1,14 +1,14 @@
 import { useStore } from 'effector-react';
 
-import { Task } from 'shared/api';
+import { TaskNormalized } from 'shared/api';
 
 import { $tasks, $currentTask, $currentTaskId } from './store';
 
-export function useTasks(): Task[] {
+export function useTasks(): TaskNormalized[] {
   return useStore($tasks);
 }
 
-export function useCurrentTask(): Task | undefined {
+export function useCurrentTask(): TaskNormalized | undefined {
   return useStore($currentTask);
 }
 

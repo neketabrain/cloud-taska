@@ -1,66 +1,47 @@
 import { createStore } from 'effector';
 
-import { Task } from 'shared/api';
+import { TaskNormalized } from 'shared/api';
 
 import { getCurrentTask } from '../lib';
 
-import { resetTasks, setTasks, toggleTask, addTask, editTask, deleteTask } from './events';
+import { getTasksFx, createTaskFx, editTaskFx, deleteTaskFx, toggleTaskFx } from './effects';
 
-// TODO: удалить
-const today = new Date();
+export const $tasks = createStore<TaskNormalized[]>([])
+  .on(getTasksFx.doneData, (_, tasks) => tasks)
+  .on(deleteTaskFx.done, (state, { params }) => state.filter((task) => task.id !== params))
+  .on(editTaskFx.doneData, (state, editedTask) => {
+    if (!editedTask) {
+      return state;
+    }
 
-// TODO: удалить
-function generateTasks(count: number, day = today.getDate(), startTime = 10): Task[] {
-  return new Array(count).fill(null).map((_, idx): Task => {
-    const date = new Date();
-    date.setDate(day);
-    date.setHours(startTime + idx);
-    date.setMinutes(0);
-
-    const dueDate = new Date(date);
-    dueDate.setHours(date.getHours() + 1);
-
-    return {
-      id: String(Math.random() * 10 + idx),
-      title: `Задача ${idx + 1}`,
-      description: `Описание задачи ${idx + 1}`,
-      start_date: date,
-      due_date: dueDate,
-      completed: false,
-    };
-  });
-}
-
-// TODO: удалить
-const defaultState: Task[] = [
-  ...generateTasks(3, today.getDate() - 1),
-  ...generateTasks(14),
-  ...generateTasks(4, today.getDate() + 1),
-];
-
-export const $tasks = createStore<Task[]>(defaultState)
-  .on(setTasks, (_, tasks) => tasks)
-  .on(addTask, (state, task) => state.concat(task))
-  .on(deleteTask, (state, taskId) => state.filter((task) => task.id !== taskId))
-  .on(editTask, (state, editedTask) =>
-    state.map((task) => {
+    return state.map((task) => {
       if (task.id === editedTask.id) {
         return { ...task, ...editedTask };
       }
 
       return task;
-    })
-  )
-  .on(toggleTask, (state, taskId) =>
-    state.map((task) => {
-      if (task.id === taskId) {
+    });
+  })
+  .on(toggleTaskFx.doneData, (state, editedTask) => {
+    if (!editedTask) {
+      return state;
+    }
+
+    return state.map((task) => {
+      if (task.id === editedTask.id) {
         return { ...task, completed: !task.completed };
       }
 
       return task;
-    })
-  )
-  .reset(resetTasks);
+    });
+  })
+  .on(createTaskFx.doneData, (state, newTask) => {
+    if (!newTask) {
+      return state;
+    }
+
+    return state.concat(newTask);
+  });
 
 export const $currentTask = $tasks.map((state) => getCurrentTask(state));
 

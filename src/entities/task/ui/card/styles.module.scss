@@ -18,7 +18,7 @@
 }
 
 .title {
-  @include paragraphLines(58px);
+  @include paragraphLines(58px, 2);
   font-size: 24px;
   font-weight: bold;
   color: var(--black-2);
@@ -28,7 +28,7 @@
 }
 
 .description {
-  @include paragraphLines(34px);
+  @include paragraphLines(34px, 2);
   font-size: 14px;
   font-weight: 300;
   color: var(--black-2);

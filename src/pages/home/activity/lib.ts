@@ -1,11 +1,11 @@
 import { isMonday, isTuesday, isWednesday, isThursday, isFriday, isSaturday, isSunday } from 'date-fns';
 import { TFunction } from 'react-i18next';
 
-import { Task } from 'shared/api';
+import { TaskNormalized } from 'shared/api';
 import { getToday } from 'shared/lib';
 import { BarChartItem } from 'shared/ui';
 
-export function getTaskStatistics(tasks: Task[]) {
+export function getTaskStatistics(tasks: TaskNormalized[]) {
   return tasks.reduce(
     (acc, task) => {
       if (task.completed) {
@@ -24,7 +24,7 @@ function getTooltipText(allTasks: number, completedTasks: number, t: TFunction):
   return `${t('completed')}: ${completedTasks}\n${t('left')}: ${allTasks - completedTasks}\n${t('total')}: ${allTasks}`;
 }
 
-export function getChartData(tasks: Task[], tDatetime: TFunction, tActivity: TFunction): BarChartItem[] {
+export function getChartData(tasks: TaskNormalized[], tDatetime: TFunction, tActivity: TFunction): BarChartItem[] {
   const today = getToday().getDay();
 
   const tasksByDay = tasks.reduce(

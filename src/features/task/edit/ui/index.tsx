@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { taskModel } from 'entities/task';
-import { NewTask, Task } from 'shared/api';
+import { NewTaskNormalized, TaskNormalized } from 'shared/api';
 import { EditIcon } from 'shared/assets/icons';
 import { Button, DropdownMenu, Input, Modal, Textarea } from 'shared/ui';
 import { DatePicker } from 'shared/ui/date-picker';
@@ -13,13 +13,13 @@ import { validationSchema } from '../config';
 
 import styles from './styles.module.scss';
 
-interface CreateTaskModalProps {
-  task: Task;
+interface EditTaskModalProps {
+  task: TaskNormalized;
   close: VoidFunction;
-  onSubmit: (values: NewTask) => void;
+  onSubmit: (values: NewTaskNormalized) => void;
 }
 
-const EditTaskModal: React.VFC<CreateTaskModalProps> = (props) => {
+const EditTaskModal: React.VFC<EditTaskModalProps> = (props) => {
   const { task, close, onSubmit } = props;
 
   const { t: tActions } = useTranslation('actions');
@@ -30,7 +30,7 @@ const EditTaskModal: React.VFC<CreateTaskModalProps> = (props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<NewTask>({ defaultValues: task, resolver: yupResolver(validationSchema) });
+  } = useForm<NewTaskNormalized>({ defaultValues: task, resolver: yupResolver(validationSchema) });
 
   return (
     <Modal title={tTask('editTask')} close={close} withCloseButton={true}>
@@ -103,7 +103,7 @@ const EditTaskModal: React.VFC<CreateTaskModalProps> = (props) => {
 };
 
 interface EditTaskProps {
-  task: Task;
+  task: TaskNormalized;
 }
 
 export const EditTask: React.VFC<EditTaskProps> = (props) => {
@@ -120,8 +120,8 @@ export const EditTask: React.VFC<EditTaskProps> = (props) => {
     setModalOpen(false);
   }
 
-  function editTask(values: NewTask) {
-    taskModel.events.editTask({ ...task, ...values });
+  function editTask(values: NewTaskNormalized) {
+    taskModel.effects.editTaskFx({ ...task, ...values });
     closeModal();
   }
 

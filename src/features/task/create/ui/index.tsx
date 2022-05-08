@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { taskModel } from 'entities/task';
-import { NewTask } from 'shared/api';
+import { NewTaskNormalized } from 'shared/api';
 import { PlusIcon } from 'shared/assets/icons';
 import { Button, Input, Modal, Textarea } from 'shared/ui';
 import { DatePicker } from 'shared/ui/date-picker';
@@ -16,7 +16,7 @@ import styles from './styles.module.scss';
 
 interface CreateTaskModalProps {
   close: VoidFunction;
-  onSubmit: (values: NewTask) => void;
+  onSubmit: (values: NewTaskNormalized) => void;
 }
 
 const CreateTaskModal: React.VFC<CreateTaskModalProps> = (props) => {
@@ -32,7 +32,7 @@ const CreateTaskModal: React.VFC<CreateTaskModalProps> = (props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<NewTask>({
+  } = useForm<NewTaskNormalized>({
     defaultValues: { start_date: now, due_date: setHours(now, now.getHours() + 1) },
     resolver: yupResolver(validationSchema),
   });
@@ -119,8 +119,8 @@ export const CreateTask: React.VFC = () => {
     setModalOpen(false);
   }
 
-  function createTask(values: NewTask) {
-    taskModel.events.addTask({ ...values, id: Date.now().toString() });
+  function createTask(values: NewTaskNormalized) {
+    taskModel.effects.createTaskFx(values);
     closeModal();
   }
 

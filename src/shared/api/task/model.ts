@@ -1,5 +1,6 @@
-export interface TaskResponse {
+export interface Task {
   id: string;
+  owner_id: string;
   title: string;
   description: string;
   start_date: string;
@@ -7,11 +8,11 @@ export interface TaskResponse {
   completed?: boolean;
 }
 
-export interface TaskRequest extends Omit<TaskResponse, 'id'> {}
+export interface NewTask extends Omit<Task, 'id' | 'owner_id'> {}
 
-export interface Task extends Omit<TaskResponse, 'start_date' | 'due_date'> {
+export interface TaskNormalized extends Omit<Task, 'start_date' | 'due_date'> {
   start_date: Date;
   due_date: Date;
 }
 
-export interface NewTask extends Omit<Task, 'id'> {}
+export interface NewTaskNormalized extends Omit<TaskNormalized, 'id' | 'owner_id'> {}

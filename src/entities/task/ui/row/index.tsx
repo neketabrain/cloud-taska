@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { Task } from 'shared/api';
+import { TaskNormalized } from 'shared/api';
 import { CalendarIcon, ClockIcon, FireIcon } from 'shared/assets/icons';
 import { formatDate, formatTime } from 'shared/lib';
 import { DropdownMenu } from 'shared/ui';
@@ -8,7 +8,7 @@ import { DropdownMenu } from 'shared/ui';
 import styles from './styles.module.scss';
 
 interface TaskRowProps {
-  task: Task;
+  task: TaskNormalized;
   toggle?: React.ReactNode;
   actions?: React.ReactNode[];
   className?: string;

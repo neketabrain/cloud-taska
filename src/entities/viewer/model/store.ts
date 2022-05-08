@@ -7,5 +7,5 @@ import { setViewer, resetViewer } from './events';
 
 export const $viewer = createStore<Viewer | null>(null)
   .on(setViewer, (_, viewer) => viewer)
-  .on(signOutFx.done, () => null)
+  .on(signOutFx.doneData, () => null)
   .reset(resetViewer);

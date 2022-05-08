@@ -13,7 +13,7 @@
   text-overflow: ellipsis;
 }
 
-@mixin paragraphLines($height, $lines: 2) {
+@mixin paragraphLines($height, $lines) {
   @include text-overflow;
   display: -webkit-box;
   height: $height;

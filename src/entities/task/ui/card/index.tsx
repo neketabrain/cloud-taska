@@ -1,4 +1,4 @@
-import { Task } from 'shared/api';
+import { TaskNormalized } from 'shared/api';
 import { CalendarIcon, FireIcon } from 'shared/assets/icons';
 import { formatDate, formatTime } from 'shared/lib';
 import { Tag } from 'shared/ui';
@@ -24,7 +24,7 @@ const EmptyTaskCard: React.VFC<EmptyTaskCardProps> = (props) => {
 };
 
 interface TaskCardProps {
-  task: Task;
+  task: TaskNormalized;
   label: string;
   action?: React.ReactNode;
 }

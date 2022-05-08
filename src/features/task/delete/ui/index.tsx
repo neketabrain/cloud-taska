@@ -25,7 +25,7 @@ export const DeleteTask: React.VFC<DeleteTaskProps> = (props) => {
   }
 
   function deleteTask() {
-    taskModel.events.deleteTask(taskId);
+    taskModel.effects.deleteTaskFx(taskId);
     closeModal();
   }
 

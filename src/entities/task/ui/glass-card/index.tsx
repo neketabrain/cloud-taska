@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 
-import { Task } from 'shared/api';
+import { TaskNormalized } from 'shared/api';
 import { FireIcon } from 'shared/assets/icons';
 import { formatTime } from 'shared/lib';
 
 import styles from './styles.module.scss';
 
 interface TaskGlassCardProps {
-  task: Task;
+  task: TaskNormalized;
   className?: string;
   active?: boolean;
 }

@@ -3,19 +3,19 @@ import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { taskModel } from 'entities/task';
-import { Task } from 'shared/api';
+import { TaskNormalized } from 'shared/api';
 import { CheckIcon, RenewIcon } from 'shared/assets/icons';
 
 import styles from './styles.module.scss';
 
 interface ToggleTaskProps {
-  task: Task;
+  task: TaskNormalized;
 }
 
 function useToggle() {
   const toggleTask = useCallback(
-    (taskId: string) => () => {
-      taskModel.events.toggleTask(taskId);
+    (task: TaskNormalized) => () => {
+      taskModel.effects.toggleTaskFx(task);
     },
     []
   );
@@ -32,7 +32,7 @@ export const ToggleTask: React.VFC<ToggleTaskProps> = (props) => {
 
   return (
     <label className={styles.toggleTask} aria-label={tTask('toggleTask')}>
-      <input type="checkbox" checked={!!task.completed} onChange={toggleTask(task.id)} className={styles.checkbox} />
+      <input type="checkbox" checked={!!task.completed} onChange={toggleTask(task)} className={styles.checkbox} />
       {task.completed ? (
         <>
           <RenewIcon /> <span>{tActions('renew')}</span>
@@ -57,7 +57,7 @@ export const ToggleTaskMini: React.VFC<ToggleTaskProps> = (props) => {
       className={clsx(styles.toggleTaskMini, task.completed && styles.toggleTaskMini_active)}
       aria-label={t('toggleTask')}
     >
-      <input type="checkbox" checked={!!task.completed} onChange={toggleTask(task.id)} className={styles.checkbox} />
+      <input type="checkbox" checked={!!task.completed} onChange={toggleTask(task)} className={styles.checkbox} />
       {task.completed ? <RenewIcon /> : <CheckIcon />}
     </label>
   );
