@@ -14,7 +14,9 @@ export const DeleteTask: React.VFC<DeleteTaskProps> = (props) => {
 
   const { t: tActions } = useTranslation('actions');
   const { t: tTask } = useTranslation('task');
+
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isPending, setPending] = useState(false);
 
   function openModal() {
     setModalOpen(true);
@@ -24,8 +26,10 @@ export const DeleteTask: React.VFC<DeleteTaskProps> = (props) => {
     setModalOpen(false);
   }
 
-  function deleteTask() {
-    taskModel.effects.deleteTaskFx(taskId);
+  async function deleteTask() {
+    setPending(true);
+    await taskModel.effects.deleteTaskFx(taskId);
+    setPending(false);
     closeModal();
   }
 
@@ -43,6 +47,7 @@ export const DeleteTask: React.VFC<DeleteTaskProps> = (props) => {
           acceptText={tActions('delete')}
           title={tTask('deleteTask')}
           description={tTask('deleteTaskConfirmation')}
+          disabled={isPending}
         />
       )}
     </>

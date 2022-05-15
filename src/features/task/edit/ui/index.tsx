@@ -6,8 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { taskModel } from 'entities/task';
 import { NewTaskNormalized, TaskNormalized } from 'shared/api';
 import { EditIcon } from 'shared/assets/icons';
-import { Button, DropdownMenu, Input, Modal, Textarea } from 'shared/ui';
-import { DatePicker } from 'shared/ui/date-picker';
+import { Button, DropdownMenu, Input, Modal, Textarea, DatePicker } from 'shared/ui';
 
 import { validationSchema } from '../config';
 
@@ -17,10 +16,11 @@ interface EditTaskModalProps {
   task: TaskNormalized;
   close: VoidFunction;
   onSubmit: (values: NewTaskNormalized) => void;
+  disabled?: boolean;
 }
 
 const EditTaskModal: React.VFC<EditTaskModalProps> = (props) => {
-  const { task, close, onSubmit } = props;
+  const { task, close, onSubmit, disabled } = props;
 
   const { t: tActions } = useTranslation('actions');
   const { t: tTask } = useTranslation('task');
@@ -29,8 +29,33 @@ const EditTaskModal: React.VFC<EditTaskModalProps> = (props) => {
     control,
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<NewTaskNormalized>({ defaultValues: task, resolver: yupResolver(validationSchema) });
+
+  const startDate = watch('start_date');
+  const dueDate = watch('due_date');
+
+  function handleChangeStartDate(date: Date | null, onChange: (date: Date | null) => void) {
+    if (date && date.getTime() >= dueDate.getTime()) {
+      const newDueDate = new Date(date);
+      newDueDate.setHours(newDueDate.getHours() + 1);
+      setValue('due_date', newDueDate);
+    }
+
+    onChange(date);
+  }
+
+  function handleChangeDueDate(date: Date | null, onChange: (date: Date | null) => void) {
+    if (date && date.getTime() <= startDate.getTime()) {
+      const newStartDate = new Date(date);
+      newStartDate.setHours(newStartDate.getHours() - 1);
+      setValue('start_date', newStartDate);
+    }
+
+    onChange(date);
+  }
 
   return (
     <Modal title={tTask('editTask')} close={close} withCloseButton={true}>
@@ -55,7 +80,7 @@ const EditTaskModal: React.VFC<EditTaskModalProps> = (props) => {
                   placeholder={tTask('enterDate')}
                   hasError={!!errors.start_date}
                   selected={field.value}
-                  onChange={(value) => field.onChange(value)}
+                  onChange={(value) => handleChangeStartDate(value, field.onChange)}
                   showTimeSelect={true}
                   dateFormat="Pp"
                 />
@@ -71,7 +96,7 @@ const EditTaskModal: React.VFC<EditTaskModalProps> = (props) => {
                   placeholder={tTask('enterDate')}
                   hasError={!!errors.due_date}
                   selected={field.value}
-                  onChange={(value) => field.onChange(value)}
+                  onChange={(value) => handleChangeDueDate(value, field.onChange)}
                   showTimeSelect={true}
                   dateFormat="Pp"
                 />
@@ -95,7 +120,9 @@ const EditTaskModal: React.VFC<EditTaskModalProps> = (props) => {
             {tActions('cancel')}
           </Button>
 
-          <Button type="submit">{tActions('save')}</Button>
+          <Button type="submit" disabled={disabled}>
+            {tActions('save')}
+          </Button>
         </div>
       </form>
     </Modal>
@@ -111,6 +138,7 @@ export const EditTask: React.VFC<EditTaskProps> = (props) => {
 
   const { t } = useTranslation('actions');
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isPending, setPending] = useState(false);
 
   function openModal() {
     setModalOpen(true);
@@ -120,8 +148,10 @@ export const EditTask: React.VFC<EditTaskProps> = (props) => {
     setModalOpen(false);
   }
 
-  function editTask(values: NewTaskNormalized) {
-    taskModel.effects.editTaskFx({ ...task, ...values });
+  async function editTask(values: NewTaskNormalized) {
+    setPending(true);
+    await taskModel.effects.editTaskFx({ ...task, ...values });
+    setPending(false);
     closeModal();
   }
 
@@ -132,7 +162,7 @@ export const EditTask: React.VFC<EditTaskProps> = (props) => {
         {t('edit')}
       </DropdownMenu.Item>
 
-      {isModalOpen && <EditTaskModal task={task} close={closeModal} onSubmit={editTask} />}
+      {isModalOpen && <EditTaskModal task={task} close={closeModal} onSubmit={editTask} disabled={isPending} />}
     </>
   );
 };

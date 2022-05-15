@@ -1,6 +1,7 @@
 export * from './bar-chart';
 export * from './button';
 export * from './confirm-modal';
+export * from './date-picker';
 export * from './dropdown';
 export * from './dropdown-menu';
 export * from './input';

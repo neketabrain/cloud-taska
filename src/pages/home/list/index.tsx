@@ -26,7 +26,7 @@ export const TaskList: React.VFC = () => {
         <p className={styles.text}>{tasksForToday.length ? t('allTasksCompleted') : t('noTasksForToday')}</p>
       )}
 
-      {taskList.length && (
+      {!!taskList.length && (
         <Scrollbar className={styles.scrollbar} variant="light">
           <ul className={styles.list}>
             {taskList.map((task) => (

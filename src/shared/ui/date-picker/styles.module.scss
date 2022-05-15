@@ -8,7 +8,7 @@
     color: var(--black-2);
     box-shadow: var(--box-shadow);
     border-radius: var(--border-radius);
-    border: 1px solid var(--grey-4);
+    border: none;
   }
 
   :global(.react-datepicker__triangle) {

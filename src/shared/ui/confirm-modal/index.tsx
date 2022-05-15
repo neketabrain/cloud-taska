@@ -7,13 +7,14 @@ import styles from './styles.module.scss';
 interface ConfirmModalProps extends Omit<ModalProps, 'close'> {
   accept: VoidFunction;
   cancel: VoidFunction;
+  disabled?: boolean;
   description?: React.ReactNode;
   acceptText?: string;
   cancelText?: string;
 }
 
 export const ConfirmModal: React.VFC<ConfirmModalProps> = (props) => {
-  const { description, accept, cancel, acceptText, cancelText, ...rest } = props;
+  const { description, accept, cancel, disabled, acceptText, cancelText, ...rest } = props;
 
   const { t } = useTranslation('actions');
 
@@ -26,7 +27,9 @@ export const ConfirmModal: React.VFC<ConfirmModalProps> = (props) => {
           {cancelText ?? t('cancel')}
         </Button>
 
-        <Button onClick={accept}>{acceptText ?? t('accept')}</Button>
+        <Button onClick={accept} disabled={disabled}>
+          {acceptText ?? t('accept')}
+        </Button>
       </div>
     </Modal>
   );

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { taskModel } from 'entities/task';
@@ -13,14 +13,18 @@ interface ToggleTaskProps {
 }
 
 function useToggle() {
+  const [isPending, setPending] = useState(false);
+
   const toggleTask = useCallback(
-    (task: TaskNormalized) => () => {
-      taskModel.effects.toggleTaskFx(task);
+    (task: TaskNormalized) => async () => {
+      setPending(true);
+      await taskModel.effects.toggleTaskFx(task);
+      setPending(false);
     },
     []
   );
 
-  return toggleTask;
+  return { toggleTask, isPending };
 }
 
 export const ToggleTask: React.VFC<ToggleTaskProps> = (props) => {
@@ -28,11 +32,20 @@ export const ToggleTask: React.VFC<ToggleTaskProps> = (props) => {
 
   const { t: tActions } = useTranslation('actions');
   const { t: tTask } = useTranslation('task');
-  const toggleTask = useToggle();
+  const { toggleTask, isPending } = useToggle();
 
   return (
-    <label className={styles.toggleTask} aria-label={tTask('toggleTask')}>
-      <input type="checkbox" checked={!!task.completed} onChange={toggleTask(task)} className={styles.checkbox} />
+    <label
+      className={clsx(styles.toggleTask, { [styles.toggleTask_disabled]: isPending })}
+      aria-label={tTask('toggleTask')}
+    >
+      <input
+        type="checkbox"
+        checked={!!task.completed}
+        onChange={toggleTask(task)}
+        className={styles.checkbox}
+        disabled={isPending}
+      />
       {task.completed ? (
         <>
           <RenewIcon /> <span>{tActions('renew')}</span>
@@ -50,14 +63,23 @@ export const ToggleTaskMini: React.VFC<ToggleTaskProps> = (props) => {
   const { task } = props;
 
   const { t } = useTranslation('task');
-  const toggleTask = useToggle();
+  const { toggleTask, isPending } = useToggle();
 
   return (
     <label
-      className={clsx(styles.toggleTaskMini, task.completed && styles.toggleTaskMini_active)}
+      className={clsx(styles.toggleTaskMini, {
+        [styles.toggleTaskMini_active]: task.completed,
+        [styles.toggleTaskMini_disabled]: isPending,
+      })}
       aria-label={t('toggleTask')}
     >
-      <input type="checkbox" checked={!!task.completed} onChange={toggleTask(task)} className={styles.checkbox} />
+      <input
+        type="checkbox"
+        checked={!!task.completed}
+        onChange={toggleTask(task)}
+        className={styles.checkbox}
+        disabled={isPending}
+      />
       {task.completed ? <RenewIcon /> : <CheckIcon />}
     </label>
   );
