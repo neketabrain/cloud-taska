@@ -38,11 +38,12 @@ export const DropdownMenu: React.VFC<DropdownMenuProps> & { Item: typeof Dropdow
 };
 
 interface DropdownMenuItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  active?: boolean;
   danger?: boolean;
 }
 
 const DropdownMenuItem: React.FC<DropdownMenuItemProps> = (props) => {
-  const { children, danger, onClick, ...rest } = props;
+  const { children, danger, active, onClick, ...rest } = props;
 
   const { close } = useContext(Dropdown.context);
 
@@ -56,7 +57,10 @@ const DropdownMenuItem: React.FC<DropdownMenuItemProps> = (props) => {
 
   return (
     <Button
-      className={clsx(styles.dropdownMenuItem, danger && styles.dropdownMenuItem_danger)}
+      className={clsx(styles.dropdownMenuItem, {
+        [styles.dropdownMenuItem_danger]: danger,
+        [styles.dropdownMenuItem_active]: active,
+      })}
       variant="transparent"
       onClick={handleClick}
       {...rest}

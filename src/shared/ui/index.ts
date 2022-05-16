@@ -8,6 +8,7 @@ export * from './input';
 export * from './logo';
 export * from './modal';
 export * from './scrollbar';
+export * from './select';
 export * from './tag';
 export * from './text-switch';
 export * from './textarea';

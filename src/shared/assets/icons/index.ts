@@ -1,6 +1,7 @@
 export { ReactComponent as ArrowIcon } from './arrow.svg';
 export { ReactComponent as CalendarIcon } from './calendar.svg';
 export { ReactComponent as CheckIcon } from './check.svg';
+export { ReactComponent as ChevronIcon } from './chevron.svg';
 export { ReactComponent as ClockIcon } from './clock.svg';
 export { ReactComponent as CloseIcon } from './close.svg';
 export { ReactComponent as DeleteIcon } from './delete.svg';
@@ -11,3 +12,5 @@ export { ReactComponent as LogoIcon } from './logo.svg';
 export { ReactComponent as LogoutIcon } from './logout.svg';
 export { ReactComponent as PlusIcon } from './plus.svg';
 export { ReactComponent as RenewIcon } from './renew.svg';
+export { ReactComponent as ResetIcon } from './reset.svg';
+export { ReactComponent as SearchIcon } from './search.svg';

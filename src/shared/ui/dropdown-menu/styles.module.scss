@@ -22,7 +22,7 @@
 .dropdownMenuItem {
   padding: 8px 24px 8px 16px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   width: 100%;
   justify-content: start;
   border-radius: 0;
@@ -35,6 +35,11 @@
 
   &:hover:not(:disabled) {
     background-color: var(--grey-4);
+  }
+
+  &_active {
+    color: var(--orange-1) !important;
+    font-weight: 600;
   }
 
   &_danger {
