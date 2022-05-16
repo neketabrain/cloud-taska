@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TaskCard, taskModel } from 'entities/task';
@@ -12,10 +11,6 @@ import { TaskTable } from './table';
 export const HomePage: React.VFC = () => {
   const { t } = useTranslation('task');
   const currentTask = taskModel.useCurrentTask();
-
-  useEffect(() => {
-    taskModel.effects.getTasksFx();
-  }, []);
 
   return (
     <div className={styles.container}>

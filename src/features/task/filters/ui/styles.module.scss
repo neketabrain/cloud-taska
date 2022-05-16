@@ -1,0 +1,46 @@
+@import 'shared/styles/mixins.scss';
+
+.container {
+  position: relative;
+  width: 100%;
+  background-color: var(--grey-5);
+  border-radius: var(--border-radius);
+  padding: 16px;
+}
+
+.header {
+  @include row;
+  position: relative;
+  justify-content: space-between;
+  height: 24px;
+}
+
+.title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--black-2);
+  text-transform: uppercase;
+  position: relative;
+}
+
+.reset {
+  font-size: 12px;
+  padding: 0 0 8px 8px;
+  color: var(--orange-1);
+
+  svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+  }
+}
+
+.input {
+  position: relative;
+  width: 100%;
+  margin-top: 12px;
+
+  &:first-of-type {
+    margin-top: 32px;
+  }
+}

@@ -1,7 +1,9 @@
-import { isAfter, isBefore, isSameWeek, isToday, isTomorrow, isYesterday, setDate } from 'date-fns';
+import { isAfter, isBefore, isDate, isSameWeek, isToday, isTomorrow, isYesterday, setDate } from 'date-fns';
 
 import { Task, TaskNormalized } from 'shared/api';
-import { getToday } from 'shared/lib';
+import { formatDate, getToday } from 'shared/lib';
+
+import { types } from '../model';
 
 export function normalizeTask(task: Task): TaskNormalized {
   return {
@@ -73,4 +75,65 @@ export function getCurrentTask(tasks: TaskNormalized[]): TaskNormalized | undefi
   }
 
   return sortedTasks.at(-1);
+}
+
+export function getSearchParamsFromConfig(filters: types.TasksQueryConfig): Record<string, string> {
+  const values: Record<string, string> = {};
+
+  if (filters.title) {
+    values.title = filters.title;
+  }
+
+  if (filters.completed && filters.completed !== 'all') {
+    values.completed = filters.completed;
+  }
+
+  if (filters.startDate) {
+    values.startDate = formatDate(filters.startDate, 'yyyy-MM-dd');
+  }
+
+  if (filters.dueDate) {
+    values.dueDate = formatDate(filters.dueDate, 'yyyy-MM-dd');
+  }
+
+  return values;
+}
+
+export function getQueryConfigFromParams(searchParams: URLSearchParams): types.TasksQueryConfig {
+  const values: types.TasksQueryConfig = {};
+
+  const title = searchParams.get('title');
+  const completed = searchParams.get('completed') as types.TasksQueryCompletedStatuses | null;
+  const start = searchParams.get('startDate');
+  const startDate = start && new Date(start);
+  const due = searchParams.get('dueDate');
+  const dueDate = due && new Date(due);
+
+  if (title) {
+    values.title = title;
+  }
+
+  if (completed && Object.values(types.TasksQueryCompletedStatuses).includes(completed)) {
+    values.completed = completed;
+  }
+
+  if (startDate && isDate(startDate)) {
+    startDate.setHours(0);
+    startDate.setMinutes(0);
+    startDate.setSeconds(0);
+    startDate.setMilliseconds(0);
+
+    values.startDate = new Date(startDate);
+  }
+
+  if (dueDate && isDate(dueDate)) {
+    dueDate.setHours(23);
+    dueDate.setMinutes(59);
+    dueDate.setSeconds(59);
+    dueDate.setMilliseconds(999);
+
+    values.dueDate = new Date(dueDate);
+  }
+
+  return values;
 }

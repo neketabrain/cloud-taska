@@ -1,0 +1,32 @@
+.block {
+  position: relative;
+  width: 100%;
+}
+
+.container {
+  @extend .container;
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  column-gap: 24px;
+}
+
+.filters {
+  @extend .block;
+  position: sticky;
+  top: 24px;
+}
+
+.tasks {
+  @extend .block;
+  overflow-x: hidden;
+  padding-bottom: 80px;
+}
+
+.item {
+  @extend .block;
+
+  &:not(:first-child) {
+    margin-top: 8px;
+  }
+}
