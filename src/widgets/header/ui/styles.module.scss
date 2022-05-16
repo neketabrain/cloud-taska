@@ -11,7 +11,7 @@
 
 .nav {
   @include row;
-  align-items: end;
+  align-items: flex-end;
   column-gap: 48px;
 }
 

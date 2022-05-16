@@ -7,11 +7,6 @@ export default {
   component: TextSwitch,
   args: {
     name: 'switch',
-    items: [
-      { label: 'First', value: '1' },
-      { label: 'Second', value: '2' },
-      { label: 'Third', value: '3' },
-    ],
   },
 } as ComponentMeta<typeof TextSwitch>;
 
@@ -22,5 +17,16 @@ export const Component: ComponentStory<typeof TextSwitch> = (args) => {
     setValue(newValue);
   }
 
-  return <TextSwitch {...args} value={value} onChange={handleChange} />;
+  return (
+    <TextSwitch
+      {...args}
+      value={value}
+      onChange={handleChange}
+      items={[
+        { label: 'First', value: '1' },
+        { label: 'Second', value: '2' },
+        { label: 'Third', value: '3' },
+      ]}
+    />
+  );
 };

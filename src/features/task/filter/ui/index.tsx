@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
@@ -13,18 +13,9 @@ import { DEFAULT_VALUES, getStatusItems } from '../config';
 
 import styles from './styles.module.scss';
 
-interface TaskFiltersProps {
-  className?: string;
-}
-
-export const TaskFilters: React.VFC<TaskFiltersProps> = (props) => {
-  const { className } = props;
-
+function useFilters() {
   const [searchParams, setSearchParams] = useSearchParams();
   const debounce = useDebounce();
-
-  const { t: tActions } = useTranslation('actions');
-  const { t: tFilters } = useTranslation('filters');
 
   const {
     register,
@@ -38,29 +29,35 @@ export const TaskFilters: React.VFC<TaskFiltersProps> = (props) => {
   });
   const { title, completed, startDate, dueDate } = watch();
 
-  function handleChangeStartDate(date: Date | null, onChange: (date: Date | null) => void) {
-    if (date && dueDate && date.getTime() > dueDate.getTime()) {
-      const newDueDate = new Date(date);
-      newDueDate.setDate(newDueDate.getDate());
-      setValue('dueDate', newDueDate);
-    }
+  const handleChangeStartDate = useCallback(
+    (date: Date | null, onChange: (date: Date | null) => void) => {
+      if (date && dueDate && date.getTime() > dueDate.getTime()) {
+        const newDueDate = new Date(date);
+        newDueDate.setDate(newDueDate.getDate());
+        setValue('dueDate', newDueDate);
+      }
 
-    onChange(date);
-  }
+      onChange(date);
+    },
+    [dueDate, setValue]
+  );
 
-  function handleChangeDueDate(date: Date | null, onChange: (date: Date | null) => void) {
-    if (date && startDate && date.getTime() < startDate.getTime()) {
-      const newStartDate = new Date(date);
-      newStartDate.setDate(newStartDate.getDate());
-      setValue('startDate', newStartDate);
-    }
+  const handleChangeDueDate = useCallback(
+    (date: Date | null, onChange: (date: Date | null) => void) => {
+      if (date && startDate && date.getTime() < startDate.getTime()) {
+        const newStartDate = new Date(date);
+        newStartDate.setDate(newStartDate.getDate());
+        setValue('startDate', newStartDate);
+      }
 
-    onChange(date);
-  }
+      onChange(date);
+    },
+    [setValue, startDate]
+  );
 
-  function handleReset() {
+  const handleReset = useCallback(() => {
     reset(DEFAULT_VALUES);
-  }
+  }, [reset]);
 
   useEffect(() => {
     debounce(
@@ -72,6 +69,36 @@ export const TaskFilters: React.VFC<TaskFiltersProps> = (props) => {
       true
     );
   }, [debounce, setSearchParams, title, startDate, dueDate, completed]);
+
+  useEffect(() => {
+    if (!searchParams.toString()) {
+      reset(DEFAULT_VALUES);
+    }
+  }, [searchParams, reset]);
+
+  useEffect(() => {
+    return () => {
+      taskModel.events.resetQueryConfig();
+    };
+  }, []);
+
+  return { searchParams, form: { register, control, errors, handleChangeDueDate, handleChangeStartDate, handleReset } };
+}
+
+interface FilterTasksProps {
+  className?: string;
+}
+
+export const FilterTasks: React.VFC<FilterTasksProps> = (props) => {
+  const { className } = props;
+
+  const { t: tActions } = useTranslation('actions');
+  const { t: tFilters } = useTranslation('filters');
+
+  const {
+    searchParams,
+    form: { control, register, errors, handleChangeStartDate, handleChangeDueDate, handleReset },
+  } = useFilters();
 
   return (
     <form className={clsx(styles.container, className)}>

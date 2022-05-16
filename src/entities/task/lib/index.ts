@@ -1,7 +1,18 @@
-import { isAfter, isBefore, isDate, isSameWeek, isToday, isTomorrow, isYesterday, setDate } from 'date-fns';
+import {
+  isAfter,
+  isBefore,
+  isDate,
+  isEqual,
+  isSameWeek,
+  isToday,
+  isTomorrow,
+  isYesterday,
+  setDate,
+  format,
+} from 'date-fns';
 
 import { Task, TaskNormalized } from 'shared/api';
-import { formatDate, getToday } from 'shared/lib';
+import { getToday } from 'shared/lib';
 
 import { types } from '../model';
 
@@ -89,11 +100,11 @@ export function getSearchParamsFromConfig(filters: types.TasksQueryConfig): Reco
   }
 
   if (filters.startDate) {
-    values.startDate = formatDate(filters.startDate, 'yyyy-MM-dd');
+    values.startDate = format(filters.startDate, 'yyyy-MM-dd');
   }
 
   if (filters.dueDate) {
-    values.dueDate = formatDate(filters.dueDate, 'yyyy-MM-dd');
+    values.dueDate = format(filters.dueDate, 'yyyy-MM-dd');
   }
 
   return values;
@@ -136,4 +147,57 @@ export function getQueryConfigFromParams(searchParams: URLSearchParams): types.T
   }
 
   return values;
+}
+
+export function filterTasksByConfig(tasks: TaskNormalized[], config: types.TasksQueryConfig) {
+  return tasks.filter((task) => {
+    if (config.title && !task.title.toLowerCase().includes(config.title.toLowerCase())) {
+      return false;
+    }
+
+    if (config.completed) {
+      if (config.completed === types.TasksQueryCompletedStatuses.completed && !task.completed) {
+        return false;
+      }
+
+      if (config.completed === types.TasksQueryCompletedStatuses.notCompleted && !!task.completed) {
+        return false;
+      }
+    }
+
+    if (
+      config.startDate &&
+      isBefore(task.start_date, config.startDate) &&
+      !isEqual(task.start_date, config.startDate)
+    ) {
+      return false;
+    }
+
+    if (config.dueDate && isAfter(task.due_date, config.dueDate) && !isEqual(task.due_date, config.dueDate)) {
+      return false;
+    }
+
+    if (config.period) {
+      if (config.period === types.TasksQueryPeriods.today && !isToday(task.start_date)) {
+        return false;
+      }
+
+      if (config.period === types.TasksQueryPeriods.tomorrow && !isTomorrow(task.start_date)) {
+        return false;
+      }
+
+      if (config.period === types.TasksQueryPeriods.yesterday && !isYesterday(task.start_date)) {
+        return false;
+      }
+
+      if (
+        config.period === types.TasksQueryPeriods.week &&
+        !isSameWeek(new Date(), task.start_date, { weekStartsOn: 1 })
+      ) {
+        return false;
+      }
+    }
+
+    return true;
+  });
 }

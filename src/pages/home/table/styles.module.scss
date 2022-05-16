@@ -12,33 +12,6 @@
   justify-content: space-between;
 }
 
-.switch {
-  @include row;
-  align-items: center;
-}
-
-.allTasksLink {
-  font-size: 16px;
-  font-weight: 400;
-  color: var(--black-2);
-  text-transform: uppercase;
-  cursor: pointer;
-  font-family: 'Source Code Pro', sans-serif;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-.separator {
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--black-2);
-  text-transform: uppercase;
-  white-space: pre;
-}
-
 .list {
   @extend .container;
   margin-top: 16px;

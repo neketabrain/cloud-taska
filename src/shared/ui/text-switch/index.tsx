@@ -3,22 +3,22 @@ import { Fragment } from 'react';
 
 import styles from './styles.module.scss';
 
-export interface TextSwitchItem {
+export interface TextSwitchItem<T> {
   label: React.ReactNode;
-  value: string;
+  value: T;
 }
 
-interface TextSwitchProps {
+interface TextSwitchProps<T> {
   name: string;
-  value: TextSwitchItem['value'];
-  onChange: (value: TextSwitchItem['value']) => void;
-  items: TextSwitchItem[];
+  value: T;
+  onChange: (value: T) => void;
+  items: TextSwitchItem<T>[];
 }
 
-export const TextSwitch: React.VFC<TextSwitchProps> = (props) => {
+export const TextSwitch = <T,>(props: TextSwitchProps<T>) => {
   const { name, items, value, onChange } = props;
 
-  function handleChange(selectedValue: TextSwitchItem['value']) {
+  function handleChange(selectedValue: T) {
     onChange(selectedValue);
   }
 
@@ -29,12 +29,12 @@ export const TextSwitch: React.VFC<TextSwitchProps> = (props) => {
         const isLast = idx >= items.length - 1;
 
         return (
-          <Fragment key={item.value}>
+          <Fragment key={`${item.value}`}>
             <label className={clsx(styles.item, isChecked && styles.item_active)}>
               <input
                 type="radio"
                 name={name}
-                value={item.value}
+                value={`${item.value}`}
                 checked={isChecked}
                 onChange={() => handleChange(item.value)}
                 className={styles.input}

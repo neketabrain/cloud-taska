@@ -23,7 +23,9 @@ export const TaskList: React.VFC = () => {
       <h2 className={styles.title}>{t('tasksForToday').toUpperCase()}</h2>
 
       {!taskList.length && (
-        <p className={styles.text}>{tasksForToday.length ? t('allTasksCompleted') : t('noTasksForToday')}</p>
+        <div className={styles.emptyContainer}>
+          <p className={styles.empty}>{tasksForToday.length ? t('allTasksCompleted') : t('noTasksForToday')}</p>
+        </div>
       )}
 
       {!!taskList.length && (

@@ -20,14 +20,22 @@
   position: relative;
 }
 
-.text {
+.emptyContainer {
+  @include row;
+  justify-content: center;
+  margin-top: 86px;
+}
+
+.empty {
   font-size: 16px;
   font-weight: 500;
   color: var(--white-1);
   text-align: center;
   width: 100%;
   position: relative;
-  margin-top: 90px;
+  padding: 8px 16px 10px;
+  background-color: rgba(white, 0.08);
+  border-radius: 16px;
 }
 
 .scrollbar {
