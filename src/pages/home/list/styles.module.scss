@@ -24,6 +24,7 @@
   @include row;
   justify-content: center;
   margin-top: 86px;
+  padding: 0 16px;
 }
 
 .empty {
@@ -31,11 +32,10 @@
   font-weight: 500;
   color: var(--white-1);
   text-align: center;
-  width: 100%;
   position: relative;
-  padding: 8px 16px 10px;
+  padding: 4px 8px 6px;
   background-color: rgba(white, 0.08);
-  border-radius: 16px;
+  border-radius: var(--border-radius);
 }
 
 .scrollbar {
