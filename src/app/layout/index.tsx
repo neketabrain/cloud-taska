@@ -5,7 +5,11 @@ import { Header } from 'widgets/header';
 
 import styles from './layout.module.scss';
 
-export const Layout: React.FC = (props) => {
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export const Layout: React.FC<LayoutProps> = (props) => {
   const { children } = props;
   const { t } = useTranslation('nav');
 

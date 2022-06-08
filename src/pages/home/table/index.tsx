@@ -6,7 +6,7 @@ import { ROUTES } from 'shared/config';
 
 import styles from './styles.module.scss';
 
-export const TaskTable: React.VFC = () => {
+export const TaskTable: React.FC = () => {
   const currentTaskId = taskModel.useCurrentTaskId();
   const tasks = taskModel.useFilteredTasks();
   const sortedTasks = useMemo(() => taskLib.sortTasksByDate(tasks), [tasks]);

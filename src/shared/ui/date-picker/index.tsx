@@ -19,7 +19,7 @@ interface DatePickerProps extends Omit<ReactDatePickerProps, 'placeholderText'> 
   inputClassName?: string;
 }
 
-export const DatePicker: React.VFC<DatePickerProps> = (props) => {
+export const DatePicker: React.FC<DatePickerProps> = (props) => {
   const { label, placeholder, hasError, className, inputClassName, ...rest } = props;
 
   const locale = getLocale();

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { TaskNormalized } from 'shared/api';
 import { CalendarIcon, ClockIcon, FireIcon } from 'shared/assets/icons';
 import { formatDate, formatTime } from 'shared/lib';
-import { DropdownMenu } from 'shared/ui';
+import { DropdownMenu, Tooltip } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
@@ -15,7 +15,7 @@ interface TaskRowProps {
   active?: boolean;
 }
 
-export const TaskRow: React.VFC<TaskRowProps> = (props) => {
+export const TaskRow: React.FC<TaskRowProps> = (props) => {
   const { task, className, active, toggle, actions } = props;
 
   return (
@@ -23,10 +23,21 @@ export const TaskRow: React.VFC<TaskRowProps> = (props) => {
       <div className={clsx(styles.left, !!toggle && styles.left_withToggle)}>
         {toggle && <div className={styles.toggle}>{toggle}</div>}
 
-        <div className={styles.info}>
-          <p className={styles.title}>{task.title}</p>
-          <p className={styles.description}>{task.description}</p>
-        </div>
+        <Tooltip
+          overlay={
+            <>
+              <b>{task.title}</b>
+              <p>{task.description}</p>
+            </>
+          }
+          placement="topLeft"
+        >
+          <div className={styles.info}>
+            <p className={styles.title}>{task.title}</p>
+
+            <p className={styles.description}>{task.description}</p>
+          </div>
+        </Tooltip>
       </div>
 
       <div className={styles.right}>

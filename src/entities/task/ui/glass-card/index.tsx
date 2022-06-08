@@ -12,7 +12,7 @@ interface TaskGlassCardProps {
   active?: boolean;
 }
 
-export const TaskGlassCard: React.VFC<TaskGlassCardProps> = (props) => {
+export const TaskGlassCard: React.FC<TaskGlassCardProps> = (props) => {
   const { task, className, active } = props;
 
   return (

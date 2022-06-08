@@ -16,6 +16,7 @@ interface DropdownActions {
 }
 
 export interface DropdownProps {
+  children: React.ReactNode;
   placement?: 'left' | 'right';
   element?: (actions: DropdownActions) => React.ReactNode;
   className?: string;

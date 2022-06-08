@@ -9,7 +9,7 @@ interface DeleteTaskProps {
   taskId: string;
 }
 
-export const DeleteTask: React.VFC<DeleteTaskProps> = (props) => {
+export const DeleteTask: React.FC<DeleteTaskProps> = (props) => {
   const { taskId } = props;
 
   const { t: tActions } = useTranslation('actions');

@@ -10,6 +10,7 @@ import { Button } from 'shared/ui';
 import styles from './styles.module.scss';
 
 export interface ModalProps {
+  children: React.ReactNode;
   close: VoidFunction;
   title?: React.ReactNode;
   withCloseButton?: boolean;

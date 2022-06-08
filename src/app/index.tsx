@@ -11,7 +11,7 @@ import { withProviders } from './providers';
 
 import './styles.scss';
 
-const Main: React.VFC = () => {
+const Main: React.FC = () => {
   const isInitialized = viewerModel.useViewerAuthStatus();
 
   if (!isInitialized) {

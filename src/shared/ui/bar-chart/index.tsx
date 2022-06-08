@@ -18,7 +18,7 @@ interface BarChartProps {
   className?: string;
 }
 
-export const BarChart: React.VFC<BarChartProps> = (props) => {
+export const BarChart: React.FC<BarChartProps> = (props) => {
   const { data, className } = props;
 
   return (

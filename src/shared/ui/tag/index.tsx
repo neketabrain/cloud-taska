@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import styles from './styles.module.scss';
 
 interface TagProps {
+  children: React.ReactNode;
   className?: string;
   as?: keyof JSX.IntrinsicElements;
 }

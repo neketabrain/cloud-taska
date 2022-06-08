@@ -9,7 +9,7 @@ interface LogoProps {
   as?: keyof JSX.IntrinsicElements;
 }
 
-export const Logo: React.VFC<LogoProps> = (props) => {
+export const Logo: React.FC<LogoProps> = (props) => {
   const { className, as: Wrapper = 'h1' } = props;
 
   return (

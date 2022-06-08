@@ -6,7 +6,7 @@ import { Scrollbar } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
-export const TaskList: React.VFC = () => {
+export const TaskList: React.FC = () => {
   const { t } = useTranslation('task');
 
   const currentTaskId = taskModel.useCurrentTaskId();

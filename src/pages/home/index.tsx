@@ -8,7 +8,7 @@ import { TaskList } from './list';
 import styles from './styles.module.scss';
 import { TaskTable } from './table';
 
-export const HomePage: React.VFC = () => {
+export const HomePage: React.FC = () => {
   const { t } = useTranslation('task');
   const currentTask = taskModel.useCurrentTask();
 

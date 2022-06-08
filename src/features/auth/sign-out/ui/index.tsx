@@ -7,7 +7,7 @@ import { Button } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
-export const SignOut: React.VFC = () => {
+export const SignOut: React.FC = () => {
   const { t } = useTranslation('actions');
   const [isPending, setPending] = useState(false);
 

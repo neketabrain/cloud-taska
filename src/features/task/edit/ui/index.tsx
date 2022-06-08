@@ -19,7 +19,7 @@ interface EditTaskModalProps {
   disabled?: boolean;
 }
 
-const EditTaskModal: React.VFC<EditTaskModalProps> = (props) => {
+const EditTaskModal: React.FC<EditTaskModalProps> = (props) => {
   const { task, close, onSubmit, disabled } = props;
 
   const { t: tActions } = useTranslation('actions');
@@ -133,7 +133,7 @@ interface EditTaskProps {
   task: TaskNormalized;
 }
 
-export const EditTask: React.VFC<EditTaskProps> = (props) => {
+export const EditTask: React.FC<EditTaskProps> = (props) => {
   const { task } = props;
 
   const { t } = useTranslation('actions');

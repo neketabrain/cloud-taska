@@ -47,7 +47,7 @@ interface FilterTasksByPeriodProps {
   className?: string;
 }
 
-export const FilterTasksByPeriod: React.VFC<FilterTasksByPeriodProps> = (props) => {
+export const FilterTasksByPeriod: React.FC<FilterTasksByPeriodProps> = (props) => {
   const { allTasksLink, className } = props;
 
   const { t } = useTranslation('datetime');

@@ -19,7 +19,7 @@ interface CreateTaskModalProps {
   disabled?: boolean;
 }
 
-const CreateTaskModal: React.VFC<CreateTaskModalProps> = (props) => {
+const CreateTaskModal: React.FC<CreateTaskModalProps> = (props) => {
   const { close, onSubmit, disabled } = props;
 
   const { t: tActions } = useTranslation('actions');
@@ -134,7 +134,7 @@ const CreateTaskModal: React.VFC<CreateTaskModalProps> = (props) => {
   );
 };
 
-export const CreateTask: React.VFC = () => {
+export const CreateTask: React.FC = () => {
   const { t } = useTranslation('task');
   const [isModalOpen, setModalOpen] = useState(false);
   const [isPending, setPending] = useState(false);

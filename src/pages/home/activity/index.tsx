@@ -7,7 +7,7 @@ import { BarChart } from 'shared/ui';
 import { getChartData, getTaskStatistics } from './lib';
 import styles from './styles.module.scss';
 
-export const Activity: React.VFC = () => {
+export const Activity: React.FC = () => {
   const { t: tActivity } = useTranslation('activity');
   const { t: tDatetime } = useTranslation('datetime');
 

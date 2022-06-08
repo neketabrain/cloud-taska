@@ -3,7 +3,11 @@ import { Navigate } from 'react-router-dom';
 import { viewerModel } from 'entities/viewer';
 import { ROUTES } from 'shared/config';
 
-export const PrivateRoute: React.FC = (props) => {
+interface RouteProps {
+  children: React.ReactNode;
+}
+
+export const PrivateRoute: React.FC<RouteProps> = (props) => {
   const { children } = props;
   const viewer = viewerModel.useViewer();
 
@@ -14,7 +18,7 @@ export const PrivateRoute: React.FC = (props) => {
   return <>{children}</>;
 };
 
-export const GuestRoute: React.FC = (props) => {
+export const GuestRoute: React.FC<RouteProps> = (props) => {
   const { children } = props;
   const viewer = viewerModel.useViewer();
 

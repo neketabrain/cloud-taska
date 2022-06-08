@@ -27,7 +27,7 @@ function useToggle() {
   return { toggleTask, isPending };
 }
 
-export const ToggleTask: React.VFC<ToggleTaskProps> = (props) => {
+export const ToggleTask: React.FC<ToggleTaskProps> = (props) => {
   const { task } = props;
 
   const { t: tActions } = useTranslation('actions');
@@ -59,7 +59,7 @@ export const ToggleTask: React.VFC<ToggleTaskProps> = (props) => {
   );
 };
 
-export const ToggleTaskMini: React.VFC<ToggleTaskProps> = (props) => {
+export const ToggleTaskMini: React.FC<ToggleTaskProps> = (props) => {
   const { task } = props;
 
   const { t } = useTranslation('task');

@@ -10,7 +10,7 @@ import { PrivateRoute, GuestRoute } from './routes';
 import { SignInPage } from './signIn';
 import { TasksPage } from './tasks';
 
-export const Pages: React.VFC = () => {
+export const Pages: React.FC = () => {
   const viewer = viewerModel.useViewer();
 
   useEffect(() => {

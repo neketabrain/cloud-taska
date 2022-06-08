@@ -89,7 +89,7 @@ interface FilterTasksProps {
   className?: string;
 }
 
-export const FilterTasks: React.VFC<FilterTasksProps> = (props) => {
+export const FilterTasks: React.FC<FilterTasksProps> = (props) => {
   const { className } = props;
 
   const { t: tActions } = useTranslation('actions');

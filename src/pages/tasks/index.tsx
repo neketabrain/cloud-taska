@@ -5,7 +5,7 @@ import { Task } from 'features/task';
 
 import styles from './styles.module.scss';
 
-export const TasksPage: React.VFC = () => {
+export const TasksPage: React.FC = () => {
   const currentTaskId = taskModel.useCurrentTaskId();
   const tasks = taskModel.useFilteredTasks();
   const sortedTasks = useMemo(() => taskLib.sortTasksByDate(tasks), [tasks]);

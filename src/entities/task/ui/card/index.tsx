@@ -10,7 +10,7 @@ interface EmptyTaskCardProps {
   description: string;
 }
 
-const EmptyTaskCard: React.VFC<EmptyTaskCardProps> = (props) => {
+const EmptyTaskCard: React.FC<EmptyTaskCardProps> = (props) => {
   const { label, description } = props;
 
   return (
@@ -29,7 +29,7 @@ interface TaskCardProps {
   action?: React.ReactNode;
 }
 
-export const TaskCard: React.VFC<TaskCardProps> & { Empty: typeof EmptyTaskCard } = (props) => {
+export const TaskCard: React.FC<TaskCardProps> & { Empty: typeof EmptyTaskCard } = (props) => {
   const { label, task, action } = props;
 
   return (

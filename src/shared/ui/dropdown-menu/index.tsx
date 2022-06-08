@@ -7,12 +7,12 @@ import { Dropdown, DropdownProps, Button } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
-interface DropdownMenuProps extends DropdownProps {
+interface DropdownMenuProps extends Omit<DropdownProps, 'children'> {
   items: React.ReactNode[];
   buttonClassName?: string;
 }
 
-export const DropdownMenu: React.VFC<DropdownMenuProps> & { Item: typeof DropdownMenuItem } = (props) => {
+export const DropdownMenu: React.FC<DropdownMenuProps> & { Item: typeof DropdownMenuItem } = (props) => {
   const { items, buttonClassName, ...rest } = props;
 
   const { t } = useTranslation('actions');

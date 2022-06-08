@@ -17,7 +17,7 @@ interface HeaderProps {
   links?: HeaderLinkItem[];
 }
 
-export const Header: React.VFC<HeaderProps> = (props) => {
+export const Header: React.FC<HeaderProps> = (props) => {
   const { logoLink, links } = props;
   const viewer = viewerModel.useViewer();
 
