@@ -18,6 +18,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
       <div className={styles.layout}>
         <Header
           logoLink={ROUTES.root}
+          settingsLink={ROUTES.settings}
           links={[
             { label: t('home'), url: ROUTES.root },
             { label: t('allTasks'), url: ROUTES.tasks },

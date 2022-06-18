@@ -3,4 +3,5 @@ export const ROUTES = {
   tasks: '/tasks',
   signIn: '/sign-in',
   signUp: '/sign-up',
+  settings: '/settings',
 };

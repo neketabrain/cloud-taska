@@ -5,6 +5,7 @@ import datetime from './datetime.json';
 import filters from './filters.json';
 import nav from './nav.json';
 import task from './task.json';
+import viewer from './viewer.json';
 
 export const ru = {
   actions,
@@ -14,4 +15,5 @@ export const ru = {
   filters,
   nav,
   task,
+  viewer,
 };

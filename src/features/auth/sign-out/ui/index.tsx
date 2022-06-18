@@ -3,9 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { viewerModel } from 'entities/viewer';
 import { LogoutIcon } from 'shared/assets/icons';
-import { Button } from 'shared/ui';
-
-import styles from './styles.module.scss';
+import { DropdownMenu } from 'shared/ui';
 
 export const SignOut: React.FC = () => {
   const { t } = useTranslation('actions');
@@ -18,14 +16,9 @@ export const SignOut: React.FC = () => {
   }
 
   return (
-    <Button
-      variant="transparent"
-      onClick={signOut}
-      aria-label={t('signOut')}
-      className={styles.button}
-      disabled={isPending}
-    >
+    <DropdownMenu.Item onClick={signOut} danger={true} disabled={isPending}>
       <LogoutIcon />
-    </Button>
+      {t('signOut')}
+    </DropdownMenu.Item>
   );
 };

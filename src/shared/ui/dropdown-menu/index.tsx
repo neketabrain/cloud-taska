@@ -3,23 +3,28 @@ import React, { useContext, Children } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { DotsIcon } from 'shared/assets/icons';
-import { Dropdown, DropdownProps, Button } from 'shared/ui';
+import { Dropdown, DropdownProps, Button, LinkButton } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
 interface DropdownMenuProps extends Omit<DropdownProps, 'children'> {
   items: React.ReactNode[];
+  children?: React.ReactNode;
+  toggleElement?: React.ReactNode;
   buttonClassName?: string;
 }
 
-export const DropdownMenu: React.FC<DropdownMenuProps> & { Item: typeof DropdownMenuItem } = (props) => {
-  const { items, buttonClassName, ...rest } = props;
+export const DropdownMenu: React.FC<DropdownMenuProps> & {
+  Item: typeof DropdownMenuItem;
+  LinkItem: typeof DropdownMenuLinkItem;
+} = (props) => {
+  const { items, toggleElement, buttonClassName, children, contentClassName, ...rest } = props;
 
   const { t } = useTranslation('actions');
 
   return (
     <Dropdown
-      contentClassName={styles.dropdownContent}
+      contentClassName={clsx(styles.dropdownContent, contentClassName)}
       element={({ toggle }) => (
         <Button
           variant="transparent"
@@ -27,11 +32,12 @@ export const DropdownMenu: React.FC<DropdownMenuProps> & { Item: typeof Dropdown
           className={clsx(styles.dropdownButton, buttonClassName)}
           aria-label={t('openMenu')}
         >
-          <DotsIcon />
+          {toggleElement || <DotsIcon />}
         </Button>
       )}
       {...rest}
     >
+      {children}
       {Children.map(items, (item) => item)}
     </Dropdown>
   );
@@ -43,7 +49,7 @@ interface DropdownMenuItemProps extends React.ButtonHTMLAttributes<HTMLButtonEle
 }
 
 const DropdownMenuItem: React.FC<DropdownMenuItemProps> = (props) => {
-  const { children, danger, active, onClick, ...rest } = props;
+  const { children, danger, active, onClick, className, ...rest } = props;
 
   const { close } = useContext(Dropdown.context);
 
@@ -57,7 +63,7 @@ const DropdownMenuItem: React.FC<DropdownMenuItemProps> = (props) => {
 
   return (
     <Button
-      className={clsx(styles.dropdownMenuItem, {
+      className={clsx(styles.dropdownMenuItem, className, {
         [styles.dropdownMenuItem_danger]: danger,
         [styles.dropdownMenuItem_active]: active,
       })}
@@ -70,4 +76,31 @@ const DropdownMenuItem: React.FC<DropdownMenuItemProps> = (props) => {
   );
 };
 
+interface DropdownMenuLinkItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  to: string;
+  active?: boolean;
+  danger?: boolean;
+}
+
+const DropdownMenuLinkItem: React.FC<DropdownMenuLinkItemProps> = (props) => {
+  const { children, danger, active, className, ...rest } = props;
+
+  const { close } = useContext(Dropdown.context);
+
+  return (
+    <LinkButton
+      className={clsx(styles.dropdownMenuItem, className, {
+        [styles.dropdownMenuItem_danger]: danger,
+        [styles.dropdownMenuItem_active]: active,
+      })}
+      variant="transparent"
+      onClick={close}
+      {...rest}
+    >
+      {children}
+    </LinkButton>
+  );
+};
+
 DropdownMenu.Item = DropdownMenuItem;
+DropdownMenu.LinkItem = DropdownMenuLinkItem;

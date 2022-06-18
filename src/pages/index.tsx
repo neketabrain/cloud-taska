@@ -11,13 +11,13 @@ import { SignInPage } from './signIn';
 import { TasksPage } from './tasks';
 
 export const Pages: React.FC = () => {
-  const viewer = viewerModel.useViewer();
+  const isViewerAuthorized = viewerModel.useViewerAuthStatus();
 
   useEffect(() => {
-    if (!!viewer) {
+    if (isViewerAuthorized) {
       taskModel.effects.getTasksFx();
     }
-  }, [viewer]);
+  }, [isViewerAuthorized]);
 
   return (
     <Routes>

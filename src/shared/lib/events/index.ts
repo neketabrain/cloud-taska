@@ -20,11 +20,9 @@ export function useClickOutside<T extends HTMLElement>(ref: RefObject<T>, callba
   );
 
   useEffect(() => {
-    setTimeout(() => {
-      document.addEventListener('mousedown', (e) => {}, false);
-      document.addEventListener('touchstart', mouseListener, false);
-      document.addEventListener('keyup', keyboardListener, true);
-    });
+    document.addEventListener('mousedown', mouseListener, false);
+    document.addEventListener('touchstart', mouseListener, false);
+    document.addEventListener('keyup', keyboardListener, true);
 
     return () => {
       document.removeEventListener('mousedown', mouseListener, false);

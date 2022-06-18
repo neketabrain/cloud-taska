@@ -1,9 +1,11 @@
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
 
-import { viewerModel } from 'entities/viewer';
+import { ViewerMiniProfile, viewerModel } from 'entities/viewer';
 import { Auth } from 'features/auth';
-import { Logo } from 'shared/ui';
+import { SettingsIcon } from 'shared/assets/icons';
+import { DropdownMenu, Logo } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
@@ -14,12 +16,15 @@ interface HeaderLinkItem {
 
 interface HeaderProps {
   logoLink: string;
+  settingsLink: string;
   links?: HeaderLinkItem[];
 }
 
 export const Header: React.FC<HeaderProps> = (props) => {
-  const { logoLink, links } = props;
+  const { logoLink, settingsLink, links } = props;
   const viewer = viewerModel.useViewer();
+
+  const { t } = useTranslation('common');
 
   return (
     <header className={styles.header}>
@@ -28,7 +33,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
           <Logo />
         </Link>
 
-        {!!links?.length && (
+        {!!viewer && !!links?.length && (
           <ul className={styles.list} role="menu">
             {links.map((link) => (
               <li role="menuitem" key={link.url}>
@@ -41,7 +46,18 @@ export const Header: React.FC<HeaderProps> = (props) => {
         )}
       </nav>
 
-      {!!viewer && <Auth.SignOut />}
+      {!!viewer && (
+        <ViewerMiniProfile
+          viewer={viewer}
+          actions={[
+            <DropdownMenu.LinkItem to={settingsLink}>
+              <SettingsIcon />
+              {t('settings')}
+            </DropdownMenu.LinkItem>,
+            <Auth.SignOut />,
+          ]}
+        />
+      )}
     </header>
   );
 };
