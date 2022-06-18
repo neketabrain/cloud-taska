@@ -14,3 +14,4 @@ export { ReactComponent as PlusIcon } from './plus.svg';
 export { ReactComponent as RenewIcon } from './renew.svg';
 export { ReactComponent as ResetIcon } from './reset.svg';
 export { ReactComponent as SearchIcon } from './search.svg';
+export { ReactComponent as SettingsIcon } from './settings.svg';
