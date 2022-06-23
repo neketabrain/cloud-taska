@@ -31,10 +31,6 @@
   }
 }
 
-.createTask {
-  flex-shrink: 0;
-}
-
 .tasksContainer {
   @extend .block;
   margin-top: 24px;

@@ -23,9 +23,9 @@ export const TaskTable: React.FC = () => {
 
       <ul className={styles.list}>
         {!sortedTasks.length && (
-          <div className={styles.emptyContainer}>
+          <li className={styles.emptyContainer}>
             <p className={styles.emptyText}>{t('noTasks')}</p>
-          </div>
+          </li>
         )}
 
         {!!sortedTasks.length &&

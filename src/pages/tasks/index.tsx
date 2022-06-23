@@ -32,7 +32,7 @@ export const TasksPage: React.FC = () => {
           </p>
         </div>
 
-        <Task.CreateTask className={styles.createTask} />
+        <Task.CreateTask />
       </div>
 
       <div className={styles.tasksContainer}>
@@ -43,9 +43,9 @@ export const TasksPage: React.FC = () => {
         <section className={styles.tasks}>
           <ul className={styles.block}>
             {!sortedTasks.length && (
-              <div className={styles.emptyContainer}>
+              <li className={styles.emptyContainer}>
                 <p className={styles.emptyText}>{tTask('noTasks')}</p>
-              </div>
+              </li>
             )}
 
             {!!sortedTasks.length &&

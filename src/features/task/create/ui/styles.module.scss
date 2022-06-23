@@ -3,6 +3,7 @@
 .button {
   height: 32px;
   font-size: 12px;
+  flex-shrink: 0;
 
   & > span {
     margin-right: 8px;
