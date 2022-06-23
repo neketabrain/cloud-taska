@@ -14,7 +14,7 @@ export function useViewerAuthorized(): boolean {
   return useStore($viewer).isAuthorized;
 }
 
-export function useViewerAuthStatus(): boolean {
+export function useCheckViewerAuthStatus(): boolean {
   const [isInitialized, setInitialized] = useState(false);
 
   useEffect(() => {

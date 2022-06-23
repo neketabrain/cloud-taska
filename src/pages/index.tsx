@@ -1,8 +1,5 @@
-import { useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
-import { taskModel } from 'entities/task';
-import { viewerModel } from 'entities/viewer';
 import { ROUTES } from 'shared/config';
 
 import { HomePage } from './home';
@@ -11,14 +8,6 @@ import { SignInPage } from './signIn';
 import { TasksPage } from './tasks';
 
 export const Pages: React.FC = () => {
-  const isViewerAuthorized = viewerModel.useViewerAuthStatus();
-
-  useEffect(() => {
-    if (isViewerAuthorized) {
-      taskModel.effects.getTasksFx();
-    }
-  }, [isViewerAuthorized]);
-
   return (
     <Routes>
       <Route

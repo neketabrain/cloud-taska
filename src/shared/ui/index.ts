@@ -5,6 +5,7 @@ export * from './date-picker';
 export * from './dropdown';
 export * from './dropdown-menu';
 export * from './input';
+export * from './loader';
 export * from './logo';
 export * from './modal';
 export * from './scrollbar';
