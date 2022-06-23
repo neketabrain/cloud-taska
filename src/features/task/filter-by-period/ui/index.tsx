@@ -1,14 +1,11 @@
-import clsx from 'clsx';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import { taskModel } from 'entities/task';
 import { TextSwitch } from 'shared/ui';
 
 import { getFilters } from '../config';
-
-import styles from './styles.module.scss';
 
 function useFilter() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -19,7 +16,7 @@ function useFilter() {
   );
 
   const changeFilter = useCallback(
-    (newPeriod: taskModel.types.TasksQueryPeriods) => {
+    (newPeriod: taskModel.types.TasksQueryPeriods | string) => {
       setSearchParams({ period: newPeriod });
     },
     [setSearchParams]
@@ -54,13 +51,12 @@ export const FilterTasksByPeriod: React.FC<FilterTasksByPeriodProps> = (props) =
   const { changeFilter, period } = useFilter();
 
   return (
-    <div className={clsx(styles.filters, className)}>
-      <TextSwitch name="period" items={getFilters(t)} value={period} onChange={changeFilter} />
-
-      <p className={styles.separator}>{' / '}</p>
-      <Link to={allTasksLink} className={styles.link}>
-        {t('all')}
-      </Link>
-    </div>
+    <TextSwitch
+      name="period"
+      items={getFilters(t, allTasksLink)}
+      value={period}
+      onChange={changeFilter}
+      className={className}
+    />
   );
 };

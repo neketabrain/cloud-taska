@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import clsx from 'clsx';
 import { setHours } from 'date-fns';
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
@@ -134,7 +135,13 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = (props) => {
   );
 };
 
-export const CreateTask: React.FC = () => {
+interface CreateTaskProps {
+  className?: string;
+}
+
+export const CreateTask: React.FC<CreateTaskProps> = (props) => {
+  const { className } = props;
+
   const { t } = useTranslation('task');
   const [isModalOpen, setModalOpen] = useState(false);
   const [isPending, setPending] = useState(false);
@@ -156,7 +163,7 @@ export const CreateTask: React.FC = () => {
 
   return (
     <>
-      <Button className={styles.button} onClick={openModal}>
+      <Button className={clsx(styles.button, className)} onClick={openModal}>
         <PlusIcon /> <span>{t('addTask')}</span>
       </Button>
 

@@ -5,9 +5,39 @@
   width: 100%;
 }
 
-.container {
-  @extend .container;
-  margin-top: 40px;
+.statisticsContainer {
+  @include row;
+  @extend .block;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 24px;
+  margin-top: 24px;
+}
+
+.statistics {
+  @include row;
+  @extend .block;
+  align-items: center;
+  column-gap: 24px;
+  color: var(--black-2);
+  font-size: 12px;
+  border-radius: var(--border-radius);
+  height: 32px;
+
+  span {
+    font-weight: 600;
+    font-size: 14px;
+    margin-left: 4px;
+  }
+}
+
+.createTask {
+  flex-shrink: 0;
+}
+
+.tasksContainer {
+  @extend .block;
+  margin-top: 24px;
   display: grid;
   grid-template-columns: 300px 1fr;
   column-gap: 24px;
@@ -46,7 +76,7 @@
 }
 
 .emptyText {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--grey-2);
   text-align: center;

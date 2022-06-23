@@ -2,7 +2,7 @@ import { combine, createStore } from 'effector';
 
 import { TaskNormalized } from 'shared/api';
 
-import { filterTasksByConfig, getCurrentTask } from '../lib';
+import { filterTasksByConfig, getCurrentTask, getCompletedTasks, getActiveTasks } from '../lib';
 
 import { getTasksFx, createTaskFx, editTaskFx, deleteTaskFx, toggleTaskFx } from './effects';
 import { setQueryConfig, resetQueryConfig } from './events';
@@ -49,8 +49,10 @@ export const $tasks = createStore<TaskNormalized[]>([])
     return state.concat(newTask);
   });
 
+export const $completedTasks = $tasks.map(getCompletedTasks);
+
+export const $activeTasks = $tasks.map(getActiveTasks);
+
 export const $tasksFiltered = combine($tasks, $queryConfig, filterTasksByConfig);
 
-export const $currentTask = $tasks.map((state) => getCurrentTask(state));
-
-export const $currentTaskId = $currentTask.map((state) => state?.id);
+export const $currentTask = $tasks.map((state) => getCurrentTask(state) || null);
