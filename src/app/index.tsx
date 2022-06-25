@@ -20,12 +20,16 @@ const Main: React.FC = () => {
   const isViewerAuthorized = viewerModel.useViewerAuthorized();
 
   useEffect(() => {
-    if (isViewerAuthorized) {
-      taskModel.effects.getTasksFx().then(() => {
+    if (isInitialized) {
+      if (isViewerAuthorized) {
+        taskModel.effects.getTasksFx().then(() => {
+          setLoading(false);
+        });
+      } else {
         setLoading(false);
-      });
+      }
     }
-  }, [isViewerAuthorized]);
+  }, [isInitialized, isViewerAuthorized]);
 
   if (isLoading || !isInitialized) {
     return <Loader />;

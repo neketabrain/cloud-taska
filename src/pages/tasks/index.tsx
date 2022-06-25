@@ -6,7 +6,7 @@ import { Task } from 'features/task';
 
 import styles from './styles.module.scss';
 
-export const TasksPage: React.FC = () => {
+const TasksPage: React.FC = () => {
   const { t: tTask } = useTranslation('task');
   const { t: tActivity } = useTranslation('activity');
 
@@ -65,3 +65,5 @@ export const TasksPage: React.FC = () => {
     </div>
   );
 };
+
+export default TasksPage;
