@@ -1,7 +1,7 @@
 import { viewerApi } from 'shared/api';
 import { Button } from 'shared/ui';
 
-export const SignInPage: React.FC = () => {
+const SignInPage: React.FC = () => {
   // TODO: feature
   function signIn() {
     viewerApi.signInWithGoogle();
@@ -9,3 +9,5 @@ export const SignInPage: React.FC = () => {
 
   return <Button onClick={signIn}>Войти через Google</Button>;
 };
+
+export default SignInPage;

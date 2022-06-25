@@ -8,7 +8,7 @@ import { TaskList } from './list';
 import styles from './styles.module.scss';
 import { TaskTable } from './table';
 
-export const HomePage: React.FC = () => {
+const HomePage: React.FC = () => {
   const { t } = useTranslation('task');
   const currentTask = taskModel.useCurrentTask();
 
@@ -44,3 +44,5 @@ export const HomePage: React.FC = () => {
     </div>
   );
 };
+
+export default HomePage;
