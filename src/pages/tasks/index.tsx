@@ -18,7 +18,16 @@ const TasksPage: React.FC = () => {
   const sortedTasks = useMemo(() => taskLib.sortTasksByDate(filteredTasks), [filteredTasks]);
 
   return (
-    <div className={styles.block}>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>{tTask('allTasks')}</h1>
+
+        <div className={styles.headerButtons}>
+          <Task.FilterTasksModal className={styles.addTaskMobile} />
+          <Task.CreateTask className={styles.addTaskMobile} />
+        </div>
+      </div>
+
       <div className={styles.statisticsContainer}>
         <div className={styles.statistics}>
           <p>
@@ -32,7 +41,7 @@ const TasksPage: React.FC = () => {
           </p>
         </div>
 
-        <Task.CreateTask />
+        <Task.CreateTask className={styles.addTask} />
       </div>
 
       <div className={styles.tasksContainer}>

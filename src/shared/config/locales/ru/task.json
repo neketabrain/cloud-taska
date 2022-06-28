@@ -16,5 +16,6 @@
   "enterDescription": "Введите описание",
   "startDate": "Дата начала",
   "enterDate": "Укажите дату",
-  "dueDate": "Дата завершения"
+  "dueDate": "Дата завершения",
+  "allTasks": "Все задачи"
 }

@@ -5,12 +5,12 @@ import { Link, NavLink } from 'react-router-dom';
 import { ViewerMiniProfile, viewerModel } from 'entities/viewer';
 import { Auth } from 'features/auth';
 import { SettingsIcon } from 'shared/assets/icons';
-import { DropdownMenu, Logo } from 'shared/ui';
+import { DropdownMenu, Logo, MobileMenu } from 'shared/ui';
 
 import styles from './styles.module.scss';
 
 interface HeaderLinkItem {
-  url: string;
+  link: string;
   label: string;
 }
 
@@ -36,8 +36,8 @@ export const Header: React.FC<HeaderProps> = (props) => {
         {!!viewer && !!links?.length && (
           <ul className={styles.list} role="menu">
             {links.map((link) => (
-              <li role="menuitem" key={link.url}>
-                <NavLink to={link.url} className={({ isActive }) => clsx(styles.link, isActive && styles.link_active)}>
+              <li role="menuitem" key={link.link}>
+                <NavLink to={link.link} className={({ isActive }) => clsx(styles.link, isActive && styles.link_active)}>
                   {link.label}
                 </NavLink>
               </li>
@@ -45,6 +45,16 @@ export const Header: React.FC<HeaderProps> = (props) => {
           </ul>
         )}
       </nav>
+
+      <div className={styles.mobileMenu}>
+        {!viewer && (
+          <Link to={logoLink}>
+            <Logo />
+          </Link>
+        )}
+
+        {!!viewer && !!links?.length && <MobileMenu items={links} />}
+      </div>
 
       {!!viewer && (
         <ViewerMiniProfile

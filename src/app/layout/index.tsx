@@ -20,9 +20,9 @@ export const Layout: React.FC<LayoutProps> = (props) => {
           logoLink={ROUTES.root}
           settingsLink={ROUTES.settings}
           links={[
-            { label: t('home'), url: ROUTES.root },
-            { label: t('allTasks'), url: ROUTES.tasks },
-            { label: t('activity'), url: ROUTES.activity },
+            { label: t('home'), link: ROUTES.root },
+            { label: t('allTasks'), link: ROUTES.tasks },
+            { label: t('activity'), link: ROUTES.activity },
           ]}
         />
 

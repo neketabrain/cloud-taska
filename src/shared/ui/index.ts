@@ -7,6 +7,7 @@ export * from './dropdown-menu';
 export * from './input';
 export * from './loader';
 export * from './logo';
+export * from './mobile-menu';
 export * from './modal';
 export * from './scrollbar';
 export * from './select';

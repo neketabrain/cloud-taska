@@ -29,9 +29,7 @@
 }
 
 .row {
-  @include row;
   position: relative;
-  column-gap: 16px;
 
   &:not(:first-child) {
     margin-top: 12px;

@@ -1,18 +1,30 @@
 @import 'shared/styles/mixins.scss';
+@import 'shared/styles/breakpoints.scss';
 
 .header {
   @include row;
   position: relative;
   width: 100%;
-  height: 52px;
   align-items: center;
   justify-content: space-between;
+
+  @include tablet {
+    padding-top: 16px;
+  }
+
+  @include mobile {
+    padding-top: 0px;
+  }
 }
 
 .nav {
   @include row;
   align-items: flex-end;
   column-gap: 48px;
+
+  @include tablet {
+    display: none;
+  }
 }
 
 .list {
@@ -30,6 +42,7 @@
   background-color: var(--grey-3);
   transform: translateX(-50%);
   left: 50%;
+  transition: opacity var(--transition), width var(--transition);
 }
 
 .link {
@@ -40,7 +53,6 @@
 
   &::after {
     @extend .linkDecorator;
-    transition: opacity var(--transition), width var(--transition);
     opacity: 0;
   }
 
@@ -58,5 +70,13 @@
       background-color: var(--black-2) !important;
       opacity: 1;
     }
+  }
+}
+
+.mobileMenu {
+  display: none;
+
+  @include tablet {
+    display: block;
   }
 }

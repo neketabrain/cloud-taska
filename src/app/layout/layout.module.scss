@@ -1,3 +1,5 @@
+@import 'shared/styles/breakpoints.scss';
+
 .container {
   position: relative;
   width: 100%;
@@ -7,4 +9,8 @@
 .layout {
   width: 100%;
   padding: 0 24px 80px;
+
+  @include mobile {
+    padding: 0 8px 60px;
+  }
 }
