@@ -20,6 +20,13 @@
 
     & > path {
       fill: var(--grey-1);
+      transition: fill var(--transition);
+    }
+  }
+
+  &:hover {
+    & > svg > path {
+      fill: var(--grey-5);
     }
   }
 }
@@ -58,11 +65,10 @@
 }
 
 .navLink {
-  display: block;
   font-size: 16px;
   font-weight: 500;
   color: var(--grey-3);
-  width: 100%;
+  transition: color var(--transition);
 
   &::after {
     content: '';
@@ -73,5 +79,14 @@
     margin-top: 4px;
     background-color: var(--grey-1);
     left: 0;
+    transition: color var(--transition);
+  }
+
+  &:hover {
+    color: var(--grey-5);
+
+    &::after {
+      background-color: var(--grey-5);
+    }
   }
 }
