@@ -1,0 +1,17 @@
+@mixin breakpoint($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @include breakpoint(400px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @include breakpoint(800px) {
+    @content;
+  }
+}

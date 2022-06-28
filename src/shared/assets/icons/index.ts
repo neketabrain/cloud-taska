@@ -7,6 +7,7 @@ export { ReactComponent as CloseIcon } from './close.svg';
 export { ReactComponent as DeleteIcon } from './delete.svg';
 export { ReactComponent as DotsIcon } from './dots.svg';
 export { ReactComponent as EditIcon } from './edit.svg';
+export { ReactComponent as FilterIcon } from './filter.svg';
 export { ReactComponent as FireIcon } from './fire.svg';
 export { ReactComponent as LogoIcon } from './logo.svg';
 export { ReactComponent as LogoutIcon } from './logout.svg';

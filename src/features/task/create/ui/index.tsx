@@ -92,7 +92,9 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = (props) => {
                 />
               )}
             />
+          </div>
 
+          <div className={styles.row}>
             <Controller
               name="due_date"
               control={control}
@@ -114,7 +116,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = (props) => {
             <Textarea
               label={tTask('description')}
               placeholder={tTask('enterDescription')}
-              rows={8}
+              rows={5}
               hasError={!!errors.description}
               {...register('description')}
             />
@@ -163,7 +165,7 @@ export const CreateTask: React.FC<CreateTaskProps> = (props) => {
 
   return (
     <>
-      <Button className={clsx(styles.button, className)} onClick={openModal}>
+      <Button className={clsx(styles.button, className)} onClick={openModal} aria-label={t('addTask')}>
         <PlusIcon /> <span>{t('addTask')}</span>
       </Button>
 

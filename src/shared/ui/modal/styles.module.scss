@@ -12,12 +12,14 @@
   right: 0;
   bottom: 0;
   backdrop-filter: blur(4px);
+  padding: 8px;
 }
 
 .modal {
-  position: absolute;
-  width: 480px;
-  height: auto;
+  position: relative;
+  max-width: 480px;
+  width: 100%;
+  height: fit-content;
   max-height: calc(100vh - 64px);
   overflow-y: auto;
   background-color: var(--white-1);
